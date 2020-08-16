@@ -1,0 +1,15 @@
+---
+title: Blog Article
+permalink: /{{title | slug}}/index.html
+---
+
+{% include '_header.njk' %}
+
+<article>
+  <h1 class="page-title">{{ title }}</h1>
+  <div class="text-container">
+    {{ content | safe }}
+  </div>
+</article>
+
+{% include '_footer.njk' %}

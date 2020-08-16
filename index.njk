@@ -1,0 +1,18 @@
+---
+layout: page.njk
+title: Kleinprojects
+subtitle: a coding blog
+---
+
+<head class="header">
+  <h1>{{ title }}</h1>
+  <h3>{{ subtitle }}</h3>
+</head>
+
+<main class="content">
+  <div class="post-list">
+    {%- for post in collections.posts -%}
+      <h2><a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a></h2>
+    {%- endfor -%}
+  </div>
+</main>
