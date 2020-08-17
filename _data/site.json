@@ -1,0 +1,6 @@
+{
+  "styles": {
+    "sourceFile": "styles/main.scss",
+    "targetFile": "_site/css/main.css"
+  }
+}

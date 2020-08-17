@@ -1,7 +1,6 @@
 ---
 tags: ['eleventy', 'coding', 'blog', 'minimalistic']
 title: Clearing the _site directory in Eleventy automatically
-layout: post
 ---
 
 If you want to ensure an always up to date version, with all files being removed you might want to clear your `_site` directory before each build. This needs no further packages then the already built in [fs package](https://nodejs.org/api/fs.html) of node. The function `rmdirSync(folderPath, {recursive:true}) can accomplish excactly this.
