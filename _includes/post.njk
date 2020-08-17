@@ -5,10 +5,12 @@ permalink: /{{title | slug}}/index.html
 
 {% include '_header.njk' %}
 
-<article>
-  <h1 class="page-title">{{ title }}</h1>
-  <div class="text-container">
-    {{ content | safe }}
+<article class="section">
+  <div class="container">
+    <h1 class="title">{{ title }}</h1>
+    <div class="content">
+      {{ content | safe }}
+    </div>
   </div>
 </article>
 

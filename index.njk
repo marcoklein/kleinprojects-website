@@ -4,15 +4,21 @@ title: Kleinprojects
 subtitle: coding blog and projects
 ---
 
-<head class="header">
-  <h1 class="logo">{{ title }}</h1>
-  <h3>{{ subtitle }}</h3>
-</head>
-
-<main class="content">
-  <div class="post-list">
-    {%- for post in collections.posts -%}
-      <h2><a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a></h2>
-    {%- endfor -%}
+<section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+    <h1 class="title">{{ title }}</h1>
+    <h2 class="subtitle">{{ subtitle }}</h2>
+    </div>
   </div>
-</main>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="post-list">
+      {%- for post in collections.posts -%}
+        <h2><a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a></h2>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

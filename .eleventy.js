@@ -1,6 +1,7 @@
 const sass = require('sass');
 const fs = require('fs');
 const site = require('./_data/site.json');
+const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 
 // clear site on initial build
 fs.rmdirSync('_site', {recursive: true});
@@ -28,5 +29,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("posts/*.md").reverse();
   });
+
+  eleventyConfig.addPlugin(syntaxhighlight);
 
 };
