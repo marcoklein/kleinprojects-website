@@ -2,12 +2,11 @@
   "name": "kleinprojects-website",
   "version": "1.0.0",
   "description": "Landing page of Kleinprojects with blog and projects",
-  "dependencies": {
-    "bulma": "^0.9.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "bulma": "^0.9.0",
     "gh-pages": "^3.1.0",
     "sass": "^1.26.10"
   },

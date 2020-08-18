@@ -1,8 +1,5 @@
----
-layout: page.njk
-title: This is markdown
----
-# {{ title }}
+# Kleinprojects Website
+Built with Eleventy and Bulma
 
 # TODO
 * add AMP article https://developers.google.com/search/docs/data-types/article

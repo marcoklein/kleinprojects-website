@@ -1,6 +1,5 @@
-
-
+const site = require('./_data/site');
 
 module.exports = {
-  title: 'indeTitle'
+  pageTitle: `${site.title} - ${site.subtitle}`,
 };
