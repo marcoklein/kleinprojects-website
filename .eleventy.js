@@ -24,6 +24,8 @@ module.exports = function(eleventyConfig) {
   });
   compileSass();
 
+  eleventyConfig.addPassthroughCopy('src/images');
+
   // Filter source file names using a glob
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
