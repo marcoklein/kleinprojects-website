@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/marcoklein/kleinprojects-website/workflows/Node.js%20CI/badge.svg)
+
 # Kleinprojects Website
 Built with Eleventy and Bulma
 
