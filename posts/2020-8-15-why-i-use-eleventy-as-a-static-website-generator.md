@@ -1,5 +1,5 @@
 ---
-tags: ['eleventy', 'coding', 'blog', 'minimalistic']
+tags: ['eleventy']
 title: My journey to using Eleventy as a static website generator
 ---
 

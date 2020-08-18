@@ -1,5 +1,5 @@
 ---
-tags: ['eleventy', 'coding', 'blog', 'minimalistic']
+tags: ['eleventy']
 title: Clearing the _site directory in Eleventy automatically
 ---
 

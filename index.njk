@@ -4,20 +4,25 @@ title: Kleinprojects
 subtitle: coding blog and projects
 ---
 
-<section class="hero is-primary is-bold">
-  <div class="hero-body">
+<section class="is-text-centered mt-3">
     <div class="container">
-    <h1 class="title">{{ title }}</h1>
-    <h2 class="subtitle">{{ subtitle }}</h2>
+      <h1 class="title">{{ title }}</h1>
+      <h2 class="subtitle">{{ subtitle }}</h2>
     </div>
-  </div>
 </section>
 
-<section class="section">
+
+<section class="section is-text-centered">
   <div class="container">
     <div class="post-list">
       {%- for post in collections.posts -%}
-        <h2><a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a></h2>
+        <h2 class="mb-3">
+          <a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a>
+
+          {%- for tag in post.data.tags %}
+            <span class="tag">{{ tag }}</span>
+          {%- endfor -%}
+        </h2>
       {%- endfor -%}
     </div>
   </div>

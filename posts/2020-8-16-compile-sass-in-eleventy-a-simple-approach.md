@@ -1,5 +1,5 @@
 ---
-tags: ['eleventy', 'coding', 'blog', 'minimalistic']
+tags: ['eleventy']
 title: A dead simple approach to using SASS in Eleventy
 ---
 
