@@ -14,14 +14,22 @@ function compileSass() {
  */
 module.exports = function(eleventyConfig) {
 
+  console.log('env', process.env);
+  console.log(eleventyConfig);
+  
+
   // clear site on initial build
   fs.rmdirSync('_site', {recursive: true});
   console.log('Cleared _site folder');
-    
-  fs.watch('src/styles', (event, filepath) => {
-    console.log('Styles file changed', filepath);
-    compileSass();
-  });
+  
+  const isServing = process.argv.includes('--serve');
+  if (isServing) {
+    // watch only files if we are serving
+    fs.watch('src/styles', (event, filepath) => {
+      console.log('Styles file changed', filepath);
+      compileSass();
+    });
+  }
   compileSass();
 
   eleventyConfig.addPassthroughCopy('src/images');

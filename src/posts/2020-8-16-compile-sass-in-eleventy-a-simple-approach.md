@@ -27,3 +27,17 @@ compileSass();
 ```
 
 This a a very simple approach without asynchronous code or anything. The only package you need is the npm sass package. They even write that "renderSync() is more than twice as fast as render()" ([SASS npm package](https://www.npmjs.com/package/sass)), so you might consider if its worth for you introducing parallel execution.
+
+## Important Note to fs.watch
+This script does not work when publishing to GitHub pages automatically as the `fs.watch` command will block input. To unblock if Eleventy isn't run with the `--serve` flag we can only enable file watching if we discover that flag like so:
+
+``` js
+const isServing = process.argv.includes('--serve');
+if (isServing) {
+  // watch only files if we are serving
+  fs.watch('src/styles', (event, filepath) => {
+    console.log('Styles file changed', filepath);
+    compileSass();
+  });
+}
+```
