@@ -1,0 +1,30 @@
+---
+layout: page.njk
+---
+
+<div class="section">
+  <section class="is-text-centered">
+      <div class="container">
+        <h1 class="title is-2">{{ site.title }}</h1>
+        <h2 class="subtitle is-4">{{ site.subtitle }}</h2>
+      </div>
+  </section>
+
+  <main class="mt-6">
+    <section class="is-text-centered">
+      <div class="container">
+        <div class="post-list">
+          {%- for post in collections.posts -%}
+            <h2 class="mb-3">
+              <a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a>
+
+              {# {%- for tag in post.data.tags %}
+                <span class="tag">{{ tag }}</span>
+              {%- endfor -%} #}
+            </h2>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
