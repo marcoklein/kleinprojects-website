@@ -4,10 +4,13 @@ permalink: /{{title | slug}}/index.html
 ---
 
 {% include 'partials/_header.njk' %}
-{# {% include 'partials/_navbar.njk' %} #}
+{% include 'partials/_navbar.njk' %}
 
+{# <nav class="container">
+  <a class="button mx-2 my-2" href="/">{{site.title}} Home</a>
+</nav> #}
 
-<article class="section">
+<article class="section pt-2">
   <div class="container">
     <h1 class="title">{{ title }}</h1>
     <div class="content">
@@ -15,5 +18,9 @@ permalink: /{{title | slug}}/index.html
     </div>
   </div>
 </article>
+
+<nav class="container">
+  <a class="button mx-2 my-2" href="/">{{site.title}} Home</a>
+</nav>
 
 {% include 'partials/_footer.njk' %}
