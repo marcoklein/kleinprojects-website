@@ -1,0 +1,13 @@
+
+<section class="container mx-6 is-text-centered">
+    <div class="project-list">
+      <div class="columns is-multiline is-centered">
+        {% for project in collections.projects %}
+          <div class="column is-half-tablet is-one-third-widescreen is-one-quarter-fullhd">
+            {% include 'projects/card.njk' %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+<section>

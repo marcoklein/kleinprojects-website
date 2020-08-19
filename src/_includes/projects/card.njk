@@ -1,0 +1,14 @@
+<div class="card is-shadowless">
+  <div class="card-image">
+    <figure class="image is16by9">
+      <img src="{{ project | coverImage }}">
+    </figure>
+  </div>
+  <div class="card-content">
+    <h2 class="title is-4">{{ project.data.title }}</h2>
+    <p class="subtitle is-6">{{ project.data.description }}<p>
+    <div class="is-text-right">
+      <small><time datetime="project.date">{{ project.date | formatDate }}</time></small>
+    </div>
+  </div>
+</div>

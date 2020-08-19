@@ -11,43 +11,22 @@ layout: page.njk
   </section>
 
   <main class="mt-6">
-    <section class="container mx-6 is-text-centered">
-        <div class="project-list">
-          <div class="columns">
-            <div class="column">
-              {% include "partials/_projectCard.njk" %}
-            </div>
-            <div class="column">
-              {% include "partials/_projectCard.njk" %}
-            </div>
-            <div class="column">
-              {% include "partials/_projectCard.njk" %}
-            </div>
-          </div>
-        </div>
-    <section>
-    <section class="section is-text-centered">
-      <div class="container">
-        <div class="column is-half is-offset-one-quarter">
-          <div class="card">
-            <div class="card-content">
-              <h1 class="title">Latest Posts</h1>
-              <div class="post-list">
-                {%- for post in collections.posts -%}
-                  <h2 class="mb-3">
-                    <a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a>
 
-                    {# {%- for tag in post.data.tags %}
-                      <span class="tag">{{ tag }}</span>
-                    {%- endfor -%} #}
-                  </h2>
-                {%- endfor -%}
-              </div>
-          
-            </div>
-          </div>
-        </div>
+    {% include 'projects/cards-grid.njk' %}
+    
+    <section class="section is-text-centered">
+      <h1 class="title">Latest Posts</h1>
+      <div class="post-list">
+        {%- for post in collections.posts -%}
+          <h2 class="mb-3">
+            <a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a>
+
+            {# {%- for tag in post.data.tags %}
+              <span class="tag">{{ tag }}</span>
+            {%- endfor -%} #}
+          </h2>
+        {%- endfor -%}
       </div>
-    </section>
+    </div>
   </main>
 </div>

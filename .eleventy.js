@@ -1,6 +1,10 @@
 const sass = require('sass');
 const fs = require('fs');
+const path = require('path');
+const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+
+const REGEX_IMAGE_EXTENSION = '(jpg|png|gif)';
 
 function compileSass() {
   console.log('Compiling sass.');
@@ -13,10 +17,6 @@ function compileSass() {
  * Restart program if you change configs!
  */
 module.exports = function(eleventyConfig) {
-
-  console.log('env', process.env);
-  console.log(eleventyConfig);
-  
 
   // clear site on initial build
   fs.rmdirSync('_site', {recursive: true});
@@ -33,13 +33,28 @@ module.exports = function(eleventyConfig) {
   compileSass();
 
   eleventyConfig.addPassthroughCopy('src/images');
+  eleventyConfig.addPassthroughCopy(`src/projects/**/*.${REGEX_IMAGE_EXTENSION}`);
 
   // Filter source file names using a glob
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
   });
+  
+  eleventyConfig.addCollection("projects", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/projects/**/*.md").reverse();
+  });
 
   eleventyConfig.addPlugin(syntaxhighlight);
+
+  eleventyConfig.addFilter('coverImage', function(page) {
+    // take filePathStem or pageOptions directly if it is a string (and a path)
+    var pageOptions = typeof pageOptions === 'string' ? page : page.filePathStem;
+    return path.join(path.dirname(pageOptions), page.data.coverImageName);
+  });
+
+  eleventyConfig.addFilter('formatDate', function(date) {
+    return moment(date).format('MMMM YYYY');
+  });
 
   // configuration object
   return {
