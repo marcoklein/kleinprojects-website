@@ -3,6 +3,9 @@
 # Kleinprojects Website
 Built with Eleventy and Bulma
 
+# Ideas
+* add hover effect on cards: show shadow if hovered over card!
+
 # TODO
 * add AMP article https://developers.google.com/search/docs/data-types/article
 * normalize css https://necolas.github.io/normalize.css/

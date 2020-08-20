@@ -1,12 +1,36 @@
-<div class="card is-shadowless">
+<script>
+  function cardOnMouseover(element) {
+    console.log('mouseover!');
+    element.classList.remove('is-shadowless');
+  }
+  function cardOnMouseout(element) {
+    element.classList.add('is-shadowless');
+  }
+</script>
+<div class="card is-shadow-hover" >
   <div class="card-image">
     <figure class="image is16by9">
+      <img class="is-static" src="/projects/catchmejump/cover.png">
       <img src="{{ project | coverImage }}">
     </figure>
   </div>
   <div class="card-content">
     <h2 class="title is-4">{{ project.data.title }}</h2>
     <p class="subtitle is-6">{{ project.data.description }}<p>
+    <div>
+      <a href="#">Project Page</a>
+        <i class="fa fa-external-link-alt fa-xs"></i><br>
+      <a href="#">Source Code</a>
+        <i class="fa fa-external-link-alt fa-xs"></i>
+    </div>
+    {# <span class="icon">
+      <i class="fab fa-github"></i>
+    </span>
+    
+      <span class="icon">
+        <i class="fa fa-external-link-alt"></i>
+      </span> #}
+
     <div class="is-text-right">
       <small><time datetime="project.date">{{ project.date | formatDate }}</time></small>
     </div>

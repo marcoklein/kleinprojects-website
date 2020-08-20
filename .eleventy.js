@@ -32,6 +32,8 @@ module.exports = function(eleventyConfig) {
   }
   compileSass();
 
+  eleventyConfig.addPassthroughCopy({'./node_modules/@fortawesome/fontawesome-free': 'css/fontawesome'});
+  eleventyConfig.addPassthroughCopy('src/CNAME');
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy(`src/projects/**/*.${REGEX_IMAGE_EXTENSION}`);
 

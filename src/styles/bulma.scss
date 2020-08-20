@@ -1,0 +1,26 @@
+/*! bulma.io v0.9.0 | MIT License | github.com/jgthms/bulma */
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../node_modules/bulma/sass/base/_all";
+
+@import "../../node_modules/bulma/sass/elements/_all";
+@import "../../node_modules/bulma/sass/form/_all";
+@import "../../node_modules/bulma/sass/components/_all";
+@import "../../node_modules/bulma/sass/grid/_all";
+@import "../../node_modules/bulma/sass/helpers/_all";
+@import "../../node_modules/bulma/sass/layout/_all";
+
+/* Show shadow only on hover */
+
+.is-shadow-hover:not(:hover), .is-shadow-hover:not(:active) {
+  @extend .is-shadowless;
+}
+
+.is-static {
+  position: absolute;
+  background-color: white;
+  border: 1px black solid;
+}
+
+.is-static:hover {
+  opacity: 0;
+}
