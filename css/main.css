@@ -7915,7 +7915,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   border-radius: 0 !important;
 }
 
-.is-shadowless {
+.is-shadowless, .is-shadow-hover:not(:hover), .is-shadow-hover:not(:active) {
   box-shadow: none !important;
 }
 
@@ -9835,6 +9835,17 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .footer {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem;
+}
+
+/* Show shadow only on hover */
+.is-static {
+  position: absolute;
+  background-color: white;
+  border: 1px black solid;
+}
+
+.is-static:hover {
+  opacity: 0;
 }
 
 /**
