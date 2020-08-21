@@ -9838,13 +9838,13 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 
 /* Show shadow only on hover */
-.is-static {
+.is-hidden-on-hover {
   position: absolute;
-  background-color: white;
-  border: 1px black solid;
+  background-color: whitesmoke;
+  border: 1px whitesmoke solid;
+  opacity: 0;
 }
-
-.is-static:hover {
+.is-hidden-on-hover:hover {
   opacity: 0;
 }
 
