@@ -54,9 +54,35 @@ module.exports = function(eleventyConfig) {
     return path.join(path.dirname(pageOptions), page.data.coverImageName);
   });
 
+  /**
+   * Generates a dynamic cover image
+   */
+  eleventyConfig.addShortcode('dynamicImageOnHover', function(page, staticCoverImage, dynamicCoverImage) {
+    const pageInputDir = path.dirname(page.inputPath);
+    const staticCoverImageInputPath = path.join(pageInputDir, staticCoverImage);
+    const dynamicCoverImageInputPath = path.join(pageInputDir, dynamicCoverImage);
+    const baseDir = page.url;
+    const staticCoverImagePath = path.join(baseDir, staticCoverImage);
+    const dynamicCoverImagePath = path.join(baseDir, dynamicCoverImage);
+
+    if (!fs.existsSync(staticCoverImageInputPath)) {
+      throw new Error(`Static cover image not found. path=${staticCoverImageInputPath}`);
+    }
+    if (fs.existsSync(dynamicCoverImageInputPath)) {
+      // dynamic cover image exists
+      return `<img class="is-hidden-on-hover" src="${staticCoverImagePath}">`
+           + `<img src="${dynamicCoverImagePath}">`
+    } else {
+      return `<img src="${staticCoverImagePath}">`
+    }
+  });
+  
+
   eleventyConfig.addFilter('formatDate', function(date) {
     return moment(date).format('MMMM YYYY');
   });
+
+  eleventyConfig.addWatchTarget('src/**/*.md');
 
   // configuration object
   return {

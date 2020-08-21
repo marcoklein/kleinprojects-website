@@ -7,32 +7,51 @@
     element.classList.add('is-shadowless');
   }
 </script>
-<div class="card is-shadow-hover" >
+<div class="card is-text-left" >
   <div class="card-image">
     <figure class="image is16by9">
-      <img class="is-static" src="/projects/catchmejump/cover.png">
-      <img src="{{ project | coverImage }}">
+      {% dynamicImageOnHover project, project.data.coverImage, project.data.coverImageDynamic %}
     </figure>
   </div>
   <div class="card-content">
-    <h2 class="title is-4">{{ project.data.title }}</h2>
-    <p class="subtitle is-6">{{ project.data.description }}<p>
-    <div>
-      <a href="#">Project Page</a>
-        <i class="fa fa-external-link-alt fa-xs"></i><br>
-      <a href="#">Source Code</a>
-        <i class="fa fa-external-link-alt fa-xs"></i>
-    </div>
-    {# <span class="icon">
-      <i class="fab fa-github"></i>
-    </span>
     
-      <span class="icon">
-        <i class="fa fa-external-link-alt"></i>
-      </span> #}
+      <span class="content is-small is-pulled-right mb-0 ml-1">
+        <span class="icon">
+          <i class="fas fa-calendar"></i>
+        </span>
+        <time datetime="project.date">{{ project.date | formatDate }}</time>
+      </span>
+    <h2 class="title is-4">{{ project.data.title }}</h2>
+    <p class="subtitle is-6 mb-0">{{ project.data.description }}<p>
 
-    <div class="is-text-right">
-      <small><time datetime="project.date">{{ project.date | formatDate }}</time></small>
-    </div>
+      
+
+  </div>
+  <div class="card-footer is-text-left">
+      {% if project.data.sourceUrl %}
+        <div class="card-footer-item">
+          {% if project.data.showUrlIcons %}
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          {% endif %}
+          <a href="{{ project.data.sourceUrl }}" target="_blank" class="">{{ project.data.sourceUrlText }}</a>
+        </div>
+      {% endif %}
+      {% if project.data.projectUrl %}
+        <div class="card-footer-item">
+          <a href="{{ project.data.projectUrl }}" class="">{{ project.data.projectUrlText }}</a>
+        </div>
+      {% endif %}
+      {% for url in project.data.urls | reverse %}
+        <div class="card-footer-item">
+          {% if url.icon and project.data.showUrlIcons %}
+            <span class="icon">
+              <i class="{{ url.icon }}"></i>
+            </span>
+          {% endif %}
+          <a href="{{ url.url }}" target="_blank" class="">{{ url.text }}</a>
+        </div>
+      {% endfor %}
   </div>
 </div>

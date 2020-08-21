@@ -1,13 +1,14 @@
 
-<section class="container mx-6 is-text-centered">
+<section class="container is-text-centered">
     <div class="project-list">
-      <div class="columns is-multiline is-centered">
-        {% for project in collections.projects %}
-          <div class="column is-half-tablet is-one-third-widescreen is-one-quarter-fullhd">
+      {% for project in collections.projects %}
+        <div class="columns is-centered my-6">
+          <div class="column is-half-tablet is-offset-one-quarter-table">
+             {# is-half-tablet is-one-third-fullhd #}
             {% include 'projects/card.njk' %}
           </div>
-        {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 <section>

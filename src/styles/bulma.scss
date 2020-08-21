@@ -15,12 +15,25 @@
   @extend .is-shadowless;
 }
 
-.is-static {
+.is-hidden-on-hover {
   position: absolute;
-  background-color: white;
-  border: 1px black solid;
-}
+  background-color: $background;
+  // ensure that we hide the other image
+  border: 1px $background solid;
+  
+  &:hover {
+    opacity: 0;
+  }
 
-.is-static:hover {
+  // always show on two columns
+  // @media (max-width: $widescreen) {
+  //   opacity: 0;
+  // }
   opacity: 0;
+
+  // always show on touch devices
+  // @media (pointer: coarse) and (any-pointer: coarse) {
+  //   opacity: 0;
+  // }
+  
 }
