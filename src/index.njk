@@ -10,7 +10,9 @@ layout: page.njk
       </div>
   </section>
 
-  <main class="mt-6">
+  {% include "partials/_navbar.njk" %}
+
+  <main class="mt-0">
 
     {% include 'projects/cards-grid.njk' %}
     
@@ -19,7 +21,7 @@ layout: page.njk
       <div class="post-list">
         {%- for post in collections.posts -%}
           <h2 class="mb-3">
-            <a href='{{ post.data.title | slug }}'> {{ post.data.title }}</a>
+            <a href="{{ post.data.title | slug }}"> {{ post.data.title }}</a>
 
             {# {%- for tag in post.data.tags %}
               <span class="tag">{{ tag }}</span>

@@ -1,6 +1,15 @@
-/*! bulma.io v0.9.0 | MIT License | github.com/jgthms/bulma */
+
+// do not break the navbar
+$navbar-breakpoint: 0;
+// $navbar-box-shadow-size: 4px 4px 2px 8px;
+
+
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all";
+
+
+
+/*! bulma.io v0.9.0 | MIT License | github.com/jgthms/bulma */
 
 @import "../../node_modules/bulma/sass/elements/_all";
 @import "../../node_modules/bulma/sass/form/_all";
@@ -8,6 +17,7 @@
 @import "../../node_modules/bulma/sass/grid/_all";
 @import "../../node_modules/bulma/sass/helpers/_all";
 @import "../../node_modules/bulma/sass/layout/_all";
+
 
 /* Show shadow only on hover */
 
