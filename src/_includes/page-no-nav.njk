@@ -3,10 +3,12 @@
 
 {% include 'partials/_header.njk' %}
 
-{% include 'partials/_navbar-top.njk' %}
+{# <section class="section"> #}
+{# {% include '_navbar.njk' %} #}
+{# </section> #}
 
-{# <main> #}
+<main>
   {{ content | safe }}
-{# </main> #}
+</main>
 
 {% include 'partials/_footer.njk' %}

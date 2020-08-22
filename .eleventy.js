@@ -36,6 +36,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/CNAME');
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy(`src/projects/**/*.${REGEX_IMAGE_EXTENSION}`);
+  eleventyConfig.addPassthroughCopy({'webconfig': './'});
 
   // Filter source file names using a glob
   eleventyConfig.addCollection("posts", function(collectionApi) {
@@ -76,7 +77,11 @@ module.exports = function(eleventyConfig) {
       return `<img src="${staticCoverImagePath}">`
     }
   });
-  
+
+  /** Return year of today */
+  eleventyConfig.addShortcode('currentYear', function() {
+    return moment().format('YYYY');
+  });
 
   eleventyConfig.addFilter('formatDate', function(date) {
     return moment(date).format('MMMM YYYY');
