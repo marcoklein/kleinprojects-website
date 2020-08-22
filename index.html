@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
     <title>Kleinprojects - coding projects and blog</title>
     
@@ -20,55 +21,58 @@
 
 <main>
   
-<div class="section">
-  <section class="is-text-centered">
-      <div class="container">
-        <h1 class="title is-2">Kleinprojects</h1>
-        <h2 class="subtitle is-4">coding projects and blog</h2>
-      </div>
-  </section>
-
-  
-
-<div class="columns is-centered">
+<section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
   <div class="column is-half-tablet ">
-    <nav class="navbar is-light has-shadow mt-6 mb-0" role="navigation" aria-label="main navigation">
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item is-active" href="/">
-            Home
-          </a>
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            Projects
+            <figure class="image is-64by64 mr-1">
+              <img src="/images/logo.png">
+            </figure>
+            Kleinprojects
           </a>
-          <a class="navbar-item" href="/">
-            Blog
-          </a>
-        </div>
-        <div class="navbar-end">
-          <a class="navbar-item" href="/">
-            About me
-          </a>
-        </div>
       </div>
+      
+<div class="navbar-menu is-active">
+  <div class="navbar-start">
+    <a class="navbar-item is-active" href="/">
+      Home
+    </a>
+    <a class="navbar-item" href="/projects/">
+      Projects
+    </a>
+    <a class="navbar-item" href="/blog/">
+      Blog
+    </a>
+  </div>
+  <div class="navbar-end">
+    <a class="navbar-item" href="/">
+      About me
+    </a>
+  </div>
+</div>
     </nav>
   </div>
 </div>
 
 
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">Kleinprojects</h1>
+    <h2 class="subtitle is-4">coding projects and blog</h2>
+  </div>
+</section>
 
-
-
-
-  <main class="mt-0">
-
-    
-<section class="container is-text-centered">
-    <div class="project-list">
-      
-        <div class="columns is-centered my-6">
-          <div class="column is-half-tablet">
-             
+<div>
+  <main>
+    <section class="section has-text-centered pt-4">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-relative">
+            <h4 class="title is-4">Latest Project</h4>
+            
             <script>
   function cardOnMouseover(element) {
     console.log('mouseover!');
@@ -123,274 +127,39 @@
   </div>
 </div>
 
+            <a class="button is-primary mt-4" href="/projects/">
+              Explore Projects
+            </a>
           </div>
-        </div>
-      
-        <div class="columns is-centered my-6">
-          <div class="column is-half-tablet">
-             
-            <script>
-  function cardOnMouseover(element) {
-    console.log('mouseover!');
-    element.classList.remove('is-shadowless');
-  }
-  function cardOnMouseout(element) {
-    element.classList.add('is-shadowless');
-  }
-</script>
-<div class="card is-text-left" >
-  <div class="card-image">
-    <figure class="image is16by9">
-      <img class="is-hidden-on-hover" src="/projects/eager-learner/cover.png"><img src="/projects/eager-learner/cover-dynamic.gif">
-    </figure>
-  </div>
-  <div class="card-content">
-    
-      <span class="content is-small is-pulled-right mb-0 ml-1">
-        <span class="icon">
-          <i class="fas fa-calendar"></i>
-        </span>
-        <time datetime="project.date">May 2020</time>
-      </span>
-    <h2 class="title is-4">Eager Learner</h2>
-    <p class="subtitle is-6 mb-0">Originally created for the Roguelike GameJam on Itch.io. Play it on itch.io or here.<p>
-
-      
-
-  </div>
-  <div class="card-footer is-text-left">
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-          
-          <a href="https://github.com/marcoklein/roguelike" target="_blank" class="">Source Code</a>
-        </div>
-      
-      
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fab fa-itch-io"></i>
-            </span>
-          
-          <a href="https://marcoklein.itch.io/eagerlearner" target="_blank" class="">Play Original</a>
-        </div>
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fas fa-gamepad"></i>
-            </span>
-          
-          <a href="https://eagerlearner.kleinprojects.com" target="_blank" class="">Play Latest</a>
-        </div>
-      
-  </div>
-</div>
-
-          </div>
-        </div>
-      
-        <div class="columns is-centered my-6">
-          <div class="column is-half-tablet">
-             
-            <script>
-  function cardOnMouseover(element) {
-    console.log('mouseover!');
-    element.classList.remove('is-shadowless');
-  }
-  function cardOnMouseout(element) {
-    element.classList.add('is-shadowless');
-  }
-</script>
-<div class="card is-text-left" >
-  <div class="card-image">
-    <figure class="image is16by9">
-      <img class="is-hidden-on-hover" src="/projects/catchmejump/cover.png"><img src="/projects/catchmejump/cover-dynamic.gif">
-    </figure>
-  </div>
-  <div class="card-content">
-    
-      <span class="content is-small is-pulled-right mb-0 ml-1">
-        <span class="icon">
-          <i class="fas fa-calendar"></i>
-        </span>
-        <time datetime="project.date">December 2018</time>
-      </span>
-    <h2 class="title is-4">CatchMe Jump</h2>
-    <p class="subtitle is-6 mb-0">Multiplayer tag game with controller support. Built with Phaser 3.<p>
-
-      
-
-  </div>
-  <div class="card-footer is-text-left">
-      
-      
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fab fa-itch-io"></i>
-            </span>
-          
-          <a href="https://marcoklein.itch.io/catchmejump" target="_blank" class="">Play on Itch.io</a>
-        </div>
-      
-  </div>
-</div>
-
-          </div>
-        </div>
-      
-        <div class="columns is-centered my-6">
-          <div class="column is-half-tablet">
-             
-            <script>
-  function cardOnMouseover(element) {
-    console.log('mouseover!');
-    element.classList.remove('is-shadowless');
-  }
-  function cardOnMouseout(element) {
-    element.classList.add('is-shadowless');
-  }
-</script>
-<div class="card is-text-left" >
-  <div class="card-image">
-    <figure class="image is16by9">
-      <img class="is-hidden-on-hover" src="/projects/one-thought/cover.png"><img src="/projects/one-thought/cover-dynamic.gif">
-    </figure>
-  </div>
-  <div class="card-content">
-    
-      <span class="content is-small is-pulled-right mb-0 ml-1">
-        <span class="icon">
-          <i class="fas fa-calendar"></i>
-        </span>
-        <time datetime="project.date">November 2017</time>
-      </span>
-    <h2 class="title is-4">One Thought</h2>
-    <p class="subtitle is-6 mb-0">One Thought is a simple focus timer running for 25 minutes. You can enter your current task and a reward.<p>
-
-      
-
-  </div>
-  <div class="card-footer is-text-left">
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-          
-          <a href="https://github.com/marcoklein/onethought" target="_blank" class="">Source Code</a>
-        </div>
-      
-      
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="far fa-hourglass"></i>
-            </span>
-          
-          <a href="https://onethought.kleinprojects.com" target="_blank" class="">Open App</a>
-        </div>
-      
-  </div>
-</div>
-
-          </div>
-        </div>
-      
-        <div class="columns is-centered my-6">
-          <div class="column is-half-tablet">
-             
-            <script>
-  function cardOnMouseover(element) {
-    console.log('mouseover!');
-    element.classList.remove('is-shadowless');
-  }
-  function cardOnMouseout(element) {
-    element.classList.add('is-shadowless');
-  }
-</script>
-<div class="card is-text-left" >
-  <div class="card-image">
-    <figure class="image is16by9">
-      <img class="is-hidden-on-hover" src="/projects/inspireme/cover.png"><img src="/projects/inspireme/cover-dynamic.gif">
-    </figure>
-  </div>
-  <div class="card-content">
-    
-      <span class="content is-small is-pulled-right mb-0 ml-1">
-        <span class="icon">
-          <i class="fas fa-calendar"></i>
-        </span>
-        <time datetime="project.date">September 2017</time>
-      </span>
-    <h2 class="title is-4">Inspire Me</h2>
-    <p class="subtitle is-6 mb-0">Need inspiration? Inspire Me presents random input for your head to make idea generation easy.<p>
-
-      
-
-  </div>
-  <div class="card-footer is-text-left">
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-          
-          <a href="https://github.com/marcoklein/inspireme" target="_blank" class="">Source Code</a>
-        </div>
-      
-      
-      
-        <div class="card-footer-item">
-          
-            <span class="icon">
-              <i class="fas fa-lightbulb"></i>
-            </span>
-          
-          <a href="https://inspireme.kleinprojects.com" target="_blank" class="">Open App</a>
-        </div>
-      
-  </div>
-</div>
-
-          </div>
-        </div>
-      
-    </div>
-  </div>
-<section>
-
-    
-    <section class="section is-text-centered">
-      <h1 class="title">Latest Posts</h1>
-      <div class="post-list"><h2 class="mb-3">
-            <a href="a-dead-simple-approach-to-using-sass-in-eleventy"> A dead simple approach to using SASS in Eleventy</a>
-
+          <div class="column is-relative">
+            <h4 class="title is-4">Latest Posts</h4>
+            <div class="post-list"><h2 class="mb-3">
+                  <a href="a-dead-simple-approach-to-using-sass-in-eleventy"> A dead simple approach to using SASS in Eleventy</a>
+                </h2><h2 class="mb-3">
+                  <a href="clearing-the-_site-directory-in-eleventy-automatically"> Clearing the _site directory in Eleventy automatically</a>
+                </h2><h2 class="mb-3">
+                  <a href="my-journey-to-using-eleventy-as-a-static-website-generator"> My journey to using Eleventy as a static website generator</a>
+                </h2></div>
             
-          </h2><h2 class="mb-3">
-            <a href="clearing-the-_site-directory-in-eleventy-automatically"> Clearing the _site directory in Eleventy automatically</a>
-
-            
-          </h2><h2 class="mb-3">
-            <a href="my-journey-to-using-eleventy-as-a-static-website-generator"> My journey to using Eleventy as a static website generator</a>
-
-            
-          </h2></div>
+            <div></div>
+            <a class="button is-primary mt-4" href="/blog/">
+              Explore Posts
+            </a>
+          </div>
     </div>
   </main>
 </div>
 </main>
 
 
-  </body>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      &copy; Marco Klein 2020
+    </p>
+  </div>
+</footer>
+
+
+</body>
 </html>
