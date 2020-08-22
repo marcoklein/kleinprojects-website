@@ -4,6 +4,7 @@ useHero: true
 addSection: true
 title: null
 subtitle: null
+centerContent: true
 ---
 
 {% include 'partials/_header.njk' %}
@@ -11,7 +12,7 @@ subtitle: null
 {% if useHero %}
   {% include 'partials/_hero.njk' %}
 {% else %}
-  {% include 'partials/_navbar-top.njk' %}
+  {% include 'partials/_navbar.njk' %}
     <section class="section has-text-centered">
       {% if title %}
         <h1 class="title">{{ title }}</h1>
@@ -22,8 +23,7 @@ subtitle: null
     </section>
 {% endif %}
 
-
-<main class="container has-text-centered">
+<main class="container {% if centerContent %}has-text-centered{% endif %}">
   <section class="section">
     {{ content | safe }}
   </section>

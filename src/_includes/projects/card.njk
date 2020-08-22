@@ -1,12 +1,3 @@
-<script>
-  function cardOnMouseover(element) {
-    console.log('mouseover!');
-    element.classList.remove('is-shadowless');
-  }
-  function cardOnMouseout(element) {
-    element.classList.add('is-shadowless');
-  }
-</script>
 <div class="card is-text-left" >
   <div class="card-image">
     <figure class="image is16by9">
@@ -14,7 +5,6 @@
     </figure>
   </div>
   <div class="card-content">
-    
       <span class="content is-small is-pulled-right mb-0 ml-1">
         <span class="icon">
           <i class="fas fa-calendar"></i>
@@ -23,9 +13,6 @@
       </span>
     <h2 class="title is-4">{{ project.data.title }}</h2>
     <p class="subtitle is-6 mb-0">{{ project.data.description }}<p>
-
-      
-
   </div>
   <div class="card-footer is-text-left">
       {% if project.data.sourceUrl %}
