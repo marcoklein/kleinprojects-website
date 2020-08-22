@@ -86,6 +86,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('formatDate', function(date) {
     return moment(date).format('MMMM YYYY');
   });
+  
+  eleventyConfig.addFilter('datetime', function(date) {
+    return moment(date).format('YYYY-MM-DD');
+  });
 
   eleventyConfig.addWatchTarget('src/**/*.md');
 

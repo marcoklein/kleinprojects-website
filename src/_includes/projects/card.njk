@@ -1,4 +1,4 @@
-<div class="card is-text-left" >
+<div class="card has-text-left" >
   <div class="card-image">
     <figure class="image is16by9">
       {% dynamicImageOnHover project, project.data.coverImage, project.data.coverImageDynamic %}
@@ -9,12 +9,12 @@
         <span class="icon">
           <i class="fas fa-calendar"></i>
         </span>
-        <time datetime="project.date">{{ project.date | formatDate }}</time>
+        <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
       </span>
     <h2 class="title is-4">{{ project.data.title }}</h2>
     <p class="subtitle is-6 mb-0">{{ project.data.description }}<p>
   </div>
-  <div class="card-footer is-text-left">
+  <div class="card-footer">
       {% if project.data.sourceUrl %}
         <div class="card-footer-item">
           {% if project.data.showUrlIcons %}

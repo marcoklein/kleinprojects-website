@@ -1,14 +1,7 @@
-
-<section class="container is-text-centered">
-    <div class="project-list">
-      {% for project in collections.projects %}
-        <div class="columns is-centered">
-          <div class="column is-half-tablet">
-             {# is-half-tablet is-one-third-fullhd #}
-            {% include 'projects/card.njk' %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-<section>
+<div class="columns is-centered is-multiline">
+  {% for project in collections.projects %}
+      <div class="column is-two-thirds-tablet is-half-widescreen">
+        {% include 'projects/card.njk' %}
+      </div>
+  {% endfor %}
+</div>
