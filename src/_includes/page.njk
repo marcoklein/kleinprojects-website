@@ -1,13 +1,32 @@
 ---
 navParent: home
+useHero: true
+addSection: true
+title: null
+subtitle: null
 ---
 
 {% include 'partials/_header.njk' %}
 
-{% include 'partials/_navbar-top.njk' %}
+{% if useHero %}
+  {% include 'partials/_hero.njk' %}
+{% else %}
+  {% include 'partials/_navbar-top.njk' %}
+    <section class="section has-text-centered">
+      {% if title %}
+        <h1 class="title">{{ title }}</h1>
+      {% endif %}
+      {% if subtitle %}
+        <h2 class="subtitle">{{ subtitle }}</h2>
+      {% endif %}
+    </section>
+{% endif %}
 
-{# <main> #}
-  {{ content | safe }}
-{# </main> #}
+
+<main class="container has-text-centered">
+  <section class="section">
+    {{ content | safe }}
+  </section>
+</main>
 
 {% include 'partials/_footer.njk' %}

@@ -1,26 +1,12 @@
 ---
-title: Blog Article
+navParent: blog
 permalink: /{{title | slug}}/index.html
+layout: page
+
+title: null
+subtitle: null
 ---
 
-{% include 'partials/_header.njk' %}
-{% include 'partials/_navbar-top.njk' %}
-
-{# <nav class="container">
-  <a class="button mx-2 my-2" href="/">{{site.title}} Home</a>
-</nav> #}
-
-<article class="section pt-2">
-  <div class="container">
-    <h1 class="title">{{ title }}</h1>
-    <div class="content">
-      {{ content | safe }}
-    </div>
-  </div>
-</article>
-
-<nav class="container">
-  <a class="button mx-2 my-2" href="/">{{site.title}} Home</a>
-</nav>
-
-{% include 'partials/_footer.njk' %}
+<div class="content has-text-left">
+  {{ content | safe }}
+</div>

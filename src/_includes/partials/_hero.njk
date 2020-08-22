@@ -1,0 +1,19 @@
+{#
+
+Shows title and subtitle in a hero and adds navbar on top.
+
+title: title
+subtitle: subtitle
+
+#}
+
+
+<section class="hero has-background-info-light">
+  <div class="hero-header">
+    {% include "partials/_navbar-top.njk" %}
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">{{ title }}</h1>
+    <h2 class="subtitle is-4">{{ subtitle }}</h2>
+  </div>
+</section>

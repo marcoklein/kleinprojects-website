@@ -12,3 +12,5 @@ Built with Eleventy and Bulma
 * add hygen for code generation via templates https://www.npmjs.com/package/hygen
 * add manifest.json, site.json, robot.txt and all the seo related stuff
 * minify HTML by adding a transform function
+
+* Add excepert with https://www.11ty.dev/docs/data-frontmatter-customize/

@@ -1,44 +1,31 @@
 ---
-layout: page-no-nav.njk
+layout: page.njk
 navParent: home
+eleventyComputed:
+  title: '{{ site.title }}'
+  subtitle: '{{ site.subtitle }}'
 ---
 
-<section class="hero has-background-info-light">
-  <div class="hero-header">
-    {% include "partials/_navbar-top.njk" %}
+<div class="columns is-centered">
+  <div class="column is-relative">
+    <h4 class="title is-4">Latest Project</h4>
+    {% set project = collections.projects | first %}
+    {% include 'projects/card.njk' %}
+    <a class="button is-primary mt-4" href="/projects/">
+      Explore Projects
+    </a>
   </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1">{{ site.title }}</h1>
-    <h2 class="subtitle is-4">{{ site.subtitle }}</h2>
-  </div>
-</section>
-
-<div>
-  <main>
-    <section class="section has-text-centered pt-4">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-relative">
-            <h4 class="title is-4">Latest Project</h4>
-            {% set project = collections.projects | first %}
-            {% include 'projects/card.njk' %}
-            <a class="button is-primary mt-4" href="/projects/">
-              Explore Projects
-            </a>
-          </div>
-          <div class="column is-relative">
-            <h4 class="title is-4">Latest Posts</h4>
-            <div class="post-list">
-              {%- for post in collections.posts -%}
-                <h2 class="mb-3">
-                  <a href="{{ post.data.title | slug }}"> {{ post.data.title }}</a>
-                </h2>
-              {%- endfor -%}
-            </div>
-            <a class="button is-primary mt-4" href="/blog/">
-              Explore Posts
-            </a>
-          </div>
+  <div class="column is-relative">
+    <h4 class="title is-4">Latest Posts</h4>
+    <div class="post-list">
+      {%- for post in collections.posts -%}
+        <h2 class="mb-3">
+          <a href="{{ post.data.title | slug }}"> {{ post.data.title }}</a>
+        </h2>
+      {%- endfor -%}
     </div>
-  </main>
+    <a class="button is-primary mt-4" href="/blog/">
+      Explore Posts
+    </a>
+  </div>
 </div>
