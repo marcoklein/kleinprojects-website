@@ -14,49 +14,55 @@
     
   </head>
   <body>
-<div class="columns is-centered">
-  <div class="column is-half-tablet ">
+
+
+  
+
+
+<section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
     <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-          <a class="navbar-item" href="/">
+      <div class="navbar-menu is-active">
+        <div class="navbar-start">
+          <a class="navbar-item " href="/">
             <figure class="image is-64by64 mr-1">
               <img src="/images/logo.png">
             </figure>
             Kleinprojects
           </a>
+          <a class="navbar-item " href="/projects/">
+            Projects
+          </a>
+          <a class="navbar-item is-active" href="/blog/">
+            Blog
+          </a>
+        </div>
+        <div class="navbar-end">
+          <a class="navbar-item " href="/about/">
+            About Me
+          </a>
+        </div>
       </div>
-      
-<div class="navbar-menu is-active">
-  <div class="navbar-start">
-    <a class="navbar-item is-active" href="/">
-      Home
-    </a>
-    <a class="navbar-item" href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item" href="/blog/">
-      Blog
-    </a>
-  </div>
-  <div class="navbar-end">
-    <a class="navbar-item" href="/">
-      About me
-    </a>
-  </div>
-</div>
     </nav>
   </div>
 </div>
 
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">Clearing the _site directory in Eleventy automatically</h1>
+    <h2 class="subtitle is-4"></h2>
+  </div>
+</section>
 
 
 
-
-<article class="section pt-2">
-  <div class="container">
-    <h1 class="title">Clearing the _site directory in Eleventy automatically</h1>
-    <div class="content">
-      <p>If you want to ensure an always up to date version, with all files being removed you might want to clear your <code>_site</code> directory before each build. This needs no further packages then the already built in <a href="https://nodejs.org/api/fs.html">fs package</a> of node. The function `rmdirSync(folderPath, {recursive:true}) can accomplish excactly this.</p>
+<main class="container ">
+  <section class="section">
+    
+<div class="content">
+  <p>If you want to ensure an always up to date version, with all files being removed you might want to clear your <code>_site</code> directory before each build. This needs no further packages then the already built in <a href="https://nodejs.org/api/fs.html">fs package</a> of node. The function `rmdirSync(folderPath, {recursive:true}) can accomplish excactly this.</p>
 <p>Your .eleventy.js then looks like this:</p>
 <pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// clear site on initial build</span><br>fs<span class="token punctuation">.</span><span class="token function">rmdirSync</span><span class="token punctuation">(</span><span class="token string">'_site'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>recursive<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Cleared _site folder'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
@@ -64,13 +70,9 @@
 </blockquote>
 <p>That means, that this code does not block our subsequent building pipeline. However, when you run Eleventy with <code>eleventy serve</code> you might end up with unwanted files in the end. So always remember to run <code>eleventy build</code> before publishing your site and you will always get a clean version.</p>
 
-    </div>
-  </div>
-</article>
-
-<nav class="container">
-  <a class="button mx-2 my-2" href="/">Kleinprojects Home</a>
-</nav>
+</div>
+  </section>
+</main>
 
 
 <footer class="footer">

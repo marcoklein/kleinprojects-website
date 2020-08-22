@@ -10010,15 +10010,3 @@ code[class*=language-css] {
   background: -webkit-linear-gradient(left, rgba(193, 222, 241, 0.2) 70%, rgba(221, 222, 241, 0));
   background: linear-gradient(to right, rgba(193, 222, 241, 0.2) 70%, rgba(221, 222, 241, 0));
 }
-
-.is-text-centered {
-  text-align: center;
-}
-
-.is-text-right {
-  text-align: right;
-}
-
-.is-text-left {
-  text-align: left;
-}
