@@ -1,0 +1,15 @@
+---
+layout: 'page.njk'
+navParent: blog
+---
+
+<section class="section pt-0">
+  <main class="container has-text-centered">
+    <h1 class="title">Posts</h1>
+    {%- for post in collections.posts -%}
+      <h2 class="mb-3">
+        <a href="{{ post.data.title | slug }}"> {{ post.data.title }}</a>
+      </h2>
+    {%- endfor -%}
+  </main>
+</section>
