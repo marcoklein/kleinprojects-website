@@ -71,8 +71,8 @@ module.exports = function(eleventyConfig) {
     }
     if (fs.existsSync(dynamicCoverImageInputPath)) {
       // dynamic cover image exists
-      return `<img class="is-hidden-on-hover" src="${staticCoverImagePath}">`
-           + `<img src="${dynamicCoverImagePath}">`
+      return `<img class="is-absolute" src="${dynamicCoverImagePath}">`
+        + `<img class="is-hidden-on-hover" src="${staticCoverImagePath}">`
     } else {
       return `<img src="${staticCoverImagePath}">`
     }
