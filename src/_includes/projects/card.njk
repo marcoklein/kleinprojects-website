@@ -5,14 +5,34 @@
     </figure>
   </div>
   <div class="card-content">
-      <span class="content is-small is-pulled-right mb-0 ml-1">
+    <span class="content is-small is-pulled-right mb-1 ml-1">
+      <div>
         <span class="icon">
           <i class="fas fa-calendar"></i>
         </span>
         <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
-      </span>
+      </div>
+      
+      {% if project.data.platforms %}
+        {% if 'desktop' in project.data.platforms %}
+          <div>
+            <span class="icon">
+              <i class="fas fa-desktop"></i>
+            </span> Desktop
+          </div>
+        {% endif %}
+        {% if 'mobile' in project.data.platforms %}
+          <div>
+            <span class="icon">
+              <i class="fas fa-mobile-alt"></i>
+            </span> Mobile
+          </div>
+        {% endif %}
+      {% endif %}
+    </span>
     <h2 class="title is-4">{{ project.data.title }}</h2>
-    <p class="subtitle is-6 mb-0">{{ project.data.description }}<p>
+    <p class="subtitle is-6">{{ project.data.description }}
+    </p>
   </div>
   <div class="card-footer">
       {% if project.data.sourceUrl %}
