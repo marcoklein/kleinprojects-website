@@ -4,5 +4,5 @@
 module.exports = {
   // website title
   title: "Kleinprojects",
-  subtitle: "coding projects and blog",
+  subtitle: "Coding Projects and Blog",
 }

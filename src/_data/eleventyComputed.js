@@ -6,9 +6,10 @@ module.exports = {
     const siteTitle = data.site.title;
     const pageTitle = data.title;
 
-    if (pageTitle && pageTitle.length) {
+    if (pageTitle && pageTitle.length && pageTitle !== data.site.title) {
       return pageTitle + ' | ' + siteTitle;
     }
+
     return defaultTitle;
   },
 };
