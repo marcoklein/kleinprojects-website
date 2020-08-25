@@ -23,7 +23,7 @@ centerContent: true
     </section>
 {% endif %}
 
-<main class="container {% if centerContent %}has-text-centered{% endif %}">
+<main class="container {% if centerContent %}has-text-centered{% endif %} {% if r/\.md$/.test(page.inputPath) %}content{% endif %}">
   <section class="section">
     {{ content | safe }}
   </section>
