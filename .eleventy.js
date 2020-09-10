@@ -40,7 +40,7 @@ module.exports = function(eleventyConfig) {
 
   // Filter source file names using a glob
   eleventyConfig.addCollection("posts", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/posts/*.md").filter(item => !item.data.unlisted).reverse();
   });
   
   eleventyConfig.addCollection("projects", function(collectionApi) {
