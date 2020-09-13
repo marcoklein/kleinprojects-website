@@ -91,6 +91,10 @@ module.exports = function(eleventyConfig) {
     return moment(date).format('YYYY-MM-DD');
   });
 
+  // general config
+  eleventyConfig.setFrontMatterParsingOptions({
+    excerpt: true,
+  });
   eleventyConfig.addWatchTarget('src/**/*.md');
 
   // configuration object

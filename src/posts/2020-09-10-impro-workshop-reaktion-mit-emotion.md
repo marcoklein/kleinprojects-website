@@ -2,7 +2,7 @@
 tags: ['impro']
 title: Improworkshop Reaktion statt Aktion
 date: 2020-09-10
-unlisted: false
+unlisted: true
 ---
 
 1. Liebespaar
@@ -37,6 +37,8 @@ unlisted: false
     - B wiederholt "ich hoere da Ekel"
     - B reagiert, um die Emotion von A zu unterstuetzen "und zieh dir die Schnecken hier rein"
 
+> hier waren 2,5h um und die Probe beendet - haette also deutlich laenger gehen koennen
+
 1. Emotion alleine spielen mit Verstaerkung
     - jemand kommt dazu und macht die Emotion noch staerker!
     - zum Beispiel, wenn traurig noch trauriger, wenn freudig noch freudiger
@@ -68,3 +70,8 @@ unlisted: false
     1. Nur Bewegung erlaubt
     2. nach Bewegung Gromolo
     3. nach Bewegung EINEN Satz auf Deutsch
+
+## Learnings
+- Side-Coaching ist gut
+- Emotionen sind schwer - was ist eine Emotion?? - wie erkenne ich Emotionen
+- aufpassen bei "trigger" Emotionen (bspw. Trauer)
