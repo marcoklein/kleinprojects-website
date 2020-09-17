@@ -24,8 +24,25 @@ unlisted: true
     - anderem Spieler zuklatschen (beliebig)
     - Varianten
 
-## Reagieren mit Tanz
+### Vertrauen
+1. Fotografier-Roboter
+    - Paarweise: Spieler fuehren sich durch den Raum und visieren den Kopf des Spielers auf einen Gegenstand
+    - durch druecken auf den Kopf wird ein "Bild" aufgenommen
+
+
+## Ablauf
+
+### Raumlauf zum ankommen
+1. Morgens -> Abends
+1. Wir nehmen andere wahr, schauen was die so machen
+1. Kopieren / anpassen, nur wenn wir wollen!
+1. Machen mal etwas groesser was der andere macht, machen es mal kleiner...
+
+### Forts. Raumlauf: reagieren mit Tanz
 1. Aufwaermen hier mit Raumlauf und Musik - passende Bewegung zur Musik machen
+1. Wenn etwas gefaellt, dann anschliessen (hintereinander laufen) - Wechsel auch moeglich!
+
+
 1. [Choreographie-Uebung](https://improwiki.com/de/wiki/improtheater/choreographie-ubung)
     - Spieler Rautenfoermig im Raum (4 - 8)
     - "Vogelschwarmprinzip": immer derjenige fuehrt, der die "Nase vorn hat"
