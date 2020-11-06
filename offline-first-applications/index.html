@@ -1,0 +1,111 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Offline First Applications | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  
+
+
+<section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+          <span class="ml-1">Kleinprojects</span>
+        </a>
+      </div>
+      <div class="navbar-menu is-active">
+        <div class="navbar-start">
+          <a class="navbar-item " href="/projects/">
+            Projects
+          </a>
+          <a class="navbar-item is-active" href="/blog/">
+            Blog
+          </a>
+        </div>
+        <div class="navbar-end">
+          <a class="navbar-item " href="/about/">
+            About Me
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">Offline First Applications</h1>
+    <h2 class="subtitle is-4"></h2>
+  </div>
+</section>
+
+
+
+<main class="container  content">
+  <section class="section">
+    
+<div class="content">
+  <p>The offline first approach is a popular approach to increase usability of mobile end user applications.
+Here my notes about this, using GraphQL for backend communication:</p>
+<h2>Use RxDB</h2>
+<p><a href="https://rxdb.info/replication-graphql.html">RxDB</a> is a database that also comes with replication functionality through GraphQL. Additionally, it offers a CouchDB synchronization protocol.
+Therefore, this database system can take over a schema-based data management for an offline first approach and sync changes to the server as needed.</p>
+<p>This comes at a price:</p>
+<ol>
+<li>The schema of RxDB and the GraphQL schema are nearly duplicates. However, we cannot use the exact same schema, as RxDB will need some other data for local storage (e.g. local keys).</li>
+<li>Mixing of Database access and GraphQL queries?
+<ul>
+<li>You cannot directly request stuff from the server because you first need to cache it in your DB. And then you can present it to the user.</li>
+<li>Otherwise, you would mix up queries to the backend and to GraphQL</li>
+<li>Advantage: you have your queries always cached (however, Apollo Client also caches)</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Code duplication through database and GraphQL schema is too large for a small development team!
+Therefore, we should focus on getting the <strong>Apollo client offline first</strong>!</p>
+</blockquote>
+<h2>Use Apollo as GraphQL</h2>
+<p>Readings:</p>
+<ul>
+<li>https://medium.com/twostoryrobot/a-recipe-for-offline-support-in-react-apollo-571ad7e6f7f4</li>
+<li>https://codeburst.io/highly-functional-offline-applications-using-apollo-client-12885bd5f335</li>
+</ul>
+
+</div>
+
+  </section>
+</main>
+
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2020
+    </p>
+  </div>
+</footer>
+
+
+</body>
+</html>
