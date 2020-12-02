@@ -7,7 +7,7 @@ tags:
 
 Exception logging in SLF4J works without including it in the format:
 
-```Java
+```java
 logger.error("An exception occured", new Exception("my exception"));
 ```
 
