@@ -2,7 +2,6 @@
 tags: ['impro']
 title: Improworkshop Reaktion statt Aktion Teil 2
 date: 2020-09-12
-unlisted: true
 ---
 
 ## Brainstorming

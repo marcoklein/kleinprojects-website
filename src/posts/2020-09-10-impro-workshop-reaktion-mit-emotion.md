@@ -1,8 +1,7 @@
 ---
-tags: ['impro']
+tags: ['impro', 'german']
 title: Improworkshop Reaktion statt Aktion
 date: 2020-09-10
-unlisted: true
 ---
 
 1. Liebespaar

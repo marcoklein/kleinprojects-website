@@ -19,7 +19,7 @@ I think for me it is about getting better in writing. And since this content wou
 
 > On the long run, I am planning to publish more, improving gradually in summarizing ideas, learning new phrasings or wordings, getting better in describing technical concerns with focus.
 
-So often as you here: start small - this is exactly what I am planning here.
+So often as you hear: start small - this is exactly what I am planning here.
 
 ### The fear of publishing bad content
 When I completely rewrote this website I had this initial motivation of "blogging" more. Of producing more posts than before. However, I am sometimes writing something up - but then I won't publish it.
