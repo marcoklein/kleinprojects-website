@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
-    <title>Blog | Kleinprojects</title>
+    <title>Linux Cheat Sheet | Kleinprojects</title>
     
   </head>
   <body>
@@ -51,38 +51,60 @@
 
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Blog</h1>
+    <h1 class="title is-1">Linux Cheat Sheet</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
 
 
 
-<main class="container has-text-centered ">
+<main class="container  content">
   <section class="section">
-    <h2 class="mb-3">
-    <a href="/linux-cheat-sheet/"> Linux Cheat Sheet</a>
-  </h2><h2 class="mb-3">
-    <a href="/practical-vim-command-cheat-sheet/"> Practical Vim Command Cheat Sheet</a>
-  </h2><h2 class="mb-3">
-    <a href="/vim-for-firefox/"> Vim for Firefox</a>
-  </h2><h2 class="mb-3">
-    <a href="/logging-exceptions-with-slf4j/"> Logging Exceptions with SLF4J</a>
-  </h2><h2 class="mb-3">
-    <a href="/go-cheat-sheet/"> Go Cheat Sheet</a>
-  </h2><h2 class="mb-3">
-    <a href="/improworkshop-reaktion-statt-aktion-teil-2/"> Improworkshop Reaktion statt Aktion Teil 2</a>
-  </h2><h2 class="mb-3">
-    <a href="/what-this-blog-is-about/"> What this blog is about</a>
-  </h2><h2 class="mb-3">
-    <a href="/improworkshop-reaktion-statt-aktion/"> Improworkshop Reaktion statt Aktion</a>
-  </h2><h2 class="mb-3">
-    <a href="/a-dead-simple-approach-to-using-sass-in-eleventy/"> A dead simple approach to using SASS in Eleventy</a>
-  </h2><h2 class="mb-3">
-    <a href="/clearing-the-_site-directory-in-eleventy-automatically/"> Clearing the _site directory in Eleventy automatically</a>
-  </h2><h2 class="mb-3">
-    <a href="/my-journey-to-using-eleventy-as-a-static-website-generator/"> My journey to using Eleventy as a static website generator</a>
-  </h2>
+    
+<div class="content">
+  <h2>Check Kernel Version</h2>
+<pre><code>uname -a
+</code></pre>
+<h2>Check IP</h2>
+<pre><code>ifconfig
+</code></pre>
+<pre><code>ip addr show
+</code></pre>
+<h2>Check disk space</h2>
+<pre><code>df -ah
+</code></pre>
+<h2>Work with services</h2>
+<pre><code>service &lt;service-name&gt; status
+systemctl status &lt;service-name&gt;
+</code></pre>
+<h2>Check folder size</h2>
+<p>Disk use</p>
+<pre><code>du -sh &lt;directory&gt;
+</code></pre>
+<h2>Check for open ports</h2>
+<pre><code>netstat
+</code></pre>
+<h2>Check CPU usage</h2>
+<pre><code>ps aux | grep &lt;process-name&gt;
+</code></pre>
+<pre><code>top
+</code></pre>
+<h2>Mounting</h2>
+<pre><code>mount /dev/sda2 /mnt
+</code></pre>
+<p>Check for existing</p>
+<pre><code>mounts
+</code></pre>
+<p>Auto mount in file</p>
+<pre><code>/etc/fstab
+</code></pre>
+<h2>Manpages</h2>
+<p>Manual pages</p>
+<pre><code>man &lt;command&gt;
+</code></pre>
+
+</div>
+
   </section>
 </main>
 
