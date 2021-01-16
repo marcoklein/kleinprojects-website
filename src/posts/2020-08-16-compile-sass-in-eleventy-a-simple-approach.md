@@ -9,14 +9,14 @@ So, to include SASS within my Eleventy project I am using only the official [SAS
 
 The `.eleventy.js` file contains only three lines within the configuration function to compile SASS into CSS:
 
-``` javascript
+```javascript
 const sass = require('sass');
 const fs = require('fs');
 
 function compileSass() {
   console.log('Compiling sass.');
-  const cssContent = sass.renderSync({file: 'styles/main.scss'});
-  fs.mkdirSync('_site/css', {recursive: true});
+  const cssContent = sass.renderSync({ file: 'styles/main.scss' });
+  fs.mkdirSync('_site/css', { recursive: true });
   fs.writeFileSync('_site/css/main.css', cssContent.css);
 }
 fs.watch('styles', (event, filepath) => {
@@ -28,10 +28,11 @@ compileSass();
 
 This a a very simple approach without asynchronous code or anything. The only package you need is the npm sass package. They even write that "renderSync() is more than twice as fast as render()" ([SASS npm package](https://www.npmjs.com/package/sass)), so you might consider if its worth for you introducing parallel execution.
 
-## Important Note to fs.watch
+## Important note to fs.watch
+
 This script does not work when publishing to GitHub pages automatically as the `fs.watch` command will block input. To unblock if Eleventy isn't run with the `--serve` flag we can only enable file watching if we discover that flag like so:
 
-``` js
+```js
 const isServing = process.argv.includes('--serve');
 if (isServing) {
   // watch only files if we are serving
