@@ -47,13 +47,16 @@
     "node": ">=6"
   },
   "dependencies": {},
-  "version": "5.14.0",
+  "version": "5.15.2",
   "name": "@fortawesome/fontawesome-free",
   "main": "js/fontawesome.js",
   "style": "css/fontawesome.css",
-  "license": "(CC-BY-4.0 AND OFL-1.1 AND MIT)"
+  "license": "(CC-BY-4.0 AND OFL-1.1 AND MIT)",
+  "scripts": {
+    "postinstall": "node attribution.js"
+  }
 
-,"_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.14.0.tgz"
-,"_integrity": "sha512-OfdMsF+ZQgdKHP9jUbmDcRrP0eX90XXrsXIdyjLbkmSBzmMXPABB8eobUJtivaupucYaByz6WNe1PI1JuYm3qA=="
-,"_from": "@fortawesome/fontawesome-free@5.14.0"
+,"_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.2.tgz"
+,"_integrity": "sha512-7l/AX41m609L/EXI9EKH3Vs3v0iA8tKlIOGtw+kgcoanI7p+e4I4GYLqW3UXWiTnjSFymKSmTTPKYrivzbxxqA=="
+,"_from": "@fortawesome/fontawesome-free@5.15.2"
 }
