@@ -4,6 +4,9 @@ const path = require('path');
 const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 
+// install prism plugins
+require('prismjs/plugins/custom-class/prism-custom-class');
+
 const REGEX_IMAGE_EXTENSION = '(jpg|png|gif)';
 
 function compileSass() {
@@ -47,7 +50,15 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/projects/**/*.md").reverse();
   });
 
-  eleventyConfig.addPlugin(syntaxhighlight);
+  eleventyConfig.addPlugin(syntaxhighlight, {
+    init: function({Prism}) {
+      Prism.plugins.customClass.map({
+        // prefix tag and number to avoid conflicts with Bulma
+        tag: 'prism-tag',
+        number: 'prism-number'
+      });
+    }
+  });
 
   eleventyConfig.addFilter('coverImage', function(page) {
     // take filePathStem or pageOptions directly if it is a string (and a path)

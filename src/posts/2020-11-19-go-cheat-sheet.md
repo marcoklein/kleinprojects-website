@@ -5,13 +5,15 @@ date: 2020-11-19
 ---
 
 ## Go Lang Tour
-This post is my cheat sheet from https://tour.golang.org
 
+This post is my cheat sheet for the (Go Lang Tour)[https://tour.golang.org].
 
 Package `main` runs programs.
 
 ## Imports
+
 Factored Import Statements
+
 ```go
 import (
 	"fmt"
@@ -20,15 +22,19 @@ import (
 ```
 
 ## Exports
-> In Go, a name is exported if it begins with a capital letter.
+
+In Go, a name is exported if it begins with a capital letter.
 
 ## Functions
+
 ```go
 func add(x int, y int) int {
 	return x + y
 }
 ```
-You may omit types if they are equal for consecutive params.
+
+You may omit types if they are equal for consecutive parameters.
+
 ```go
 func add(x, y int) int {
 	return x + y
@@ -36,6 +42,7 @@ func add(x, y int) int {
 ```
 
 ### Multiple Results
+
 ```go
 func swap(x, y string) (string, string) {
 	return y, x
@@ -46,7 +53,9 @@ func main() {
 	fmt.Println(a, b)
 }
 ```
+
 ### Naked return
+
 ```go
 func split(sum int) (x, y int) {
 	x = sum * 4 / 9
@@ -54,11 +63,15 @@ func split(sum int) (x, y int) {
 	return
 }
 ```
+
 ## Variables
+
 ```go
 var c, python, java bool
 ```
+
 Short declaration with `:=`
+
 ```go
 func main() {
 	var i, j int = 1, 2
@@ -68,7 +81,9 @@ func main() {
 	fmt.Println(i, j, k, c, python, java)
 }
 ```
+
 ## Datatypes
+
 ```go
 bool
 
@@ -90,19 +105,24 @@ complex64 complex128
 # Conditions and Loops
 
 ## For
+
 ```go
 sum := 0
 for i := 0; i < 10; i++ {
     sum += i
 }
 ```
+
 ## For is Go's While
+
 ```go
 for sum < 1000 {
     sum += sum
 }
 ```
+
 ## Defer
+
 ```go
 func main() {
 	defer fmt.Println("world")
@@ -110,20 +130,28 @@ func main() {
 	fmt.Println("hello")
 }
 ```
+
 [Further Reading](https://blog.golang.org/defer-panic-and-recover)
 
-# For https://www.spoj.com
+# Examples
+
 Read in line:
+
 ```go
 func Scanln(a ...interface{}) (n int, err error)
 ```
+
 Example
+
 ```go
 var name string
 fmt.Scanln(&name)
 ```
 
 ## Life, the Universe, and Everything
+
+Read lines until we read `42`.
+
 ```go
 package main
 import "fmt"
@@ -131,7 +159,7 @@ import "fmt"
 func main(){
 	// your code goes here
 	var line string
-	for fmt.Scanln(&line); line != "42";fmt.Scanln(&line) {
+	for fmt.Scanln(&line); line != "42"; fmt.Scanln(&line) {
 		fmt.Println(line)
 	}
 }

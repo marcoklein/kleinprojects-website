@@ -4,13 +4,13 @@
   "description": "Landing page of Kleinprojects with blog and projects",
   "dependencies": {},
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "@fortawesome/fontawesome-free": "^5.14.0",
-    "bulma": "^0.9.0",
+    "@11ty/eleventy": "^0.11.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.6",
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "bulma": "^0.9.1",
     "gh-pages": "^3.1.0",
-    "moment": "^2.27.0",
-    "sass": "^1.26.10"
+    "moment": "^2.29.1",
+    "sass": "^1.32.4"
   },
   "scripts": {
     "build:eleventy": "eleventy",
