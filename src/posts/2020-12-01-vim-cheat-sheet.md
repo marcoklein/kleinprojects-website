@@ -112,3 +112,23 @@ Delete line and enter insert mode
 ```
 S
 ```
+
+# Vertical Movement
+
+Move to top
+
+```
+H
+```
+
+Move to bottom
+
+```
+L
+```
+
+Move to middle
+
+```
+M
+```
