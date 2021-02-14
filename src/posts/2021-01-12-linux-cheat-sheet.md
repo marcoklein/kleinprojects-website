@@ -7,29 +7,29 @@ tags:
 
 ## Check Kernel Version
 
-```
+```bash
 uname -a
 ```
 
 ## Check IP
 
-```
+```bash
 ifconfig
 ```
 
-```
+```bash
 ip addr show
 ```
 
 ## Check disk space
 
-```
+```bash
 df -ah
 ```
 
 ## Work with services
 
-```
+```bash
 service <service-name> status
 systemctl status <service-name>
 ```
@@ -38,41 +38,41 @@ systemctl status <service-name>
 
 Disk use
 
-```
+```bash
 du -sh <directory>
 ```
 
 ## Check for open ports
 
-```
+```bash
 netstat
 ```
 
 ## Check CPU usage
 
-```
+```bash
 ps aux | grep <process-name>
 ```
 
-```
+```bash
 top
 ```
 
 ## Mounting
 
-```
+```bash
 mount /dev/sda2 /mnt
 ```
 
 Check for existing
 
-```
+```bash
 mounts
 ```
 
 Auto mount in file
 
-```
+```bash
 /etc/fstab
 ```
 
@@ -80,7 +80,7 @@ Auto mount in file
 
 Manual pages
 
-```
+```bash
 man <command>
 ```
 
@@ -88,7 +88,7 @@ man <command>
 
 Show permissions
 
-```
+```bash
 stat file.txt
 ```
 
