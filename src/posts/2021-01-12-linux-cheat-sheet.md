@@ -94,7 +94,7 @@ stat file.txt
 
 Change permissions
 
-```sh
+```
 # denies file read for others
 chmod o-r file.txt
 # read for user, read for group, deny access to others
