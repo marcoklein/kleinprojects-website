@@ -107,11 +107,7 @@ systemctl status &lt;service-name&gt;
 <pre><code>stat file.txt
 </code></pre>
 <p>Change permissions</p>
-<pre><code># denies file read for others
-chmod o-r file.txt
-# read for user, read for group, deny access to others
-chmod u=r,g=r,o= file.txt
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># denies file read for others</span><br><span class="token function">chmod</span> o-r file.txt<br><span class="token comment"># read for user, read for group, deny access to others</span><br><span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>r,g<span class="token operator">=</span>r,o<span class="token operator">=</span> file.txt</code></pre>
 
 </div>
 
