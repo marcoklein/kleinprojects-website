@@ -63,49 +63,34 @@
     
 <div class="content">
   <h2>Check Kernel Version</h2>
-<pre><code>uname -a
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">uname</span> -a</code></pre>
 <h2>Check IP</h2>
-<pre><code>ifconfig
-</code></pre>
-<pre><code>ip addr show
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">ifconfig</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">ip</span> addr show</code></pre>
 <h2>Check disk space</h2>
-<pre><code>df -ah
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">df</span> -ah</code></pre>
 <h2>Work with services</h2>
-<pre><code>service &lt;service-name&gt; status
-systemctl status &lt;service-name&gt;
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">service</span> <span class="token operator">&lt;</span>service-name<span class="token operator">></span> status<br>systemctl status <span class="token operator">&lt;</span>service-name<span class="token operator">></span></code></pre>
 <h2>Check folder size</h2>
 <p>Disk use</p>
-<pre><code>du -sh &lt;directory&gt;
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">du</span> -sh <span class="token operator">&lt;</span>directory<span class="token operator">></span></code></pre>
 <h2>Check for open ports</h2>
-<pre><code>netstat
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">netstat</span></code></pre>
 <h2>Check CPU usage</h2>
-<pre><code>ps aux | grep &lt;process-name&gt;
-</code></pre>
-<pre><code>top
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token operator">&lt;</span>process-name<span class="token operator">></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">top</span></code></pre>
 <h2>Mounting</h2>
-<pre><code>mount /dev/sda2 /mnt
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mount</span> /dev/sda2 /mnt</code></pre>
 <p>Check for existing</p>
-<pre><code>mounts
-</code></pre>
+<pre class="language-bash"><code class="language-bash">mounts</code></pre>
 <p>Auto mount in file</p>
-<pre><code>/etc/fstab
-</code></pre>
+<pre class="language-bash"><code class="language-bash">/etc/fstab</code></pre>
 <h2>Manpages</h2>
 <p>Manual pages</p>
-<pre><code>man &lt;command&gt;
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">man</span> <span class="token operator">&lt;</span>command<span class="token operator">></span></code></pre>
 <h2>Permissions</h2>
 <p>Show permissions</p>
-<pre><code>stat file.txt
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">stat</span> file.txt</code></pre>
 <p>Change permissions</p>
 <pre class="language-bash"><code class="language-bash"><span class="token comment"># denies file read for others</span><br><span class="token function">chmod</span> o-r file.txt<br><span class="token comment"># read for user, read for group, deny access to others</span><br><span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>r,g<span class="token operator">=</span>r,o<span class="token operator">=</span> file.txt</code></pre>
 
