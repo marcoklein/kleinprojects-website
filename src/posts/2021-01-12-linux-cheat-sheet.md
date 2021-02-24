@@ -100,3 +100,13 @@ chmod o-r file.txt
 # read for user, read for group, deny access to others
 chmod u=r,g=r,o= file.txt
 ```
+
+## File Transformation
+
+Use `jq` to transform JSON files.
+
+```bash
+cat logs.json | jq '.["@timestamp"] + "   " + .message' > logs.txt
+```
+
+Transforms extracts timestamp and message from JSON objects and prints them into logs.txt.

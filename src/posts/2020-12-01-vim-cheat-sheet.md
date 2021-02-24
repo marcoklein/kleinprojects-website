@@ -132,3 +132,71 @@ Move to middle
 ```
 M
 ```
+
+# Search and replace
+
+Search for all occurrences of foo and replace with bar after confirmation
+
+```bash
+:%s/foo/bar/gc
+```
+
+# Navigation
+
+Open finder
+
+```
+:e <folder>
+```
+
+Jump between two last buffers
+
+```
+Ctrl + ^
+```
+
+Set mark with
+
+```
+m <letter>
+```
+
+Set global mark with
+
+```
+m <Shift + letter>
+```
+
+# Splits
+
+All under `Ctrl + W` are window controls.
+
+Vertical
+
+```
+Ctrl + W v
+```
+
+Horizontal
+
+```
+Ctrl + W s
+```
+
+Equal split
+
+```
+Ctrl + W =
+```
+
+Resize horizontally
+
+```
+:resize 10
+```
+
+Resize vertically
+
+```
+:vertical resize 20
+```
