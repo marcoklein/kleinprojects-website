@@ -93,6 +93,10 @@
 <pre class="language-bash"><code class="language-bash"><span class="token function">stat</span> file.txt</code></pre>
 <p>Change permissions</p>
 <pre class="language-bash"><code class="language-bash"><span class="token comment"># denies file read for others</span><br><span class="token function">chmod</span> o-r file.txt<br><span class="token comment"># read for user, read for group, deny access to others</span><br><span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>r,g<span class="token operator">=</span>r,o<span class="token operator">=</span> file.txt</code></pre>
+<h2>File Transformation</h2>
+<p>Use <code>jq</code> to transform JSON files.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">cat</span> logs.json <span class="token operator">|</span> jq <span class="token string">'.["@timestamp"] + "   " + .message'</span> <span class="token operator">></span> logs.txt</code></pre>
+<p>Transforms extracts timestamp and message from JSON objects and prints them into logs.txt.</p>
 
 </div>
 
