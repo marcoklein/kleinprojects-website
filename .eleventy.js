@@ -22,7 +22,9 @@ function compileSass() {
 module.exports = function(eleventyConfig) {
 
   // clear site on initial build
-  fs.rmdirSync('_site', {recursive: true});
+  if (fs.existsSync('_site')) {
+    fs.rmdirSync('_site', { recursive: true });
+  }
   console.log('Cleared _site folder');
   
   const isServing = process.argv.includes('--serve');

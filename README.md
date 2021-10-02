@@ -4,6 +4,12 @@
 
 Built with Eleventy and Bulma
 
+## Install dependencies
+
+```sh
+npm install
+```
+
 ## Run locally
 
 ```sh
