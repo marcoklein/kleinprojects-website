@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- New project: Impftermin scraper
+
 ## 1.0.1
 
 - Fix local serve script
