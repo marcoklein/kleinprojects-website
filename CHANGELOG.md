@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+
+- Post: Linking markdown files
+- chore: switch to `yarn`
+
 ## 1.1.0
 
 - New project: Impftermin scraper
