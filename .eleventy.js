@@ -68,7 +68,7 @@ module.exports = function (eleventyConfig) {
       });
     },
   });
-  eleventyConfig.addPlugin(UpgradeHelper);
+  // eleventyConfig.addPlugin(UpgradeHelper);
 
   eleventyConfig.addFilter('coverImage', function (page) {
     // take filePathStem or pageOptions directly if it is a string (and a path)

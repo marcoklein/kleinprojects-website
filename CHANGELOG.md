@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- fix: exclude upgrade helper
+
 ## 1.2.0
 
 - Post: Linking markdown files
