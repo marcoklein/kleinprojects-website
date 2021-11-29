@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+- fix: GitHub pipeline
+
 ## 1.2.1
 
 - fix: exclude upgrade helper

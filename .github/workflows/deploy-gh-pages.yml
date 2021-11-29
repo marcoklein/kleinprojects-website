@@ -16,10 +16,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
       - name: Publish to GitHub Pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/marcoklein/kleinprojects-website.git
-          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+          yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

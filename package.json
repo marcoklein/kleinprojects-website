@@ -1,6 +1,6 @@
 {
   "name": "kleinprojects-website",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Landing page of Kleinprojects with blog and projects",
   "dependencies": {},
   "devDependencies": {
@@ -16,7 +16,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
-    "deploy": "npm run build && gh-pages -d _site",
+    "deploy": "yarn build && gh-pages -d _site",
     "deps:upgrade": "yarn upgrade-interactive --latest"
   },
   "keywords": [
