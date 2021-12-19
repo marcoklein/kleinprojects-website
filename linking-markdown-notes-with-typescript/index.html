@@ -70,6 +70,9 @@ This post dives into an implementation to leverage the power of <code>[[wikilink
 We use the package manager <a href="https://yarnpkg.com/">yarn</a> for dependency management. However, you could also install everything via <a href="https://www.npmjs.com/">npm</a> if you prefer. So, go ahead and install yarn.</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --global <span class="token function">yarn</span></code></pre>
 <p>Let's create a new folder for our project and initialize an empty yarn project with default options.</p>
+<blockquote>
+<p>You could also find all code on <a href="https://github.com/marcoklein/linked-markdown-notes">GitHub</a>.</p>
+</blockquote>
 <pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> linked-markdown-notes<br><span class="token builtin class-name">cd</span> linked-markdown-notes<br><span class="token function">yarn</span> init -y</code></pre>
 <p>Add required dependencies for running the project.</p>
 <pre class="language-shell"><code class="language-shell"><span class="token function">yarn</span> <span class="token function">add</span> --dev typescript ts-node @types/node @types/fs-extra<br><span class="token function">yarn</span> <span class="token function">add</span> remark-parse remark-wiki-link unist-util-visit-parents</code></pre>
@@ -163,6 +166,7 @@ Try to experiment with the implementation a little. You could for example use so
 </ol>
 <p><strong>Enjoy working with your set of linked notes.</strong></p>
 <p>Cheers, Marco</p>
+<p><em>Find code for this article on <a href="https://github.com/marcoklein/linked-markdown-notes">GitHub</a></em></p>
 
 </div>
 
