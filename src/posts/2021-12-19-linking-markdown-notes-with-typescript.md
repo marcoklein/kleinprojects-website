@@ -20,6 +20,8 @@ npm install --global yarn
 
 Let's create a new folder for our project and initialize an empty yarn project with default options.
 
+> You could also find all code on [GitHub](https://github.com/marcoklein/linked-markdown-notes).
+
 ```bash
 mkdir linked-markdown-notes
 cd linked-markdown-notes
@@ -454,3 +456,7 @@ Try to experiment with the implementation a little. You could for example use so
 **Enjoy working with your set of linked notes.**
 
 Cheers, Marco
+
+---
+
+_Find code for this article on [GitHub](https://github.com/marcoklein/linked-markdown-notes)_
