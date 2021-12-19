@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+
+- Post: Linking Markdown Notes with TypeScript
+
 ## 1.2.2
 
 - fix: GitHub pipeline
