@@ -7,13 +7,13 @@ Built with Eleventy and Bulma
 ## Install dependencies
 
 ```sh
-npm install
+yarn install
 ```
 
 ## Run locally
 
 ```sh
-npm run serve
+yarn serve
 ```
 
 ## Upgrade dependencies

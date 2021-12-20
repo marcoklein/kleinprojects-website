@@ -6,16 +6,16 @@ tags: [notes]
 
 Linked note taking brings the advantage of connecting knowledge in an intuitive, connected matter as opposed to traditional, section-based note taking approaches. This approach gained traction through new networked note taking applications like [RoamResearch](https://roamresearch.com/), [Obsidian](https://obsidian.md/), and [Logseq](https://logseq.com/). They pursue the concept of _linked_ notes - that means that instead of dividing notes into sections, they are all in a flat directory and define structure by relations to other notes.
 
-In this post we are using Markdown to stick to an easily editable text format without vendor lock-in. We could even drop these plain files into a Git folder for effortless backups and versioning. For linking markdown notes we are going to use the [widely adopted Wikilink format](https://en.wikipedia.org/wiki/Help:Link) (e.g. `[[wikilink]]`). These link arbitrary documents without the need of specifying the exact location.
+In this post we are using Markdown to stick to an easily editable text format without vendor lock-in. We could even drop these plain files into a Git folder for effortless backups and versioning. For linking markdown notes we are going to use the [widely adopted Wikilink format](https://en.wikipedia.org/wiki/Help:Link) (e.g. `[[wikilink]]`). These connect arbitrary documents without the need of specifying the exact location.
 
 I did not find too many resources and guides on how you could implement algorithms by yourself to interlink Markdown notes with the power of `[[wikilinks]]`. That is why this post dives into an implementation to
 
-1. [Setup a base project](#Setup) ([Source on GitHub](https://github.com/marcoklein/linked-markdown-notes)) to work with examples
-2. [Read markdown files](#Reading-Markdown-Files) from your folder to have data to analyze
-3. [Parse the files](#Parsing-Markdown-Files) to find all wikilinks for further mapping
-4. [Extract titles](#Extracting-Document-Titles) to that we can map our links
-5. [Build a master mapping table](#Building-Master-Mappings) to quickly interlink our notes
-6. [Map links to document paths](#Mapping-Links-to-Document-Paths) for an example on using our master mappings
+1. [Setup a base project](#setup) ([Source on GitHub](https://github.com/marcoklein/linked-markdown-notes)) for the implementation
+2. [Read markdown files](#reading-markdown-files) from your folder to have data to analyze
+3. [Parse the files](#parsing-markdown-files) to find all wikilinks for further mapping
+4. [Extract titles](#extracting-document-titles) to that we can map our links
+5. [Build a master mapping table](#building-master-mappings) to quickly interlink our notes
+6. [Map links to document paths](#mapping-links-to-document-paths) for an example on using our master mappings
 
 I assume knowledge of TypeScript but it is not necessary in order to grasp the concept and process.
 

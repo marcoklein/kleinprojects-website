@@ -4,24 +4,27 @@
       <div class="navbar-brand">
         <a class="navbar-item {% if navParent=='home' %}is-active{% endif %}" href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">{{ site.title }}</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item {% if navParent=='projects' %}is-active{% endif %}" href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item {% if navParent=='blog' %}is-active{% endif %}" href="/blog/">
-            Blog
+            <span class="ml-1">{{ site.title }}</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item {% if navParent=='about' %}is-active{% endif %}" href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item {% if navParent=='projects' %}is-active{% endif %}" href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item {% if navParent=='blog' %}is-active{% endif %}" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item {% if navParent=='about' %}is-active{% endif %}" href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0
+
+- Plugin to add heading anchors
+- change heading size
+- update readme for yarn
+- about me
+
 ## 1.3.0
 
 - Post: Linking Markdown Notes with TypeScript

@@ -4,6 +4,8 @@ const path = require('path');
 const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
+const markdownIt = require('markdown-it');
+const markdownItAnchor = require('markdown-it-anchor');
 
 // install prism plugins
 require('prismjs/plugins/custom-class/prism-custom-class');
@@ -125,6 +127,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('datetime', function (date) {
     return moment(date).format('YYYY-MM-DD');
   });
+
+  // generate anchor ids of headings
+  const markdownLib = markdownIt({ html: true }).use(markdownItAnchor);
+  eleventyConfig.setLibrary('md', markdownLib);
 
   // general config
   eleventyConfig.setFrontMatterParsingOptions({
