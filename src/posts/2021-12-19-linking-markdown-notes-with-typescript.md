@@ -4,15 +4,27 @@ date: 2021-12-19
 tags: [notes]
 ---
 
-Networked note taking applications like RoamResearch, Obsidian, and Logseq are getting more and more popular. They pursue the concept of _linked_ notes - that means that instead of dividing notes into sections, they are all in a flat directory and define structure by relations to other notes.
-This post dives into an implementation to leverage the power of `[[wikilinks]]` - links that can point to any location within your note system. I assume knowledge of TypeScript but it's not necessary to grasp the concept and process.
+Linked note taking brings the advantage of connecting knowledge in an intuitive, connected matter as opposed to traditional, section-based note taking approaches. This approach gained traction through new networked note taking applications like [RoamResearch](https://roamresearch.com/), [Obsidian](https://obsidian.md/), and [Logseq](https://logseq.com/). They pursue the concept of _linked_ notes - that means that instead of dividing notes into sections, they are all in a flat directory and define structure by relations to other notes.
 
-**You will have a basis to link any markdown notes through a mapping data structure that gives you direct access to _path_, _title_, and _links_ of documents.**
+In this post we are using Markdown to stick to an easily editable text format without vendor lock-in. We could even drop these plain files into a Git folder for effortless backups and versioning. For linking markdown notes we are going to use the [widely adopted Wikilink format](https://en.wikipedia.org/wiki/Help:Link) (e.g. `[[wikilink]]`). These link arbitrary documents without the need of specifying the exact location.
+
+I did not find too many resources and guides on how you could implement algorithms by yourself to interlink Markdown notes with the power of `[[wikilinks]]`. That is why this post dives into an implementation to
+
+1. [Setup a base project](#Setup) ([Source on GitHub](https://github.com/marcoklein/linked-markdown-notes)) to work with examples
+2. [Read markdown files](#Reading-Markdown-Files) from your folder to have data to analyze
+3. [Parse the files](#Parsing-Markdown-Files) to find all wikilinks for further mapping
+4. [Extract titles](#Extracting-Document-Titles) to that we can map our links
+5. [Build a master mapping table](#Building-Master-Mappings) to quickly interlink our notes
+6. [Map links to document paths](#Mapping-Links-to-Document-Paths) for an example on using our master mappings
+
+I assume knowledge of TypeScript but it is not necessary in order to grasp the concept and process.
+
+**Objective: Building a basis to link any markdown notes through a mapping data structure that gives you direct access to _path_, _title_, and _links_ of documents.**
 
 ## Setup
 
-At first, we are going to setup our environment and base project. Ensure you have a recent installation of [Node.js](https://nodejs.org). If not head over to their [download page]((https://nodejs.org/en/download/), grab the latest version and install it.
-We use the package manager [yarn](https://yarnpkg.com/) for dependency management. However, you could also install everything via [npm](https://www.npmjs.com/) if you prefer. So, go ahead and install yarn.
+At first, we are going to setup our environment and base project. Ensure you have a recent installation of [Node.js](https://nodejs.org). If not head over to their [download page](https://nodejs.org/en/download/) grab the latest version and install it.
+We use the package manager [yarn](https://yarnpkg.com/) for dependency management. However, you could also install everything via [npm](https://www.npmjs.com/) if preferred. So, go ahead and install yarn.
 
 ```bash
 npm install --global yarn
@@ -35,7 +47,7 @@ yarn add --dev typescript ts-node @types/node @types/fs-extra
 yarn add remark-parse remark-wiki-link unist-util-visit-parents
 ```
 
-We are using ESM - therefore add the `"type": "module"` option to your `package.json` and create a `start` script for running our project.
+We are using [ECMAScript Modules (ESM)](https://www.typescriptlang.org/docs/handbook/esm-node.html), therefore add the `"type": "module"` option to your `package.json` and create a `start` script for running our project:
 
 ```json
 {
@@ -50,7 +62,7 @@ We are using ESM - therefore add the `"type": "module"` option to your `package.
 }
 ```
 
-Create a new `tsconfig.json` file for our [TypeScript](https://www.typescriptlang.org/) configuration.
+Create a new `tsconfig.json` file for our [TypeScript](https://www.typescriptlang.org/) configuration:
 
 ```json
 {
@@ -76,7 +88,7 @@ For this we just create a new file under `typings/remark-wiki-link.d.ts` with th
 declare module 'remark-wiki-link';
 ```
 
-Either use a folder with markdown files you would like to use or create a new `test/resources` folder that contains some sample markdown files. In this post all examples and code will work with the latter one. If you want to follow this the create 4 files in that folder:
+Either use an already existing folder with markdown files or create a new `test/resources` folder that contains some sample markdown files. In this post, all examples and code will work with the latter one. If you want to follow it, the create 4 files in that folder:
 
 `test/resources/Dog.md`
 
@@ -89,24 +101,24 @@ There is a dog.
 
 ```
 # Cat
-Cat plays with [[Dog]]
+Cat plays with [[Dog]].
 ```
 
 `test/resources/Farm.md`
 
 ```
 # Farm
-Farm has a [[Dog]], a [[Horse]], and a [[Cow]]
+Farm has a [[Dog]], a [[Horse]], and a [[Cow]].
 ```
 
 `test/resources/Home.md`
 
 ```
 # Home
-Home has a [[Cat]] and [[Dog]]
+Home has a [[Cat]] and [[Dog]].
 ```
 
-Content of the files make no real sense - we'll use these files as a basis to test the `[[...]]` links.
+The content of the files make no real sense, but we will need these examples as a basis to test the `[[wikilinks]]`.
 Eventually, our folder structure should look this:
 
 ```
@@ -122,11 +134,11 @@ package.json
 tsconfig.json
 ```
 
-**With our base setup we are good to go and dive into the actual implementation.**
+**With our basic setup we are now ready to dive into the actual implementation.**
 
 ## Reading Markdown Files
 
-Let's write some code. Create a new file under `src/index.ts` - this is our application entry. Add the following function that reads in markdown files of a specific directory.
+Let's write some code for reading our files that we want to link. For that create a new file under `src/index.ts` as application entry. Add the following function to read markdown files of a specific directory:
 
 ```ts
 import fs from 'node:fs/promises';
@@ -172,13 +184,13 @@ const files = await readMarkdownFiles('./test/resources');
 files.forEach(({ path }) => console.log(`Read file path: ${path}`));
 ```
 
-Run the code snippet and see its result:
+Run the code snippet and examine its result:
 
 ```bash
 yarn start
 ```
 
-It should print a list of markdown files in our `test/resources` folder:
+It should have printed a list of markdown files in your `test/resources` folder:
 
 ```bash
 Read file path: test/resources/Cat.md
@@ -191,7 +203,9 @@ Read file path: test/resources/Home.md
 
 ## Parsing Markdown Files
 
-We use [remark-parse](https://github.com/remarkjs/remark/tree/main/packages/remark-parse) for markdown parsing with the [remark-wiki-link](https://github.com/landakram/remark-wiki-link) extension for parsing wikilinks of the format `[[...]]`. To leverage the power of typings we start with the creation of a `WikiLinkNode` type that we need for the `remark-wiki-plugin` and then we create a custom `SyntaxTree` type that combines the root type of the parsers syntax tree and the wiki link plugin. Additionally, let us import `visit` - an utility to traverse through the syntax tree - see [tree traversal article in TypeScript](https://unifiedjs.com/learn/recipe/tree-traversal-typescript/) for more information about that.
+As a second step we have to find all wikilink occurrences that we can use for lining our files. Therefore, we are going to parse the Markdown content and analyze the syntax tree.
+
+We use the library [remark-parse](https://github.com/remarkjs/remark/tree/main/packages/remark-parse) for markdown parsing with the [remark-wiki-link](https://github.com/landakram/remark-wiki-link) extension for parsing wikilinks of the format `[[...]]`. We start with the creation of a `WikiLinkNode` type that we need for the `remark-wiki-plugin`. Afterwards, we we create a `SyntaxTree` type we can use as the root type of our parser. Additionally, let us import `visit` - an utility to traverse the syntax tree - see [tree traversal article in TypeScript](https://unifiedjs.com/learn/recipe/tree-traversal-typescript/) for more information about that.
 
 ```ts
 // ... other imports
@@ -211,8 +225,8 @@ interface WikiLinkNode extends UNIST.Node {
 type SyntaxTree = mdast.Root | WikiLinkNode;
 ```
 
-[Unist](https://github.com/syntax-tree/unist) and [mdast](https://github.com/syntax-tree/mdast) are syntax tree structures `remark-parse` uses for parsing markdown.
-In the next step we add two more functions to parse all document links and build a mapping table from all documents and links. Let's start with a function to parse wiki links from our syntax tree. For this we are going to use the `visit` utility we imported in the previous snippet.
+[Unist](https://github.com/syntax-tree/unist) and [mdast](https://github.com/syntax-tree/mdast) are syntax tree structures, which `remark-parse` uses for parsing markdown.
+In the next step, we add two more functions to parse all document links and build a mapping table from all documents and links. Let's start with a function to parse wikilinks from our syntax tree. For this we are going to use the `visit` utility we imported in the previous snippet:
 
 ```ts
 function parseDocumentLinks(parsedDocumentContent: SyntaxTree) {
@@ -233,7 +247,7 @@ function parseDocumentLinks(parsedDocumentContent: SyntaxTree) {
 }
 ```
 
-The function returns an array of wiki links it finds in the syntax tree. With this we can add our function for building the document to links map.
+The function returns an array of wikilinks that it finds in the syntax tree. Now, we can add our function for building the document to map links:
 
 ```ts
 function buildDocumentsLinkMap(files: FileSystemDocument[]) {
@@ -242,13 +256,13 @@ function buildDocumentsLinkMap(files: FileSystemDocument[]) {
   // end result
   const documentLinksMap: { [key: string]: string[] } = {};
   files.forEach(({ path, content }) => {
-    // parse each content and put its links into our result map
+    // parse each content and put its links into the result map
     const parsedDocumentContent = documentParser.parse(content);
     documentLinksMap[path] = parseDocumentLinks(parsedDocumentContent);
   });
   return documentLinksMap;
 }
-// print our result
+// print the result
 console.log('Document links map: ', buildDocumentsLinkMap(files));
 ```
 
@@ -267,12 +281,12 @@ Documents links map: {
 }
 ```
 
-**Voilà - we successfully parsed our markdown files, extracted links, and created a mapping table. With this mapping table we can easily match documents and links. The next sections discuss how we can implement that mapping.**
+**Voilà, we successfully parsed our markdown files, extracted links, and created a mapping table. With this mapping table we can easily match documents and links. The next sections discuss how we can implement that mapping.**
 
 ## Extracting Document Titles
 
-Our links have to map against some sort of name or title. In our case we are using the document title as the matching target. However, you could also use for example the first heading in you markdown file. It's just important that we create a map of titles that the document links map can use for consecutive linking.
-Therefore, we add a new function for extracting document titles
+Our links have to map against some sort of name or title. In our case, we are using the document name of each file as the matching target (you could also use e.g. the first heading in you markdown file). It is only important to create a map of titles that the `documentsLinksMap` can use for linking.
+Therefore, we add a new function for extracting document titles:
 
 ```ts
 function buildDocumentsTitleMap(files: FileSystemDocument[]) {
@@ -295,7 +309,7 @@ console.log('Documents title map: ', buildDocumentsTitleMap(files));
 ```
 
 The regex `([^\/]+)\.md$` returns the title of a document and the first matching group contains the title. Additionally, the function contains two additional checks to guarantee uniqueness of titles.
-A run with `yarn start` now prints
+A run with `yarn start` now prints:
 
 ```bash
 Read file path: test/resources/Cat.md
@@ -316,12 +330,12 @@ Documents title map:  {
 }
 ```
 
-**Well done - with the documents links map and the documents title map we can interlink our markdown files.**
+**Well done, with the `documentsLinksMap` and the `documentsTitleMap` we can now interlink our markdown files.**
 
 ## Building Master Mappings
 
-You might already wonder how we could actually map all links with the mapping tables that we got now. Therefore, for our final mapping we create mappings based on our two original mapping tables and combine them all! They will enable any future algorithms to directly find mappings for links.
-Let's add a function that creates our master mapping tables:
+You might already wonder how we could actually visualize all the links by using the mapping tables. Thus, for our final mapping we create mappings based on our two original mapping tables and combine them all! They will enable any future algorithms to directly find mappings for links.
+Let us add a function that creates our master mapping tables:
 
 ```ts
 function buildMasterMappings(
@@ -389,11 +403,13 @@ Master mappings:  {
 }
 ```
 
-**You see where this is getting? Now we got mappings into all directions with all document titles, paths, and links. Now we just have to use it.**
+**Do You see where this is getting? Hence, we got mappings into all directions with all document titles, paths, and links. Now we just have to use it.**
 
 ## Mapping Links to Document Paths
 
-We could utilize these master mappings in various use cases. To look into one in particular we implement a function to map links to the respective file path. Note, that some links don't have a matching target document - our function considers this case as well.
+We could utilize these master mappings in various use cases. To look into one in particular, we implement a function to map links to the respective file path:
+
+(Note, that some links don't have a matching target document - our function considers this case as well)
 
 ```ts
 // we build a global master mapping table
@@ -442,18 +458,21 @@ Path for link Farm:  { existing: true, path: 'test/resources/Farm.md' }
 Path for link Farm:  { existing: false, path: undefined }
 ```
 
-**This case shows us how easy it is to utilise the master mapping to quickly find paths for linked notes.**
+**This case shows us how easy it is to utilize the master mapping to quickly find paths for linked notes.**
 
 ## Limitations and Outlook
 
-This post covered a basic implementation for processing linked Markdown notes. Feel free to take it as an inspiration and let me know if you do something cool with it. Nonetheless, there is much more to come and we are only at the very beginning.
-Try to experiment with the implementation a little. You could for example use some [PageRank Algorithm](https://en.wikipedia.org/wiki/PageRank) for sorting documents by the amount of links. Additionally, there are many more cases that I am currently working on that all need this base of interconnected notes:
+This post covered a basic implementation for processing linked Markdown notes. Feel free to take it as an inspiration and let me know if you do something cool with it.
 
-1. Are all notes connected with each other, or are there outsiders? This might be indications for lost notes.
-2. What links don't have a mapping target? This would be links that point to non-existent documents.
-3. Which links point to a specific document (also known as _backlinks_)?
+Finally, I want to close with some questions worth asking when looking at you map of notes:
+for sorting documents by the amount of links. Additionally, there are many more cases that I am currently working on that all need this base of interconnected notes:
 
-**Enjoy working with your set of linked notes.**
+1. Are all notes connected with each other, or are there outsiders? This might be an indication for lost notes.
+2. What links do not have a mapping target? This would be links pointing to non-existent documents.
+3. Which links point to a specific document (also known as backlinks)?
+4. What notes are the most important ones? E.g. you could sort with the [PageRank Algorithm](https://en.wikipedia.org/wiki/PageRank)
+
+**Enjoy working with your set of networked notes.**
 
 Cheers, Marco
 
