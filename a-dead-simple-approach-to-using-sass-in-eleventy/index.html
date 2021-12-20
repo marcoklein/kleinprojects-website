@@ -17,8 +17,6 @@
 
 
   
-
-
 <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
@@ -27,35 +25,36 @@
       <div class="navbar-brand">
         <a class="navbar-item " href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">Kleinprojects</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item " href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item is-active" href="/blog/">
-            Blog
+            <span class="ml-1">Kleinprojects</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item " href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>
-
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">A dead simple approach to using SASS in Eleventy</h1>
+    <h1 class="title is-2">A dead simple approach to using SASS in Eleventy</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
-
 
 
 <main class="container  content">
@@ -67,7 +66,7 @@
 <p>The <code>.eleventy.js</code> file contains only three lines within the configuration function to compile SASS into CSS:</p>
 <pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> sass <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'sass'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token keyword">function</span> <span class="token function">compileSass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Compiling sass.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token keyword">const</span> cssContent <span class="token operator">=</span> sass<span class="token punctuation">.</span><span class="token function">renderSync</span><span class="token punctuation">(</span><span class="token punctuation">{</span> file<span class="token operator">:</span> <span class="token string">'styles/main.scss'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  fs<span class="token punctuation">.</span><span class="token function">mkdirSync</span><span class="token punctuation">(</span><span class="token string">'_site/css'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> recursive<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  fs<span class="token punctuation">.</span><span class="token function">writeFileSync</span><span class="token punctuation">(</span><span class="token string">'_site/css/main.css'</span><span class="token punctuation">,</span> cssContent<span class="token punctuation">.</span>css<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br>fs<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'styles'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event<span class="token punctuation">,</span> filepath</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Styles file changed'</span><span class="token punctuation">,</span> filepath<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token function">compileSass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">compileSass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>This a a very simple approach without asynchronous code or anything. The only package you need is the npm sass package. They even write that &quot;renderSync() is more than twice as fast as render()&quot; (<a href="https://www.npmjs.com/package/sass">SASS npm package</a>), so you might consider if its worth for you introducing parallel execution.</p>
-<h2>Important note to fs.watch</h2>
+<h2 id="important-note-to-fs.watch" tabindex="-1">Important note to fs.watch</h2>
 <p>This script does not work when publishing to GitHub pages automatically as the <code>fs.watch</code> command will block input. To unblock if Eleventy isn't run with the <code>--serve</code> flag we can only enable file watching if we discover that flag like so:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">const</span> isServing <span class="token operator">=</span> process<span class="token punctuation">.</span>argv<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">'--serve'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">if</span> <span class="token punctuation">(</span>isServing<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token comment">// watch only files if we are serving</span><br>  fs<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'src/styles'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event<span class="token punctuation">,</span> filepath</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Styles file changed'</span><span class="token punctuation">,</span> filepath<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">compileSass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 

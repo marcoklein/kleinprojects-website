@@ -17,8 +17,6 @@
 
 
   
-
-
 <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
@@ -27,57 +25,58 @@
       <div class="navbar-brand">
         <a class="navbar-item " href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">Kleinprojects</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item " href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item is-active" href="/blog/">
-            Blog
+            <span class="ml-1">Kleinprojects</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item " href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>
-
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Practical Vim Command Cheat Sheet</h1>
+    <h1 class="title is-2">Practical Vim Command Cheat Sheet</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
-
 
 
 <main class="container  content">
   <section class="section">
     
 <div class="content">
-  <h3>Surround with brackets</h3>
+  <h3 id="surround-with-brackets" tabindex="-1">Surround with brackets</h3>
 <p>Select with <code>visual mode</code>.</p>
 <p>Use</p>
 <pre><code>c()&lt;Esc&gt;P
 </code></pre>
-<h2>Visual mode</h2>
+<h2 id="visual-mode" tabindex="-1">Visual mode</h2>
 <p>Visual mode for lines (Visual Line mode)</p>
 <pre><code>V
 </code></pre>
 <p>Visual mode for characters</p>
 <pre><code>v
 </code></pre>
-<h2>Leave insert mode</h2>
+<h2 id="leave-insert-mode" tabindex="-1">Leave insert mode</h2>
 <pre><code>Ctrl-C or ESC
 </code></pre>
-<h1>More movements</h1>
+<h1 id="more-movements" tabindex="-1">More movements</h1>
 <p>Insert line above</p>
 <pre><code>O
 </code></pre>
@@ -95,7 +94,7 @@
 </code></pre>
 <p>Hop through results: <code>n</code> reverse: <code>N</code></p>
 <p>Go to next occurrence: <code>*</code> reverse: <code>#</code></p>
-<h1>Horizontal Movement</h1>
+<h1 id="horizontal-movement" tabindex="-1">Horizontal Movement</h1>
 <p>Find and select character</p>
 <pre><code>f / F &lt;character&gt;
 </code></pre>
@@ -108,7 +107,7 @@
 <blockquote>
 <p>Delete until <code>&lt;character&gt;</code></p>
 </blockquote>
-<h1>Delete and insert</h1>
+<h1 id="delete-and-insert" tabindex="-1">Delete and insert</h1>
 <p>Delete character</p>
 <pre><code>x / X
 </code></pre>
@@ -118,7 +117,7 @@
 <p>Delete line and enter insert mode</p>
 <pre><code>S
 </code></pre>
-<h1>Vertical Movement</h1>
+<h1 id="vertical-movement" tabindex="-1">Vertical Movement</h1>
 <p>Move to top</p>
 <pre><code>H
 </code></pre>
@@ -128,10 +127,10 @@
 <p>Move to middle</p>
 <pre><code>M
 </code></pre>
-<h1>Search and replace</h1>
+<h1 id="search-and-replace" tabindex="-1">Search and replace</h1>
 <p>Search for all occurrences of foo and replace with bar after confirmation</p>
 <pre class="language-bash"><code class="language-bash">:%s/foo/bar/gc</code></pre>
-<h1>Navigation</h1>
+<h1 id="navigation" tabindex="-1">Navigation</h1>
 <p>Open finder</p>
 <pre><code>:e &lt;folder&gt;
 </code></pre>
@@ -144,7 +143,7 @@
 <p>Set global mark with</p>
 <pre><code>m &lt;Shift + letter&gt;
 </code></pre>
-<h1>Splits</h1>
+<h1 id="splits" tabindex="-1">Splits</h1>
 <p>All under <code>Ctrl + W</code> are window controls.</p>
 <p>Vertical</p>
 <pre><code>Ctrl + W v

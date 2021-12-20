@@ -17,8 +17,6 @@
 
 
   
-
-
 <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
@@ -27,35 +25,36 @@
       <div class="navbar-brand">
         <a class="navbar-item " href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">Kleinprojects</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item " href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item is-active" href="/blog/">
-            Blog
+            <span class="ml-1">Kleinprojects</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item " href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>
-
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">My journey to using Eleventy as a static website generator</h1>
+    <h1 class="title is-2">My journey to using Eleventy as a static website generator</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
-
 
 
 <main class="container  content">
@@ -67,13 +66,13 @@
 <p>I only published content and applications sporadically. Therefore, my server kept getting out of date and I killed it before trying to walk through a complex updating process. Often my blog posts and content got lost in that process.</p>
 <p>So its now 2020 and again I killed my server as my last updates happened 2 years ago. Yes, initially I did backups and restored them on my new Ghost blog instance. However, now I am pursuing a more sustainable and lasting approach to keep stuff that I am working on online.</p>
 <p>Of course I also considered hosted blogging platforms like <a href="https://medium.com/">Medium</a>. Nonetheless, I prefer hosting my own stuff and learning new things in the process.</p>
-<h1>Static Websites</h1>
+<h1 id="static-websites" tabindex="-1">Static Websites</h1>
 <p>During my research of a better hosting alternative I stumbled across <a href="https://pages.github.com/">GitHub Pages</a> that allows hosting of websites for free, with SSL encryption. After some investigation I considered this as a valid hosting option for my new website. Building a static website also had the benefit of changing hosting providers quickly as it is only a bunch of HTML and CSS files without the need of backend services.</p>
-<h1>Templating Websites</h1>
+<h1 id="templating-websites" tabindex="-1">Templating Websites</h1>
 <p>Building a website with merely HTML and CSS is a pain when you consider the long run. You might want to change some things and have to update layout and styles at lots of different places. Therefore I decided to go with a templating engine. <a href="https://jekyllrb.com/">Jekyll</a> was my first consideration as it is a very popular framework for static website generation. It uses Ruby under its hood and after setup and some tests I quickly figured out that this is not the language I want to host my websites with.</p>
-<h1>Eleventy as Static Website Generator</h1>
+<h1 id="eleventy-as-static-website-generator" tabindex="-1">Eleventy as Static Website Generator</h1>
 <p>As mostly work with front-end technologies like Typescript or Javascript I searched for an engine that uses excactly these technologies. That was when I discovered <a href="https://www.11ty.dev/">Eleventy</a>, a static website generator built with Javascript and using the <a href="https://www.npmjs.com/">package manager NPM</a> for building.</p>
-<h1>Getting used to Static Website Generators</h1>
+<h1 id="getting-used-to-static-website-generators" tabindex="-1">Getting used to Static Website Generators</h1>
 <p>As Eleventy is my first static website generator I have ever worked with, I started reading through the documentation and setting up a very simple website. There are lots of demo projects, however I decided to start from scratch to learn about that technology and all the features it has.</p>
 <p>There are several things I already learned in the process: for example setting up basic fragments that can be reused in other templates, applying CSS, or building a basic post collection.</p>
 <p>So I decided to build a new website from scratch. It should be minimal, show off projects that I am working on, and provide the capability of posting stuff from time to time. It should be easy to maintain (from a coders perspective) and last for a long time.</p>

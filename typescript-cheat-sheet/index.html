@@ -17,8 +17,6 @@
 
 
   
-
-
 <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
@@ -27,42 +25,43 @@
       <div class="navbar-brand">
         <a class="navbar-item " href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">Kleinprojects</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item " href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item is-active" href="/blog/">
-            Blog
+            <span class="ml-1">Kleinprojects</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item " href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>
-
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Typescript Cheat Sheet</h1>
+    <h1 class="title is-2">Typescript Cheat Sheet</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
-
 
 
 <main class="container  content">
   <section class="section">
     
 <div class="content">
-  <h1>Decorators</h1>
+  <h1 id="decorators" tabindex="-1">Decorators</h1>
 <p>Can be attached to</p>
 <ul>
 <li>class</li>
@@ -74,9 +73,9 @@
 <ul>
 <li>logging, e.g. <code>@deprecated</code></li>
 </ul>
-<h2>Class decorators</h2>
+<h2 id="class-decorators" tabindex="-1">Class decorators</h2>
 <pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">decorator</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> prop<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token comment">// target is our class prototype</span><br>  <span class="token keyword">return</span> target <span class="token operator">=></span> <span class="token punctuation">{</span><br>    <span class="token comment">// ...</span><br>  <span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token decorator"><span class="token at operator">@</span><span class="token function">decorator</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span><br>  prop<span class="token operator">:</span> <span class="token string">'foo'</span><span class="token punctuation">,</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><br><span class="token keyword">class</span> <span class="token class-name">MyClass</span> <span class="token punctuation">{</span><br>  <span class="token comment">// ...</span><br><span class="token punctuation">}</span></code></pre>
-<h2>Class Method</h2>
+<h2 id="class-method" tabindex="-1">Class Method</h2>
 
 </div>
 

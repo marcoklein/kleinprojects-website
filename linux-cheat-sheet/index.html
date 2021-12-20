@@ -17,8 +17,6 @@
 
 
   
-
-
 <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
@@ -27,73 +25,74 @@
       <div class="navbar-brand">
         <a class="navbar-item " href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">Kleinprojects</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item " href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item is-active" href="/blog/">
-            Blog
+            <span class="ml-1">Kleinprojects</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item " href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>
-
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Linux Cheat Sheet</h1>
+    <h1 class="title is-2">Linux Cheat Sheet</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
-
 
 
 <main class="container  content">
   <section class="section">
     
 <div class="content">
-  <h2>Check Kernel Version</h2>
+  <h2 id="check-kernel-version" tabindex="-1">Check Kernel Version</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">uname</span> -a</code></pre>
-<h2>Check IP</h2>
+<h2 id="check-ip" tabindex="-1">Check IP</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">ifconfig</span></code></pre>
 <pre class="language-bash"><code class="language-bash"><span class="token function">ip</span> addr show</code></pre>
-<h2>Check disk space</h2>
+<h2 id="check-disk-space" tabindex="-1">Check disk space</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">df</span> -ah</code></pre>
-<h2>Work with services</h2>
+<h2 id="work-with-services" tabindex="-1">Work with services</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">service</span> <span class="token operator">&lt;</span>service-name<span class="token operator">></span> status<br>systemctl status <span class="token operator">&lt;</span>service-name<span class="token operator">></span></code></pre>
-<h2>Check folder size</h2>
+<h2 id="check-folder-size" tabindex="-1">Check folder size</h2>
 <p>Disk use</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">du</span> -sh <span class="token operator">&lt;</span>directory<span class="token operator">></span></code></pre>
-<h2>Check for open ports</h2>
+<h2 id="check-for-open-ports" tabindex="-1">Check for open ports</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">netstat</span></code></pre>
-<h2>Check CPU usage</h2>
+<h2 id="check-cpu-usage" tabindex="-1">Check CPU usage</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token operator">&lt;</span>process-name<span class="token operator">></span></code></pre>
 <pre class="language-bash"><code class="language-bash"><span class="token function">top</span></code></pre>
-<h2>Mounting</h2>
+<h2 id="mounting" tabindex="-1">Mounting</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">mount</span> /dev/sda2 /mnt</code></pre>
 <p>Check for existing</p>
 <pre class="language-bash"><code class="language-bash">mounts</code></pre>
 <p>Auto mount in file</p>
 <pre class="language-bash"><code class="language-bash">/etc/fstab</code></pre>
-<h2>Manpages</h2>
+<h2 id="manpages" tabindex="-1">Manpages</h2>
 <p>Manual pages</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">man</span> <span class="token operator">&lt;</span>command<span class="token operator">></span></code></pre>
-<h2>Permissions</h2>
+<h2 id="permissions" tabindex="-1">Permissions</h2>
 <p>Show permissions</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">stat</span> file.txt</code></pre>
 <p>Change permissions</p>
 <pre class="language-bash"><code class="language-bash"><span class="token comment"># denies file read for others</span><br><span class="token function">chmod</span> o-r file.txt<br><span class="token comment"># read for user, read for group, deny access to others</span><br><span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>r,g<span class="token operator">=</span>r,o<span class="token operator">=</span> file.txt</code></pre>
-<h2>File Transformation</h2>
+<h2 id="file-transformation" tabindex="-1">File Transformation</h2>
 <p>Use <code>jq</code> to transform JSON files.</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">cat</span> logs.json <span class="token operator">|</span> jq <span class="token string">'.["@timestamp"] + "   " + .message'</span> <span class="token operator">></span> logs.txt</code></pre>
 <p>Transforms extracts timestamp and message from JSON objects and prints them into logs.txt.</p>

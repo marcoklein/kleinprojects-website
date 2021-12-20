@@ -17,8 +17,6 @@
 
 
   
-
-
 <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
@@ -27,53 +25,54 @@
       <div class="navbar-brand">
         <a class="navbar-item " href="/">
           <img src="/images/logo.png">
-          <span class="ml-1">Kleinprojects</span>
-        </a>
-      </div>
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <a class="navbar-item " href="/projects/">
-            Projects
-          </a>
-          <a class="navbar-item is-active" href="/blog/">
-            Blog
+            <span class="ml-1">Kleinprojects</span>
           </a>
         </div>
-        <div class="navbar-end">
-          <a class="navbar-item " href="/about/">
-            About Me
-          </a>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-</div>
-
   </div>
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Refactor on the go</h1>
+    <h1 class="title is-2">Refactor on the go</h1>
     <h2 class="subtitle is-4"></h2>
   </div>
 </section>
-
 
 
 <main class="container  content">
   <section class="section">
     
 <div class="content">
-  <h1>Break up database references</h1>
-<h2>Problem</h2>
+  <h1 id="break-up-database-references" tabindex="-1">Break up database references</h1>
+<h2 id="problem" tabindex="-1">Problem</h2>
 <ul>
 <li>You are splitting up one microservice with db access into multiple</li>
 <li>Your database schema has to split up as some entities go into the other service</li>
 </ul>
-<h2>Solution</h2>
+<h2 id="solution" tabindex="-1">Solution</h2>
 <ul>
 <li>Use business keys to address new table</li>
 <li>Use migration scripts to</li>
 </ul>
-<h2>Demo Environment</h2>
+<h2 id="demo-environment" tabindex="-1">Demo Environment</h2>
 <pre class="language-sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> customers<span class="token punctuation">;</span><br><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> contacts<span class="token punctuation">;</span><br><br><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> customers<span class="token punctuation">(</span><br>   customer_id <span class="token keyword">serial</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">,</span><br>   customer_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span><br>   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>customer_id<span class="token punctuation">)</span><br><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> contacts<span class="token punctuation">(</span><br>   contact_id <span class="token keyword">serial</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">,</span><br>   customer_id <span class="token keyword">INT</span><span class="token punctuation">,</span><br>   contact_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span><br>   phone <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>   email <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>contact_id<span class="token punctuation">)</span><span class="token punctuation">,</span><br>   <span class="token keyword">CONSTRAINT</span> fk_customer<br>      <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>customer_id<span class="token punctuation">)</span> <br>	  <span class="token keyword">REFERENCES</span> customers<span class="token punctuation">(</span>customer_id<span class="token punctuation">)</span><br><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>from https://www.postgresqltutorial.com/postgresql-foreign-key/</p>
 <p>Insert Customers</p>
