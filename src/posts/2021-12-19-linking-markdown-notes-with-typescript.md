@@ -464,7 +464,7 @@ Path for link Farm:  { existing: false, path: undefined }
 
 This post covered a basic implementation for processing linked Markdown notes. Feel free to take it as an inspiration and let me know if you do something cool with it.
 
-Finally, I want to close with some questions worth asking when looking at you map of notes:
+Finally, I want to close with some questions worth asking when looking at your map of notes:
 
 1. Are all notes connected with each other, or are there outsiders? This might be an indication for lost notes.
 2. What links do not have a mapping target? This would be links pointing to non-existent documents.
