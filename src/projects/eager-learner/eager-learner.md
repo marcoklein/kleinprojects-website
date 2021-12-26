@@ -6,7 +6,7 @@ date: 2020-05-29
 platforms:
   - desktop
 
-sourceUrl: https://github.com/marcoklein/roguelike
+sourceUrl: https://github.com/marcoklein/eagerlearner
 urls:
   - url: https://eagerlearner.kleinprojects.com
     text: Play Latest

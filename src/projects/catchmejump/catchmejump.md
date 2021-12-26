@@ -4,8 +4,9 @@ description: Multiplayer tag game with controller support. Built with Phaser 3.
 date: 2018-12-28
 
 platforms:
- - desktop
+  - desktop
 
+sourceUrl: https://github.com/marcoklein/catchmejump
 urls:
   # - url: https://catchmejump.kleinprojects.com
   #   text: Play here

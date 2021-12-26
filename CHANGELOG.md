@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0
+
+- Adjust eager learner repository url
+- Add catchme jump source code
+
 ## 1.4.0
 
 - Plugin to add heading anchors
