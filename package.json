@@ -1,6 +1,6 @@
 {
   "name": "kleinprojects-website",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "description": "Landing page of Kleinprojects with blog and projects",
   "dependencies": {},
   "devDependencies": {

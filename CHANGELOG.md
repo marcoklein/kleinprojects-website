@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0
+
+- Catchme4 project
+
 ## 1.5.0
 
 - Adjust eager learner repository url
