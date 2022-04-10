@@ -1,4 +1,5 @@
 {
   "javascript.validate.enable": true,
-  "javascript.suggestionActions.enabled": false
+  "javascript.suggestionActions.enabled": false,
+  "editor.formatOnSave": false
 }

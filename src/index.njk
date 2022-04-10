@@ -19,7 +19,7 @@ subtitle: coding projects and blog
     <div class="post-list">
       {%- for post in collections.posts -%}
         <h2 class="mb-3">
-          <a href="{{ post.data.title | slug }}"> {{ post.data.title }}</a>
+          <a href="{{ post.data.title | slugify }}"> {{ post.data.title }}</a>
         </h2>
       {%- endfor -%}
     </div>

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0
+
+- Upgrade to Eleventy 1.x
+- Add license
+
 ## 1.6.0
 
 - Catchme4 project
