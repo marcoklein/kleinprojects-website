@@ -5,6 +5,7 @@ const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
+const pluginRss = require('@11ty/eleventy-plugin-rss')
 
 // install prism plugins
 require('prismjs/plugins/custom-class/prism-custom-class');
@@ -129,6 +130,9 @@ module.exports = function (eleventyConfig) {
   // generate anchor ids of headings
   const markdownLib = markdownIt({ html: true }).use(markdownItAnchor);
   eleventyConfig.setLibrary('md', markdownLib);
+
+  // generate Atom (RSS feed)
+  eleventyConfig.addPlugin(pluginRss)
 
   // general config
   eleventyConfig.setFrontMatterParsingOptions({

@@ -4,6 +4,7 @@
 
 - Upgrade to Eleventy 1.x
 - Add license
+- Add RSS (Atom) feed accessible via `feed.xml`
 
 ## 1.6.0
 

@@ -1,6 +1,7 @@
 ---
 tags: ['eleventy']
 title: My journey to using Eleventy as a static website generator
+date: 2020-08-15
 ---
 
 I started renting my first server something like 10 years ago back in school. Initially I merely used it to play around with some new technologies. While studying I launched my first websites including a small blog.
