@@ -3,9 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
-const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
+const pluginRss = require('@11ty/eleventy-plugin-rss')
 
 // install prism plugins
 require('prismjs/plugins/custom-class/prism-custom-class');
@@ -70,7 +70,6 @@ module.exports = function (eleventyConfig) {
       });
     },
   });
-  // eleventyConfig.addPlugin(UpgradeHelper);
 
   eleventyConfig.addFilter('coverImage', function (page) {
     // take filePathStem or pageOptions directly if it is a string (and a path)
@@ -131,6 +130,9 @@ module.exports = function (eleventyConfig) {
   // generate anchor ids of headings
   const markdownLib = markdownIt({ html: true }).use(markdownItAnchor);
   eleventyConfig.setLibrary('md', markdownLib);
+
+  // generate Atom (RSS feed)
+  eleventyConfig.addPlugin(pluginRss)
 
   // general config
   eleventyConfig.setFrontMatterParsingOptions({

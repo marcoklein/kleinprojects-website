@@ -1,18 +1,19 @@
 {
   "name": "kleinprojects-website",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "Landing page of Kleinprojects with blog and projects",
   "dependencies": {},
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
+    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "@11ty/eleventy-upgrade-help": "^1.0.1",
-    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@11ty/eleventy-plugin-rss": "^1.1.2",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "bulma": "^0.9.3",
     "gh-pages": "^3.2.3",
-    "markdown-it-anchor": "^8.4.1",
-    "moment": "^2.29.1",
-    "sass": "^1.42.1"
+    "markdown-it-anchor": "^8.6.2",
+    "moment": "^2.29.2",
+    "sass": "^1.50.0"
   },
   "scripts": {
     "start": "eleventy --serve",
@@ -26,5 +27,6 @@
     "blog",
     "kleinprojects"
   ],
-  "author": "Marco Klein"
+  "author": "Marco Klein",
+  "license": "CC-BY-3.0"
 }

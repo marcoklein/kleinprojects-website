@@ -6,6 +6,10 @@ title: Blog
 
 {%- for post in collections.posts -%}
   <h2 class="mb-3">
-    <a href="/{{ post.data.title | slug }}/"> {{ post.data.title }}</a>
+    <div>
+      <a href="/{{ post.data.title | slugify }}/"> {{ post.data.title }}</a>
+      &middot;
+      {{post.data.date | formatDate}}
+    </div>
   </h2>
 {%- endfor -%}

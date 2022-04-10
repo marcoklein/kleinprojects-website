@@ -1,6 +1,7 @@
 ---
 tags: ['eleventy']
 title: A dead simple approach to using SASS in Eleventy
+date: 2020-08-16
 ---
 
 I prefer going with as simple solutions as possible, avoiding the usage of third party packages that always introduce some risk into your project. You don't know if they are up to date if there are no tests included, you don't know if they are secure and what packages are attached to them if you don't check source code.
