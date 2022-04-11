@@ -1,5 +1,4 @@
 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,8 +15,7 @@
   <body>
 
 
-  
-<section class="hero has-background-info-light">
+  <section class="hero has-background-info-light">
   <div class="hero-header">
     <div class="columns is-centered">
   <div class="column is-half-tablet">
@@ -53,6 +51,7 @@
   <div class="hero-body has-text-centered">
     <h1 class="title is-2">Ideas</h1>
     <h2 class="subtitle is-4"></h2>
+    
   </div>
 </section>
 
@@ -60,6 +59,7 @@
 <main class="container  content">
   <section class="section">
     
+
 <div class="content">
   <h1 id="generating-a-dynamic-cover-image-with-eleventy" tabindex="-1">Generating a Dynamic Cover Image with Eleventy</h1>
 <pre class="language-js"><code class="language-js"><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">'coverImage'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">page</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token comment">// take filePathStem or pageOptions directly if it is a string (and a path)</span><br>    <span class="token keyword">var</span> pageOptions <span class="token operator">=</span> <span class="token keyword">typeof</span> pageOptions <span class="token operator">===</span> <span class="token string">'string'</span> <span class="token operator">?</span> page <span class="token operator">:</span> page<span class="token punctuation">.</span>filePathStem<span class="token punctuation">;</span><br>    <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>pageOptions<span class="token punctuation">)</span><span class="token punctuation">,</span> page<span class="token punctuation">.</span>data<span class="token punctuation">.</span>coverImageName<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">/**<br>   * Generates a dynamic cover image<br>   */</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addShortcode</span><span class="token punctuation">(</span><span class="token string">'dynamicImageOnHover'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">page<span class="token punctuation">,</span> staticCoverImage<span class="token punctuation">,</span> dynamicCoverImage</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">const</span> pageInputDir <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">const</span> staticCoverImageInputPath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>pageInputDir<span class="token punctuation">,</span> staticCoverImage<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">const</span> dynamicCoverImageInputPath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>pageInputDir<span class="token punctuation">,</span> dynamicCoverImage<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">const</span> baseDir <span class="token operator">=</span> page<span class="token punctuation">.</span>url<span class="token punctuation">;</span><br>    <span class="token keyword">const</span> staticCoverImagePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>baseDir<span class="token punctuation">,</span> staticCoverImage<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">const</span> dynamicCoverImagePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>baseDir<span class="token punctuation">,</span> dynamicCoverImage<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fs<span class="token punctuation">.</span><span class="token function">existsSync</span><span class="token punctuation">(</span>staticCoverImageInputPath<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Static cover image not found. path=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>staticCoverImageInputPath<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span>fs<span class="token punctuation">.</span><span class="token function">existsSync</span><span class="token punctuation">(</span>dynamicCoverImageInputPath<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>      <span class="token comment">// dynamic cover image exists</span><br>      <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;img class="is-absolute" src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>dynamicCoverImagePath<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"></span><span class="token template-punctuation string">`</span></span><br>        <span class="token operator">+</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;img class="is-hidden-on-hover" src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>staticCoverImagePath<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"></span><span class="token template-punctuation string">`</span></span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>      <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;img src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>staticCoverImagePath<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"></span><span class="token template-punctuation string">`</span></span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
@@ -68,7 +68,6 @@
 
   </section>
 </main>
-
 
 <footer class="footer">
   <div class="content has-text-centered">
@@ -82,7 +81,6 @@
     </p>
   </div>
 </footer>
-
 
 </body>
 </html>
