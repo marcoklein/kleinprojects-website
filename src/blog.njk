@@ -5,11 +5,16 @@ title: Blog
 ---
 
 {%- for post in collections.posts -%}
+<div class="box">
   <h2 class="mb-3">
     <div>
       <a href="/{{ post.data.title | slugify }}/"> {{ post.data.title }}</a>
       &middot;
       {{post.data.date | formatDate}}
     </div>
+    <p>
+      {% excerpt post %}
+    </p>
   </h2>
+</div>
 {%- endfor -%}

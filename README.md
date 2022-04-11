@@ -50,8 +50,6 @@ Both use `number` and `tag` classes for styling. To fix this we prefix Prism cla
 
 - add AMP article https://developers.google.com/search/docs/data-types/article
 - normalize CSS https://necolas.github.io/normalize.css/
-- add Hygen for code generation via templates https://www.npmjs.com/package/hygen
 - add manifest.json, site.json, robot.txt and all the SEO related stuff
 - minify HTML by adding a transform function
 
-- Add excerpt with https://www.11ty.dev/docs/data-frontmatter-customize/

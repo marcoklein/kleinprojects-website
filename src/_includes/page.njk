@@ -4,6 +4,7 @@ useHero: true
 addSection: true
 title: null
 subtitle: null
+date: null
 centerContent: true
 ---
 
@@ -13,14 +14,7 @@ centerContent: true
   {% include 'partials/_hero.njk' %}
 {% else %}
   {% include 'partials/_navbar.njk' %}
-    <section class="section has-text-centered">
-      {% if title %}
-        <h1 class="title is-2">{{ title }}</h1>
-      {% endif %}
-      {% if subtitle %}
-        <h2 class="subtitle">{{ subtitle }}</h2>
-      {% endif %}
-    </section>
+  {% include 'partials/_section.njk' %}
 {% endif %}
 
 <main class="container {% if centerContent %}has-text-centered{% endif %} {% if r/\.md$/.test(page.inputPath) %}content{% endif %}">

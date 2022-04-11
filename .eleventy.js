@@ -5,19 +5,13 @@ const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
-const pluginRss = require('@11ty/eleventy-plugin-rss')
+const pluginRss = require('@11ty/eleventy-plugin-rss');
+const striptags = require("striptags")
 
 // install prism plugins
 require('prismjs/plugins/custom-class/prism-custom-class');
 
 const REGEX_IMAGE_EXTENSION = '(jpg|png|gif)';
-
-function compileSass() {
-  console.log('Compiling sass.');
-  const cssContent = sass.renderSync({ file: 'src/styles/main.scss' });
-  fs.mkdirSync('_site/css', { recursive: true });
-  fs.writeFileSync('_site/css/main.css', cssContent.css);
-}
 
 /**
  * Restart program if you change configs!
@@ -71,47 +65,14 @@ module.exports = function (eleventyConfig) {
     },
   });
 
-  eleventyConfig.addFilter('coverImage', function (page) {
-    // take filePathStem or pageOptions directly if it is a string (and a path)
-    var pageOptions =
-      typeof pageOptions === 'string' ? page : page.filePathStem;
-    return path.join(path.dirname(pageOptions), page.data.coverImageName);
-  });
+  eleventyConfig.addFilter('coverImage', filterCoverImage);
 
   /**
    * Generates a dynamic cover image
    */
   eleventyConfig.addShortcode(
     'dynamicImageOnHover',
-    function (page, staticCoverImage, dynamicCoverImage) {
-      const pageInputDir = path.dirname(page.inputPath);
-      const staticCoverImageInputPath = path.join(
-        pageInputDir,
-        staticCoverImage
-      );
-      const dynamicCoverImageInputPath = path.join(
-        pageInputDir,
-        dynamicCoverImage
-      );
-      const baseDir = page.url;
-      const staticCoverImagePath = path.join(baseDir, staticCoverImage);
-      const dynamicCoverImagePath = path.join(baseDir, dynamicCoverImage);
-
-      if (!fs.existsSync(staticCoverImageInputPath)) {
-        throw new Error(
-          `Static cover image not found. path=${staticCoverImageInputPath}`
-        );
-      }
-      if (fs.existsSync(dynamicCoverImageInputPath)) {
-        // dynamic cover image exists
-        return (
-          `<img class="is-absolute" src="${dynamicCoverImagePath}">` +
-          `<img class="is-hidden-on-hover" src="${staticCoverImagePath}">`
-        );
-      } else {
-        return `<img src="${staticCoverImagePath}">`;
-      }
-    }
+    shortcodeDynamicImageOnHover
   );
 
   /** Return year of today */
@@ -132,13 +93,16 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setLibrary('md', markdownLib);
 
   // generate Atom (RSS feed)
-  eleventyConfig.addPlugin(pluginRss)
+  eleventyConfig.addPlugin(pluginRss);
 
   // general config
   eleventyConfig.setFrontMatterParsingOptions({
     excerpt: true,
   });
   eleventyConfig.addWatchTarget('src/**/*.md');
+
+  // excerpts
+  eleventyConfig.addShortcode('excerpt', article => extractExcerpt(article));
 
   // configuration object
   return {
@@ -148,3 +112,73 @@ module.exports = function (eleventyConfig) {
     jsDataFileSuffix: '.data',
   };
 };
+
+/**
+ * Extract excerpt from first paragraph of document.
+ * 
+ * @param article 
+ * @returns 
+ */
+function extractExcerpt(article) {
+  if (!article.hasOwnProperty('templateContent')) {
+    console.warn(
+      'Failed to extract excerpt: Document has no property "templateContent".'
+    );
+    return null;
+  }
+
+  let excerpt = null;
+  const content = article.templateContent;
+
+  excerpt = striptags(content)
+    .substring(0, 200) // Cap at 200 characters
+    .replace(/^\\s+|\\s+$|\\s+(?=\\s)/g, '')
+    .trim()
+    .concat('...');
+  return excerpt;
+}
+
+function compileSass() {
+  console.log('Compiling sass.');
+  const cssContent = sass.renderSync({ file: 'src/styles/main.scss' });
+  fs.mkdirSync('_site/css', { recursive: true });
+  fs.writeFileSync('_site/css/main.css', cssContent.css);
+}
+
+
+function shortcodeDynamicImageOnHover(page, staticCoverImage, dynamicCoverImage) {
+  const pageInputDir = path.dirname(page.inputPath);
+  const staticCoverImageInputPath = path.join(
+    pageInputDir,
+    staticCoverImage
+  );
+  const dynamicCoverImageInputPath = path.join(
+    pageInputDir,
+    dynamicCoverImage
+  );
+  const baseDir = page.url;
+  const staticCoverImagePath = path.join(baseDir, staticCoverImage);
+  const dynamicCoverImagePath = path.join(baseDir, dynamicCoverImage);
+
+  if (!fs.existsSync(staticCoverImageInputPath)) {
+    throw new Error(
+      `Static cover image not found. path=${staticCoverImageInputPath}`
+    );
+  }
+  if (fs.existsSync(dynamicCoverImageInputPath)) {
+    // dynamic cover image exists
+    return (
+      `<img class="is-absolute" src="${dynamicCoverImagePath}">` +
+      `<img class="is-hidden-on-hover" src="${staticCoverImagePath}">`
+    );
+  } else {
+    return `<img src="${staticCoverImagePath}">`;
+  }
+}
+
+function filterCoverImage(page) {
+  // take filePathStem or pageOptions directly if it is a string (and a path)
+  var pageOptions =
+    typeof pageOptions === 'string' ? page : page.filePathStem;
+  return path.join(path.dirname(pageOptions), page.data.coverImageName);
+}

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0
+
+- Show excerpts in blog list
+- Refactor `.eleventy.js` config
+- Show date in post
+
 ## 2.0.0
 
 - Upgrade to Eleventy 1.x
