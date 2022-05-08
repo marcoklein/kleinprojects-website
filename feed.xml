@@ -17,11 +17,11 @@
     <updated>2022-05-08T00:00:00Z</updated>
     <id>https://kleinprojects.com/using-the-raspberry-pi-as-a-syncthing-server/</id>
     <content type="html">&lt;p&gt;Today I reworked my Obsidian infrastructure setup to use Syncthing (&lt;a rel=&quot;noopener&quot; class=&quot;external-link&quot; href=&quot;https://syncthing.net/&quot; target=&quot;_blank&quot;&gt;https://syncthing.net/&lt;/a&gt;) instead of GitHub so I have complete control over my data. In this post I would like to share my setup with you.&lt;/p&gt;
-&lt;h3 data-heading=&quot;Raspberry Pi as Syncthing Main Server&quot;&gt;Raspberry Pi as Syncthing Main Server&lt;/h3&gt;
+&lt;h2 data-heading=&quot;Raspberry Pi as Syncthing Main Server&quot;&gt;Raspberry Pi as Syncthing Main Server&lt;/h2&gt;
 &lt;p&gt;&lt;/p&gt;&lt;div&gt;&lt;img style=&quot;max-width:400px !important; width:100%;&quot; class=&quot;excalidraw-svg&quot; src=&quot;https://kleinprojects.com/images/2022-05-08-2022-05-08%20Blog%20Post%20-%20Syncthing%20on%20Raspberry%20PI%202022-05-08%2018.03.53.excalidraw.md.svg&quot; /&gt;&lt;/div&gt;&lt;br /&gt;
 The main idea is having the Raspberry Pi as the &lt;em&gt;main&lt;/em&gt; Syncthing server that is &lt;em&gt;always online&lt;/em&gt;. Through relay servers any other client is able to establish a connection to that main server. This is important as Syncthing would at least need two devices that it can sync files properly within real-time.&lt;p&gt;&lt;/p&gt;
 &lt;p&gt;Let&#39;s dive into the technical setup.&lt;/p&gt;
-&lt;h3 data-heading=&quot;Setting up the SD Card&quot;&gt;Setting up the SD Card&lt;/h3&gt;
+&lt;h2 data-heading=&quot;Setting up the SD Card&quot;&gt;Setting up the SD Card&lt;/h2&gt;
 &lt;p&gt;Download Raspbian Imager from &lt;a rel=&quot;noopener&quot; class=&quot;external-link&quot; href=&quot;https://www.raspberrypi.com/software/&quot; target=&quot;_blank&quot;&gt;https://www.raspberrypi.com/software/&lt;/a&gt;.&lt;br /&gt;
 That software writes the Raspbian OS onto your SD Card. Pick &lt;em&gt;Raspberry Lite (no Desktop)&lt;/em&gt; and flash your SD Card.&lt;/p&gt;
 &lt;p&gt;To automatically connect to WIFI place a &lt;code&gt;wpa_supplicant.conf&lt;/code&gt; into the SD card root folder with the following content:&lt;/p&gt;
@@ -35,7 +35,7 @@ psk=&amp;quot;WiFi password&amp;quot;
 }
 &lt;/p&gt;&lt;/code&gt;&lt;button class=&quot;copy-code-button&quot;&gt;Copy&lt;/button&gt;&lt;/pre&gt;&lt;p&gt;&lt;/p&gt;
 &lt;p&gt;Additionally, place an empty &lt;code&gt;ssh&lt;/code&gt; file into the root. This triggers an SSH login on the first boot.&lt;/p&gt;
-&lt;h3 data-heading=&quot;Connecting to the Raspberry PI&quot;&gt;Connecting to the Raspberry PI&lt;/h3&gt;
+&lt;h2 data-heading=&quot;Connecting to the Raspberry PI&quot;&gt;Connecting to the Raspberry PI&lt;/h2&gt;
 &lt;p&gt;Next, start the Raspberry with the prepared SD Card. It should automatically connect to your network.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;To find the IP you might use an IP Scanner like &lt;a aria-label-position=&quot;top&quot; aria-label=&quot;https://angryip.org/&quot; rel=&quot;noopener&quot; class=&quot;external-link&quot; href=&quot;https://angryip.org/&quot; target=&quot;_blank&quot;&gt;Angry IP Scanner&lt;/a&gt; or if you have access to your router you can just see listed devices there. If this is your only raspberry pi in the network try to connecting to &lt;code&gt;raspberrypi&lt;/code&gt; as ip address.&lt;/p&gt;
@@ -51,7 +51,7 @@ Password: &lt;code&gt;raspberry&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;After the initial login change the default password to something safe! (or better: enable SSH key authentication only - I will not discuss this here)&lt;/p&gt;
 &lt;pre class=&quot;language-sh&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-sh is-loaded&quot;&gt;passwd
 &lt;/code&gt;&lt;button class=&quot;copy-code-button&quot;&gt;Copy&lt;/button&gt;&lt;/pre&gt;
-&lt;h3 data-heading=&quot;Installing Syncthing&quot;&gt;Installing Syncthing&lt;/h3&gt;
+&lt;h2 data-heading=&quot;Installing Syncthing&quot;&gt;Installing Syncthing&lt;/h2&gt;
 &lt;p&gt;Syncthing is available as a Debian package at &lt;a rel=&quot;noopener&quot; class=&quot;external-link&quot; href=&quot;https://apt.syncthing.net/&quot; target=&quot;_blank&quot;&gt;https://apt.syncthing.net/&lt;/a&gt;:&lt;/p&gt;
 &lt;pre class=&quot;language-sh&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-sh is-loaded&quot;&gt;sudo curl -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
 echo &quot;deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable&quot; | sudo tee /etc/apt/sources.list.d/syncthing.list
@@ -67,7 +67,7 @@ This will print starting logs including the Syncthing ID of the raspberry. The l
 [XXXXX] 2022/05/08 16:17:15 INFO: My ID: XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX
 ...
 &lt;/code&gt;&lt;button class=&quot;copy-code-button&quot;&gt;Copy&lt;/button&gt;&lt;/pre&gt;
-&lt;h3 data-heading=&quot;Exposing the Syncthing Web Console&quot;&gt;Exposing the Syncthing Web Console&lt;/h3&gt;
+&lt;h2 data-heading=&quot;Exposing the Syncthing Web Console&quot;&gt;Exposing the Syncthing Web Console&lt;/h2&gt;
 &lt;p&gt;There is a CLI for Syncthing but it&#39;s much easier to maintain configurations via the web browser. Enable it in the &lt;code&gt;~/.config/syncthing/config.xml&lt;/code&gt; by changing the &lt;code&gt;address&lt;/code&gt; attribute to a &lt;code&gt;0.0.0.0&lt;/code&gt; value like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;#x3C;gui enabled=&quot;true&quot; tls=&quot;true&quot;&gt;
  &amp;#x3C;address&gt;0.0.0.0:8384&amp;#x3C;/address&gt;
@@ -80,16 +80,16 @@ This will print starting logs including the Syncthing ID of the raspberry. The l
 &lt;p&gt;And access the web console at &lt;code&gt;https://&amp;#x3C;raspberry pi ip&gt;:8384&lt;/code&gt;.&lt;br /&gt;
 Add a new user authentication here to avoid others within the same network of accessing your Syncthing settings. The web console will also prompt you to do this.&lt;/p&gt;
 &lt;h3 data-heading=&quot;Starting Syncthing on Login&quot;&gt;Starting Syncthing on Login&lt;/h3&gt;
-&lt;p&gt;To run Syncthing on startup (e.g. when the Raspberry Pi powers up), we can edit the &lt;code&gt;/etc/rc.local&lt;/code&gt; file that gets executed on startup:&lt;/p&gt;
-&lt;pre class=&quot;language-sh&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-sh is-loaded&quot;&gt;sudo vi /etc/rc.local
+&lt;p&gt;To run Syncthing on startup (e.g. when the Raspberry Pi powers up), we can edit the &lt;code&gt;~/.bashrc&lt;/code&gt;file that gets executed on login of the &lt;code&gt;pi&lt;/code&gt; user:&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-sh is-loaded&quot;&gt;vi ~/.bashrc
 &lt;/code&gt;&lt;button class=&quot;copy-code-button&quot;&gt;Copy&lt;/button&gt;&lt;/pre&gt;
 &lt;p&gt;and add the following line to start syncthing:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# ...
 # Run Syncthing in detached mode (notice the &amp;#x26;)
 syncthing serve &amp;#x26;
-&lt;p&gt;exit 0
-&lt;/p&gt;&lt;/code&gt;&lt;button class=&quot;copy-code-button&quot;&gt;Copy&lt;/button&gt;&lt;/pre&gt;&lt;p&gt;&lt;/p&gt;
-&lt;h3 data-heading=&quot;Conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;/code&gt;&lt;button class=&quot;copy-code-button&quot;&gt;Copy&lt;/button&gt;&lt;/pre&gt;
+&lt;p&gt;Note that if you login into the pi user the script will always execute. You can also configure a service to run syncthing with init.d or systemd if you want a cleaner execution. The mentioned approach is very simple and sufficient for my case.&lt;/p&gt;
+&lt;h2 data-heading=&quot;Conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;This guide walked you through the basic setup of Syncthing on a Raspberry Pi.&lt;/p&gt;
 &lt;p&gt;You can now start your Raspberry Pi to automatically run Syncthing and access the web console to manage all devices and folders.&lt;/p&gt;
 &lt;p&gt;Consider adding a backup mechanism to your setup to make it even more robust.&lt;/p&gt;
