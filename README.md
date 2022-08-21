@@ -34,6 +34,22 @@ npx npm-check-updates -u
 
 Run an `npm install` after a successful write.
 
+## Tests
+
+Playwright executes end-to-end tests.
+
+To run tests start the application and run
+
+```sh
+yarn test:headed
+```
+
+To create a new test use the code generation with
+
+```sh
+yarn playwright:codegen
+```
+
 ## Changes to the Prism theme
 
 There is an overlap of the two CSS frameworks Bulma and Prism.
@@ -41,6 +57,7 @@ There is an overlap of the two CSS frameworks Bulma and Prism.
 Both use `number` and `tag` classes for styling. To fix this we prefix Prism classes with `prism-number` and `prism-tag` respectively.
 
 > You have to adjust Prism themes and rename the two tags if you change the Prism theme!
+
 
 # Ideas
 
