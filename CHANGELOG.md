@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0
+
+- Integrate Playwright for e2e test automation
+
 ## 2.1.0
 
 - Show excerpts in blog list
