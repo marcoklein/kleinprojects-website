@@ -1,11 +1,11 @@
-name: Test and Deploy
+name: Test Pull Request
 
 on:
-  push:
+  pull_request:
     branches: [master]
 
 jobs:
-  test-and-deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,9 +28,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - name: Publish to GitHub Pages if on master branch
-        run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/marcoklein/kleinprojects-website.git
-          yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
