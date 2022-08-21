@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Incremental User Interface Development | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+            <span class="ml-1">Kleinprojects</span>
+          </a>
+        </div>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Incremental User Interface Development</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">August 2022</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <p>Developing a cool user interface can be really hard. It starts with the &quot;what does the user <em>actually</em> wants to do?&quot;-challenge and involves questions like &quot;where does does the user wants to access the application?&quot;. The answer is often that neither you nor your user really knows what they want.</p>
+<p>Recently, I had to deal quite often with this &quot;user interface challenge&quot; and how to develop and effective approach to develop a cool app that solves exactly the problem a user is facing. Therefore, I tried to take a step back and observe my approach to frontend development.</p>
+<p>Initially, I observed, that I would spend tons of time looking and reading through new UI frameworks that would fit my need. And then there is a difference between the (1) <em>UI</em> framework and the (2) <em>frontend framework</em>. (1) is a library for the actual styling, like Bootstrap, Evergreen, Onsen UI, ... and (2) is a library that helps with the implementation of logic and state, like Angular, Vue, or React.</p>
+<p>So, for the <em>frontend framework</em> I would just pick whatever which is mostly React right now. The challenge is (1), the <em>UI</em> framework because there are sooo many different frameworks and lots of advantages and disadvantages. E.g. if you want to build a hybrid app you might use Onsen UI, if you use React components only you might want to use Evergreen, or Material UI, there are old frameworks that still persist like Bootstrap. Simply too many to evaluate all options before even designing.</p>
+<p>So how could I avoid spending all that time reading through pros and cons for individual UI frameworks? The answer is simple:</p>
+<blockquote>
+<p>Do not use a UI framework :)</p>
+</blockquote>
+<p>To be more precise:</p>
+<blockquote>
+<p>Do not incorporate a UI framework if you are still exploring what your application should actually do.</p>
+</blockquote>
+<p>What does this mean?</p>
+<p>It means starting with the most basic components that HTML has to offer. If you need an input, use <code>&lt;input&gt;</code>. If you need a card use a <code>&lt;div&gt;</code> with some <code>border</code> property set.</p>
+<p>With this approach I am able to push the UI framework decision to the future as long as possible and can rather ship working prototypes that I can quickly evaluate with end users to build a better product and eventually choose the UI framework that fits.</p>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2022
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
