@@ -22,6 +22,7 @@
     "start": "eleventy --serve",
     "build": "eleventy",
     "test": "playwright test",
+    "test:headed": "yarn test --headed",
     "playwright:codegen": "playwright codegen",
     "deploy": "yarn build && gh-pages -d _site",
     "deps:upgrade": "yarn upgrade-interactive --latest"
