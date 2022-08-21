@@ -3,9 +3,11 @@ name: Test and Deploy
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-  deploy-gh-pages:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,10 +19,12 @@ jobs:
         with:
           node-version: 18
       - run: yarn install --frozen-lockfile
+      - run: yarn playwright install --with-deps
       - name: Run E2E Tests
         run: |
           yarn start & (until curl -sf localhost:8080; do echo -n \".\"; sleep 1; done; yarn test --headed)
-      - name: Publish to GitHub Pages
+      - name: Publish to GitHub Pages if on master branch
+        if: github.ref == 'refs/heads/master'
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/marcoklein/kleinprojects-website.git
           yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
