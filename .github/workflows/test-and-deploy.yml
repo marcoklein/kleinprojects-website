@@ -17,10 +17,8 @@ jobs:
         with:
           node-version: 18
       - run: yarn install --frozen-lockfile
-      - run: yarn playwright install --with-deps
-      - name: Run E2E Tests
-        run: |
-          yarn start & (until curl -sf localhost:8080; do echo -n \".\"; sleep 1; done; yarn test)
+      - run: yarn playwright:install
+      - run: yarn test
       - name: Publish test results
         uses: actions/upload-artifact@v2
         if: always()

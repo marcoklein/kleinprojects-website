@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- Optimize Playwright test setup
+
 ## 2.2.0
 
 - Integrate Playwright for e2e test automation
