@@ -1,0 +1,97 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Using the version from package.json in React applications | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+            <span class="ml-1">Kleinprojects</span>
+          </a>
+        </div>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Using the version from package.json in React applications</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">October 2022</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <p>You want to display the application version from your <code>package.json</code> in your frontend React application, that is using react-scripts.</p>
+<p>React scripts automatically picks up <code>.env</code> files and populates environment variables that start with <code>REACT_APP_</code>. Thus, for runtime use a <code>.env</code> file with:</p>
+<pre><code>REACT_APP_VERSION=$npm_package_version
+</code></pre>
+<p>This populates the version from the <code>npm_package_version</code> environment variable on runtime which is set by the NodeJs environment. However, this does not always work if you are building in different environments.</p>
+<p>Therefore, for build time use a tool like <code>genversion</code> in package.json:</p>
+<pre class="language-json"><code class="language-json"><span class="token comment">// ...</span><br><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>  <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"react-scripts start"</span><span class="token punctuation">,</span><br>  <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"genversion src/version.gen.ts &amp;&amp; react-scripts build"</span><span class="token punctuation">,</span><br>  <span class="token comment">// ...</span><br><span class="token punctuation">}</span><br><span class="token comment">// ...</span></code></pre>
+<p>And include the version in your application for example via:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">export</span> <span class="token keyword">const</span> environment <span class="token operator">=</span> <span class="token punctuation">{</span><br>  <span class="token constant">VERSION</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">REACT_APP_VERSION</span> <span class="token operator">??</span> version<span class="token punctuation">,</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Ignore the generated version file in your <code>.gitignore</code>.</p>
+<p>With this approach the version gets populated if you start your react app through the <code>.env</code> and you ensure the version on a build via the <code>genversion</code> command.</p>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2022
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
