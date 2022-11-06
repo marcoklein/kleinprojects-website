@@ -4,12 +4,27 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2022-10-20T00:00:00Z</updated>
+  <updated>2022-11-06T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Thoughts on Data Privacy for my free time project Impromat</title>
+    <link href="https://kleinprojects.com/thoughts-on-data-privacy-for-my-free-time-project-impromat/"/>
+    <updated>2022-11-06T00:00:00Z</updated>
+    <id>https://kleinprojects.com/thoughts-on-data-privacy-for-my-free-time-project-impromat/</id>
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;Just some thoughts on data privacy and GDPR&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For my current project &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat&lt;/a&gt; which is an app for planning workshops for improvisational theatre, I have spent the last couple of weeks getting into that topic of data privacy and GDPR. In a nutshell: it&#39;s kind of complicated for such a small free time project. However, I value data privacy and I am sometimes a little bit afraid of some lawyers that specials in finding websites without data privacy notices.&lt;/p&gt;
+&lt;p&gt;Nonetheless, there are already some good resources about GDPR and also some decent generates like the &lt;a href=&quot;https://datenschutz-generator.de/&quot;&gt;Datenschutz Generator of Dr. Thomas Schwenk&lt;/a&gt;. The author of the website was also interviewed in a podcast which helped me with my understanding of data privacy especially in regards to GDPR (just search for it on Spotify if you are interested). Especially the generator helped me a lot with the setup, even though, I had to change some text descriptions and some contract information with my hosting provider (e.g. the Impromat backend is hosted on &lt;a href=&quot;https://contabo.de/&quot;&gt;Contabo&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat&lt;/a&gt; is not a commercial application and does neither track nor collect any user specific data per default (would be far to complicated for me to set up :P ). However, there is also a login functionality so that users can synchronize workshops across devices. Through a Google login users can get access to that synchronization feature and workshop data gets transferred to the Impromat backend server and shared with devices of that user. This is where data privacy really gets interesting because according to GDPR there are some regulations that the application must fulfill in this case. For example: users must be able to retrieve all there stored data and they must be able to request deletion of their data. I am very happy that Impromat is currently in such a simple state that I have a 100% knowledge about what kind of data is stored where.&lt;/p&gt;
+&lt;p&gt;After all, thinking about all those data sets that this small application processes is already very valuable to me. I still think that GDPR is a step into the right direction to protect user specific data, however, it&#39;s far to complicated for hobby or free time projects that you only spend a couple of hours per week or even month on.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Using the version from package.json in React applications</title>
