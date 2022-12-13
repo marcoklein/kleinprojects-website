@@ -4,12 +4,35 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2022-11-06T00:00:00Z</updated>
+  <updated>2022-12-13T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Reflection on making Impromat accessible for search engines</title>
+    <link href="https://kleinprojects.com/reflection-on-making-impromat-accessible-for-search-engines/"/>
+    <updated>2022-12-13T00:00:00Z</updated>
+    <id>https://kleinprojects.com/reflection-on-making-impromat-accessible-for-search-engines/</id>
+    <content type="html">&lt;p&gt;The following is a note to myself to reflect on options for making a current personal project &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat&lt;/a&gt; ready for search engines.&lt;/p&gt;
+&lt;h2 id=&quot;background&quot; tabindex=&quot;-1&quot;&gt;Background&lt;/h2&gt;
+&lt;p&gt;Impromat is a single page application (SPA) and currently hosted on https://impromat.app. However, this comes with several issues:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It&#39;s challenging to deal with search engine optimizations (SEO). As &lt;a href=&quot;https://web.dev/rendering-on-the-web/&quot;&gt;this article&lt;/a&gt; from Google describes you can assume that crawlers cannot process JavaScript and thus cannot process SPAs.&lt;/li&gt;
+&lt;li&gt;In the future a login might be required. Then it&#39;s not possible to &amp;quot;just share&amp;quot; anymore, however, sharing workshops is still one core feature of the Impromat.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;possible-solutions&quot; tabindex=&quot;-1&quot;&gt;Possible Solutions&lt;/h2&gt;
+&lt;h3 id=&quot;combine-seo-optimization-within-the-application&quot; tabindex=&quot;-1&quot;&gt;Combine SEO optimization within the application&lt;/h3&gt;
+&lt;p&gt;This means, that the backend would have to implement some kind of server side rendering (SSR) to allow the delivery of pre-rendered HTML that search engines could parse. There is &lt;a href=&quot;https://developers.google.com/search/docs/crawling-indexing/javascript/dynamic-rendering&quot;&gt;another article&lt;/a&gt; from Google that also mentions an,unfortunately discouraged, approach called &lt;em&gt;dynamic rendering&lt;/em&gt;. With this approach the web server would send a different, SEO optimized result to web-crawlers.&lt;/p&gt;
+&lt;p&gt;Google also provides a very good discussion in &lt;a href=&quot;https://web.dev/rendering-on-the-web/&quot;&gt;this article&lt;/a&gt; about the options and their advantages and disadvantages.&lt;/p&gt;
+&lt;h3 id=&quot;separate-the-application-page-from-a-seo-optimized-landing-page&quot; tabindex=&quot;-1&quot;&gt;Separate the application page from a SEO optimized landing page&lt;/h3&gt;
+&lt;p&gt;Another approach would be the separation of the actual application that users access, and a separate landing page that can act as a representation within the world wide web. From SEO perspectives this would be an ideal case because a well optimized, dedicated web server could host the respective landing page and link to the Impromat application. However, this also adds another service and another application that needs maintenance.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Both approaches got advantages and disadvantages. I have to reflect on the goals in regards to SEO and future development of the Impromat.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Thoughts on Data Privacy for my free time project Impromat</title>

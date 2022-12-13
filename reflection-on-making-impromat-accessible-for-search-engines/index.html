@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Reflection on making Impromat accessible for search engines | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+            <span class="ml-1">Kleinprojects</span>
+          </a>
+        </div>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Reflection on making Impromat accessible for search engines</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">December 2022</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <p>The following is a note to myself to reflect on options for making a current personal project <a href="https://impromat.app">Impromat</a> ready for search engines.</p>
+<h2 id="background" tabindex="-1">Background</h2>
+<p>Impromat is a single page application (SPA) and currently hosted on https://impromat.app. However, this comes with several issues:</p>
+<ol>
+<li>It's challenging to deal with search engine optimizations (SEO). As <a href="https://web.dev/rendering-on-the-web/">this article</a> from Google describes you can assume that crawlers cannot process JavaScript and thus cannot process SPAs.</li>
+<li>In the future a login might be required. Then it's not possible to &quot;just share&quot; anymore, however, sharing workshops is still one core feature of the Impromat.</li>
+</ol>
+<h2 id="possible-solutions" tabindex="-1">Possible Solutions</h2>
+<h3 id="combine-seo-optimization-within-the-application" tabindex="-1">Combine SEO optimization within the application</h3>
+<p>This means, that the backend would have to implement some kind of server side rendering (SSR) to allow the delivery of pre-rendered HTML that search engines could parse. There is <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/dynamic-rendering">another article</a> from Google that also mentions an,unfortunately discouraged, approach called <em>dynamic rendering</em>. With this approach the web server would send a different, SEO optimized result to web-crawlers.</p>
+<p>Google also provides a very good discussion in <a href="https://web.dev/rendering-on-the-web/">this article</a> about the options and their advantages and disadvantages.</p>
+<h3 id="separate-the-application-page-from-a-seo-optimized-landing-page" tabindex="-1">Separate the application page from a SEO optimized landing page</h3>
+<p>Another approach would be the separation of the actual application that users access, and a separate landing page that can act as a representation within the world wide web. From SEO perspectives this would be an ideal case because a well optimized, dedicated web server could host the respective landing page and link to the Impromat application. However, this also adds another service and another application that needs maintenance.</p>
+<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<p>Both approaches got advantages and disadvantages. I have to reflect on the goals in regards to SEO and future development of the Impromat.</p>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2022
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
