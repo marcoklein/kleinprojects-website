@@ -4,12 +4,29 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2022-12-13T00:00:00Z</updated>
+  <updated>2023-03-26T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Next 13 and Mantine will not replace the Ionic framework for Impromat (yet)</title>
+    <link href="https://kleinprojects.com/next-13-and-mantine-will-not-replace-the-ionic-framework-for-impromat-yet/"/>
+    <updated>2023-03-26T00:00:00Z</updated>
+    <id>https://kleinprojects.com/next-13-and-mantine-will-not-replace-the-ionic-framework-for-impromat-yet/</id>
+    <content type="html">&lt;p&gt;Since Next 13 &lt;a href=&quot;https://nextjs.org/blog/next-13&quot;&gt;got released in October 2022&lt;/a&gt; I wanted to test the framework to see if it is a viable option for Impromat, potentially replacing the Ionic framework.&lt;/p&gt;
+&lt;p&gt;Main motivations are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Customized styling with the styling framework Mantine.&lt;/li&gt;
+&lt;li&gt;Trying out cutting-edge technology with newest Server Side Rendering (SSR) improvements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;However, Impromat is not meant to be a website but it is targeting mainly mobile devices through an installable application. Technically, this is implemented via a Progressive Web App (PWA) to retain one code base for several target devices. Next 13 may offer great improvements regarding SSR and implements cutting edge patterns and newest React improvements. Nonetheless, one of the main questions remained: why should I implement a bleeding edge SSR framework, if I am going to wrap it into a PWA either way?&lt;/p&gt;
+&lt;p&gt;An additional argument for Ionic is its support for Android and IOS devices including a easy component framework that offers most app requirement needs out of the box. Switching technologies would imply a re-implementation of the whole styling framework and developing most of the components from scratch.&lt;/p&gt;
+&lt;p&gt;Nonetheless, for the future I might still consider a switch to Next 13 to try out latest technology and benefit from SSR that Impromat could leverage for an improved Search Engine Optimization (SEO). Right now switching costs would just be to high.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Reflection on making Impromat accessible for search engines</title>
