@@ -4,12 +4,23 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2023-03-26T00:00:00Z</updated>
+  <updated>2023-05-02T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Acting Authenticity</title>
+    <link href="https://kleinprojects.com/acting-authenticity/"/>
+    <updated>2023-05-02T00:00:00Z</updated>
+    <id>https://kleinprojects.com/acting-authenticity/</id>
+    <content type="html">&lt;p&gt;Was conducting a public speaking workshop session. One of the exercises was a 2 minute improvised talk about a certain topic. As participants also wanted me to present I took it and improvised a two minute speech about something.&lt;/p&gt;
+&lt;p&gt;Was interesting to get feedback: ticking all boxes for all categories that we have listed for &amp;quot;voice&amp;quot;. BUT feedback was also that I did not came across authentic at all. &amp;quot;Felt like an advertisement&amp;quot;. I also wanted to make it feel like an advertisement but was wondering: how can I control when I &lt;em&gt;act&lt;/em&gt; versus when I try to be &lt;em&gt;authentic&lt;/em&gt;? Can one reach &lt;em&gt;authenticity&lt;/em&gt; when performing an act on stage?&lt;/p&gt;
+&lt;p&gt;Still an open thought.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Next 13 and Mantine will not replace the Ionic framework for Impromat (yet)</title>
