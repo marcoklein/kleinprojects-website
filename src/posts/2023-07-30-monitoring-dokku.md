@@ -85,8 +85,8 @@ scrape_configs:
     scrape_interval: 15s
     scheme: https
     basic_auth:
-    username: <username>
-    password: <password>
+      username: <username>
+      password: <password>
     static_configs:
       - targets:
           - "node-exporter.impromat.app"
