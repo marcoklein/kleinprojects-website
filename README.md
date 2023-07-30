@@ -13,7 +13,7 @@ yarn install
 ## Run locally
 
 ```sh
-yarn serve
+yarn start
 ```
 
 ## Upgrade dependencies
