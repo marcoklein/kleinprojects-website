@@ -1,0 +1,145 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Prometheus and Grafana with Dokku | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+            <span class="ml-1">Kleinprojects</span>
+          </a>
+        </div>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Prometheus and Grafana with Dokku</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">July 2023</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <p>The following instructions describe how I have setup server-side monitoring for <a href="https://impromat.app">Impromat.app</a>. The server is running <a href="https://dokku.com">Dokku</a> for managing all services.</p>
+<p>The monitoring primarily relies on:</p>
+<ul>
+<li>Prometheus</li>
+<li>Grafana</li>
+<li>node-exporter</li>
+<li>cAdvisor</li>
+</ul>
+<p>Tested with:</p>
+<ul>
+<li>Ubuntu 22.04</li>
+<li>Dokku 0.30.2</li>
+</ul>
+<p>Based on <a href="https://richardwillis.info/blog/monitor-dokku-server-prometheus-loki-grafana">this article</a> with adaptions to make it work with dokku version <code>0.30.2</code>.</p>
+<blockquote>
+<p>Replace <code>impromat.app</code> with your own domain.</p>
+</blockquote>
+<h2 id="install-required-plugins" tabindex="-1">Install required plugins</h2>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> dokku plugin:install http-auth https://github.com/dokku/dokku-http-auth.git<br><span class="token function">sudo</span> dokku plugin:install letsencrypt https://github.com/dokku/dokku-letsencrypt.git</code></pre>
+<h2 id="install-prometheus" tabindex="-1">Install Prometheus</h2>
+<p>Add dedicated network for prometheus services (see <a href="https://dokku.com/docs/networking/network/">Dokku Networking</a>):</p>
+<pre class="language-sh"><code class="language-sh">dokku network:create prometheus-bridge</code></pre>
+<p>Create <code>prometheus</code> app:</p>
+<pre class="language-sh"><code class="language-sh">dokku apps:create prometheus<br>dokku proxy:ports-add prometheus http:80:9090<br>dokku network:set prometheus attach-post-deploy prometheus-bridge</code></pre>
+<p>Create volume mappings:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/prometheus/<span class="token punctuation">{</span>config,data<span class="token punctuation">}</span><br><span class="token function">sudo</span> <span class="token function">touch</span> /var/lib/dokku/data/storage/prometheus/config/<span class="token punctuation">{</span>alert.rules,prometheus.yml<span class="token punctuation">}</span><br><span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> nobody:nogroup /var/lib/dokku/data/storage/prometheus<br><br>dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/config:/etc/prometheus<br>dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/data:/prometheus</code></pre>
+<p>Add prometheus docker start command:</p>
+<pre class="language-sh"><code class="language-sh">dokku config:set --no-restart prometheus <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--config.file=/etc/prometheus/prometheus.yml<br>--storage.tsdb.path=/prometheus<br>--web.console.libraries=/usr/share/prometheus/console_libraries<br>--web.console.templates=/usr/share/prometheus/consoles<br>--web.enable-lifecycle<br>--storage.tsdb.no-lockfile"</span></code></pre>
+<blockquote>
+<p><code>--config.file</code> sets the location of the prometheus config path.</p>
+</blockquote>
+<p>Create config file at <code>/var/lib/dokku/data/storage/prometheus/config/prometheus.yml</code>:</p>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">global</span><span class="token punctuation">:</span><br><span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br><br><span class="token key atrule">scrape_configs</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> <span class="token string">"prometheus"</span><br>    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br>    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span><br>          <span class="token punctuation">-</span> <span class="token string">"localhost:9090"</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>exporter<br>    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br>    <span class="token key atrule">scheme</span><span class="token punctuation">:</span> https<br>    <span class="token key atrule">basic_auth</span><span class="token punctuation">:</span><br>    <span class="token key atrule">username</span><span class="token punctuation">:</span> &lt;username<span class="token punctuation">></span><br>    <span class="token key atrule">password</span><span class="token punctuation">:</span> &lt;password<span class="token punctuation">></span><br>    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span><br>          <span class="token punctuation">-</span> <span class="token string">"node-exporter.impromat.app"</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> cadvisor<br>    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br>    <span class="token key atrule">scheme</span><span class="token punctuation">:</span> http<br>    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span><br>          <span class="token punctuation">-</span> cadvisor.web<span class="token punctuation">:</span><span class="token prism-number">8080</span></code></pre>
+<p>Deploy prometheus:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull prom/prometheus:latest<br><span class="token function">docker</span> tag prom/prometheus:latest dokku/prometheus:latest<br>dokku git:from-image prometheus dokku/prometheus:latest<br>dokku domains:set prometheus prometheus.impromat.app<br><br>dokku letsencrypt:enable prometheus<br>dokku http-auth:enable prometheus <span class="token environment constant">USER</span> PASSWORD</code></pre>
+<p>Validate running Prometheus at https://prometheus.impromat.app/targets (using respective <code>USER</code> and <code>PASSWORD</code>)</p>
+<h2 id="create-node-exporter" tabindex="-1">Create node-exporter</h2>
+<pre class="language-sh"><code class="language-sh">dokku apps:create node-exporter<br>dokku proxy:ports-set node-exporter http:80:9100<br>dokku config:set --no-restart node-exporter <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--collector.textfile.directory=/data --path.procfs=/host/proc --path.sysfs=/host/sys"</span><br><br>dokku docker-options:add node-exporter deploy <span class="token string">"--net=host"</span><br>dokku checks:disable node-exporter</code></pre>
+<p>Storage mounts:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/node-exporter<br><span class="token function">sudo</span> <span class="token function">chown</span> nobody:nogroup /var/lib/dokku/data/storage/node-exporter<br><br>dokku storage:mount node-exporter /proc:/host/proc:ro<br>dokku storage:mount node-exporter /:/rootfs:ro<br>dokku storage:mount node-exporter /sys:/host/sys:ro<br>dokku storage:mount node-exporter /var/lib/dokku/data/storage/node-exporter:/data</code></pre>
+<p>Deploy node-exporter:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> image pull prom/node-exporter:latest<br><span class="token function">docker</span> image tag prom/node-exporter:latest dokku/node-exporter:latest<br><br>dokku git:from-image node-exporter dokku/node-exporter:latest<br>dokku domains:set node-exporter node-exporter.impromat.app<br><br>dokku letsencrypt:enable node-exporter<br>dokku http-auth:enable node-exporter <span class="token environment constant">USER</span> PASSWORD</code></pre>
+<h2 id="create-cadvisor" tabindex="-1">Create cAdvisor</h2>
+<pre class="language-sh"><code class="language-sh">dokku apps:create cadvisor<br>dokku proxy:ports-set cadvisor http:80:8080<br>dokku config:set --no-restart cadvisor <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--docker_only --housekeeping_interval=10s --max_housekeeping_interval=60s"</span><br>dokku network:set cadvisor attach-post-deploy prometheus-bridge</code></pre>
+<p>Storage mounts:</p>
+<pre class="language-sh"><code class="language-sh">dokku storage:mount cadvisor /:/rootfs:ro<br>dokku storage:mount cadvisor /sys:/sys:ro<br>dokku storage:mount cadvisor /var/lib/docker:/var/lib/docker:ro<br>dokku storage:mount cadvisor /var/run:/var/run:rw</code></pre>
+<p>Deploy cadvisor:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> image pull gcr.io/cadvisor/cadvisor:latest<br><span class="token function">docker</span> image tag gcr.io/cadvisor/cadvisor:latest dokku/cadvisor:latest<br><br>dokku git:from-image cadvisor dokku/cadvisor:latest</code></pre>
+<h2 id="setup-grafana" tabindex="-1">Setup Grafana</h2>
+<p>Create app:</p>
+<pre class="language-sh"><code class="language-sh">dokku apps:create grafana<br>dokku proxy:ports-add grafana http:80:3000<br>dokku network:set grafana attach-post-deploy prometheus-bridge</code></pre>
+<p>Storage mounts:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/<span class="token punctuation">{</span>config,data,plugins<span class="token punctuation">}</span><br><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/config/provisioning/datasources<br><span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token prism-number">472</span>:472 /var/lib/dokku/data/storage/grafana<br><br>dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/config/provisioning/datasources:/etc/grafana/provisioning/datasources<br>dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/data:/var/lib/grafana<br>dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/plugins:/var/lib/grafana/plugins</code></pre>
+<p>Add <code>prometheus</code> data source to <code>/var/lib/dokku/data/storage/grafana/config/provisioning/datasources/prometheus.yml</code>:</p>
+<pre class="language-sh"><code class="language-sh">datasources:<br>  - name: Prometheus<br>    type: prometheus<br>    access: proxy<br>    orgId: <span class="token prism-number">1</span><br>    url: http://prometheus.web:9090<br>    basicAuth: <span class="token boolean">false</span><br>    isDefault: <span class="token boolean">true</span><br>    version: <span class="token prism-number">1</span><br>    editable: <span class="token boolean">true</span></code></pre>
+<p>Deploy Grafana:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull grafana/grafana:latest<br><span class="token function">docker</span> tag grafana/grafana:latest dokku/grafana:latest<br>dokku git:from-image grafana dokku/grafana:latest<br>dokku letsencrypt:enable grafana</code></pre>
+<h2 id="login-to-grafana" tabindex="-1">Login to Grafana</h2>
+<p>Go to https://grafana.impromat.app. Login via <code>admin</code>/<code>admin</code> and set a new password.</p>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2023
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
