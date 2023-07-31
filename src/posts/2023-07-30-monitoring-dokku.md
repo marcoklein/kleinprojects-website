@@ -13,6 +13,10 @@ The monitoring primarily relies on:
 - node-exporter
 - cAdvisor
 
+It also sets up a data source for:
+
+- PostgreSQL
+
 Tested with:
 
 - Ubuntu 22.04
@@ -224,3 +228,37 @@ dokku letsencrypt:enable grafana
 ## Login to Grafana
 
 Go to https://grafana.impromat.app. Login via `admin`/`admin` and set a new password.
+
+## Adding more data sources
+
+### PostgreSQL
+
+Get database info from dokku via:
+
+```sh
+dokku postgres:info <db-service-name>
+```
+
+Add `/var/lib/dokku/data/storage/grafana/config/provisioning/datasources/postgresql.yml`:
+
+```yml
+datasources:
+  - name: Postgres
+    type: postgres
+    access: proxy
+    url: <Internal Ip>:5432
+    user: postgres
+    database: <database name>
+    secureJsonData:
+      password: <DB_PASSWORD>
+    jsonData:
+      database: <database name>
+      sslmode: "disable" # disable/require/verify-ca/verify-full
+      maxOpenConns: 0 # Grafana v5.4+
+      maxIdleConns: 2 # Grafana v5.4+
+      connMaxLifetime: 14400 # Grafana v5.4+
+      postgresVersion: 1400 # 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10
+```
+
+See [Grafana Data Sources Documentation](https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources)
+
