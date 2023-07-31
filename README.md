@@ -32,7 +32,7 @@ Write updates
 npx npm-check-updates -u
 ```
 
-Run an `npm install` after a successful write.
+Run an `yarn install` after a successful write.
 
 ## Tests
 
