@@ -71,6 +71,10 @@
 <li>node-exporter</li>
 <li>cAdvisor</li>
 </ul>
+<p>It also sets up a data source for:</p>
+<ul>
+<li>PostgreSQL</li>
+</ul>
 <p>Tested with:</p>
 <ul>
 <li>Ubuntu 22.04</li>
@@ -122,6 +126,13 @@
 <pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull grafana/grafana:latest<br><span class="token function">docker</span> tag grafana/grafana:latest dokku/grafana:latest<br>dokku git:from-image grafana dokku/grafana:latest<br>dokku letsencrypt:enable grafana</code></pre>
 <h2 id="login-to-grafana" tabindex="-1">Login to Grafana</h2>
 <p>Go to https://grafana.impromat.app. Login via <code>admin</code>/<code>admin</code> and set a new password.</p>
+<h2 id="adding-more-data-sources" tabindex="-1">Adding more data sources</h2>
+<h3 id="postgresql" tabindex="-1">PostgreSQL</h3>
+<p>Get database info from dokku via:</p>
+<pre class="language-sh"><code class="language-sh">dokku postgres:info <span class="token operator">&lt;</span>db-service-name<span class="token operator">></span></code></pre>
+<p>Add <code>/var/lib/dokku/data/storage/grafana/config/provisioning/datasources/postgresql.yml</code>:</p>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">datasources</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Postgres<br>    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres<br>    <span class="token key atrule">access</span><span class="token punctuation">:</span> proxy<br>    <span class="token key atrule">url</span><span class="token punctuation">:</span> &lt;Internal Ip<span class="token punctuation">></span><span class="token punctuation">:</span><span class="token prism-number">5432</span><br>    <span class="token key atrule">user</span><span class="token punctuation">:</span> postgres<br>    <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span><br>    <span class="token key atrule">secureJsonData</span><span class="token punctuation">:</span><br>      <span class="token key atrule">password</span><span class="token punctuation">:</span> &lt;DB_PASSWORD<span class="token punctuation">></span><br>    <span class="token key atrule">jsonData</span><span class="token punctuation">:</span><br>      <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span><br>      <span class="token key atrule">sslmode</span><span class="token punctuation">:</span> <span class="token string">"disable"</span> <span class="token comment"># disable/require/verify-ca/verify-full</span><br>      <span class="token key atrule">maxOpenConns</span><span class="token punctuation">:</span> <span class="token prism-number">0</span> <span class="token comment"># Grafana v5.4+</span><br>      <span class="token key atrule">maxIdleConns</span><span class="token punctuation">:</span> <span class="token prism-number">2</span> <span class="token comment"># Grafana v5.4+</span><br>      <span class="token key atrule">connMaxLifetime</span><span class="token punctuation">:</span> <span class="token prism-number">14400</span> <span class="token comment"># Grafana v5.4+</span><br>      <span class="token key atrule">postgresVersion</span><span class="token punctuation">:</span> <span class="token prism-number">1400</span> <span class="token comment"># 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10</span></code></pre>
+<p>See <a href="https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources">Grafana Data Sources Documentation</a></p>
 
 </div>
 
