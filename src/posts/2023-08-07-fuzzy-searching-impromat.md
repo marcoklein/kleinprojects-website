@@ -8,7 +8,7 @@ date: 2023-08-07
 
 - Currently, the search for element is implemented with the fuzzy search library [fuse.js](https://www.fusejs.io/).
 - For a search, all elements of the database are loaded and then searched via _fuse.js_.
-- This provided an easy and start BUT: the approach does not scale as all elements have to be searched for every call.
+- This provided an easy start BUT: the approach does not scale as all elements have to be searched for every call.
 
 ### Technology Stack
 
@@ -18,14 +18,6 @@ The investigated options consider the current stack:
 - [Prisma](https://www.prisma.io/) for db mapping
 
 Thus, options span from Postgres native features to Prisma capabilities to stay with the existing stack.
-
-## Decision
-
-Still unclear, how important fuzziness of the search is.
-
-1. Switch to easiest `contains` option.
-2. Observe user experience without fuzzy search and verify it is still usable.
-3. Switch to `pg_trgm` in the mid-term if Prisma is not supporting a fuzzy search.
 
 ## Considered Options
 
@@ -56,3 +48,11 @@ Postgres trigram extension for fuzzy search features:
 - Good, because it provides the fastest query time.
 - Bad, because search is not fuzzy at all.
 - Good, because it can be implemented via Prisma `contains` filter.
+
+## Decision
+
+Still unclear, how important fuzziness of the search is.
+
+1. Switch to easiest `contains` option.
+2. Observe user experience without fuzzy search and verify it is still usable.
+3. Switch to `pg_trgm` in the mid-term if Prisma is not supporting a fuzzy search.
