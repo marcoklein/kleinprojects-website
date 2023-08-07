@@ -67,7 +67,7 @@
 <ul>
 <li>Currently, the search for element is implemented with the fuzzy search library <a href="https://www.fusejs.io/">fuse.js</a>.</li>
 <li>For a search, all elements of the database are loaded and then searched via <em>fuse.js</em>.</li>
-<li>This provided an easy and start BUT: the approach does not scale as all elements have to be searched for every call.</li>
+<li>This provided an easy start BUT: the approach does not scale as all elements have to be searched for every call.</li>
 </ul>
 <h3 id="technology-stack" tabindex="-1">Technology Stack</h3>
 <p>The investigated options consider the current stack:</p>
@@ -76,13 +76,6 @@
 <li><a href="https://www.prisma.io/">Prisma</a> for db mapping</li>
 </ul>
 <p>Thus, options span from Postgres native features to Prisma capabilities to stay with the existing stack.</p>
-<h2 id="decision" tabindex="-1">Decision</h2>
-<p>Still unclear, how important fuzziness of the search is.</p>
-<ol>
-<li>Switch to easiest <code>contains</code> option.</li>
-<li>Observe user experience without fuzzy search and verify it is still usable.</li>
-<li>Switch to <code>pg_trgm</code> in the mid-term if Prisma is not supporting a fuzzy search.</li>
-</ol>
 <h2 id="considered-options" tabindex="-1">Considered Options</h2>
 <ul>
 <li>Prisma Full Text Search</li>
@@ -110,6 +103,13 @@
 <li>Bad, because search is not fuzzy at all.</li>
 <li>Good, because it can be implemented via Prisma <code>contains</code> filter.</li>
 </ul>
+<h2 id="decision" tabindex="-1">Decision</h2>
+<p>Still unclear, how important fuzziness of the search is.</p>
+<ol>
+<li>Switch to easiest <code>contains</code> option.</li>
+<li>Observe user experience without fuzzy search and verify it is still usable.</li>
+<li>Switch to <code>pg_trgm</code> in the mid-term if Prisma is not supporting a fuzzy search.</li>
+</ol>
 
 </div>
 

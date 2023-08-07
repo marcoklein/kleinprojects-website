@@ -20,7 +20,7 @@
 &lt;ul&gt;
 &lt;li&gt;Currently, the search for element is implemented with the fuzzy search library &lt;a href=&quot;https://www.fusejs.io/&quot;&gt;fuse.js&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;For a search, all elements of the database are loaded and then searched via &lt;em&gt;fuse.js&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;This provided an easy and start BUT: the approach does not scale as all elements have to be searched for every call.&lt;/li&gt;
+&lt;li&gt;This provided an easy start BUT: the approach does not scale as all elements have to be searched for every call.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;technology-stack&quot; tabindex=&quot;-1&quot;&gt;Technology Stack&lt;/h3&gt;
 &lt;p&gt;The investigated options consider the current stack:&lt;/p&gt;
@@ -29,13 +29,6 @@
 &lt;li&gt;&lt;a href=&quot;https://www.prisma.io/&quot;&gt;Prisma&lt;/a&gt; for db mapping&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Thus, options span from Postgres native features to Prisma capabilities to stay with the existing stack.&lt;/p&gt;
-&lt;h2 id=&quot;decision&quot; tabindex=&quot;-1&quot;&gt;Decision&lt;/h2&gt;
-&lt;p&gt;Still unclear, how important fuzziness of the search is.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Switch to easiest &lt;code&gt;contains&lt;/code&gt; option.&lt;/li&gt;
-&lt;li&gt;Observe user experience without fuzzy search and verify it is still usable.&lt;/li&gt;
-&lt;li&gt;Switch to &lt;code&gt;pg_trgm&lt;/code&gt; in the mid-term if Prisma is not supporting a fuzzy search.&lt;/li&gt;
-&lt;/ol&gt;
 &lt;h2 id=&quot;considered-options&quot; tabindex=&quot;-1&quot;&gt;Considered Options&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Prisma Full Text Search&lt;/li&gt;
@@ -63,6 +56,13 @@
 &lt;li&gt;Bad, because search is not fuzzy at all.&lt;/li&gt;
 &lt;li&gt;Good, because it can be implemented via Prisma &lt;code&gt;contains&lt;/code&gt; filter.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;decision&quot; tabindex=&quot;-1&quot;&gt;Decision&lt;/h2&gt;
+&lt;p&gt;Still unclear, how important fuzziness of the search is.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Switch to easiest &lt;code&gt;contains&lt;/code&gt; option.&lt;/li&gt;
+&lt;li&gt;Observe user experience without fuzzy search and verify it is still usable.&lt;/li&gt;
+&lt;li&gt;Switch to &lt;code&gt;pg_trgm&lt;/code&gt; in the mid-term if Prisma is not supporting a fuzzy search.&lt;/li&gt;
+&lt;/ol&gt;
 </content>
   </entry>
   
