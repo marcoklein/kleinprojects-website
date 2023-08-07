@@ -1,0 +1,133 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Fuzzy Search Considerations for Impromat | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+            <span class="ml-1">Kleinprojects</span>
+          </a>
+        </div>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Fuzzy Search Considerations for Impromat</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">August 2023</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <h2 id="context" tabindex="-1">Context</h2>
+<ul>
+<li>Currently, the search for element is implemented with the fuzzy search library <a href="https://www.fusejs.io/">fuse.js</a>.</li>
+<li>For a search, all elements of the database are loaded and then searched via <em>fuse.js</em>.</li>
+<li>This provided an easy and start BUT: the approach does not scale as all elements have to be searched for every call.</li>
+</ul>
+<h3 id="technology-stack" tabindex="-1">Technology Stack</h3>
+<p>The investigated options consider the current stack:</p>
+<ul>
+<li><a href="https://www.postgresql.org/">Postgresql</a> as database</li>
+<li><a href="https://www.prisma.io/">Prisma</a> for db mapping</li>
+</ul>
+<p>Thus, options span from Postgres native features to Prisma capabilities to stay with the existing stack.</p>
+<h2 id="decision" tabindex="-1">Decision</h2>
+<p>Still unclear, how important fuzziness of the search is.</p>
+<ol>
+<li>Switch to easiest <code>contains</code> option.</li>
+<li>Observe user experience without fuzzy search and verify it is still usable.</li>
+<li>Switch to <code>pg_trgm</code> in the mid-term if Prisma is not supporting a fuzzy search.</li>
+</ol>
+<h2 id="considered-options" tabindex="-1">Considered Options</h2>
+<ul>
+<li>Prisma Full Text Search</li>
+<li>Postgres <code>pg_trgm</code></li>
+<li>Basic text search via <code>LIKE %searchText%</code></li>
+</ul>
+<h3 id="prisma-full-text-search" tabindex="-1">Prisma Full Text Search</h3>
+<p>Prisma preview feature for searching through database fields via a search logic:</p>
+<ul>
+<li>Good, because Prisma is the db abstraction layer (shift complexity to abstraction layer).</li>
+<li>Bad, because the search is not fuzzy but is a set of static search rules.</li>
+<li>Good, because it provides huge performance benefits over the current solution.</li>
+</ul>
+<p>See <a href="https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search">Prisma documentation</a></p>
+<h3 id="postgres-pg_trgm" tabindex="-1">Postgres <code>pg_trgm</code></h3>
+<p>Postgres trigram extension for fuzzy search features:</p>
+<ul>
+<li>Bad, because it requires raw SQL (mixing with Prisma as abstraction layer).</li>
+<li>Good, because it is extremely performant as it works directly with Postgres.</li>
+<li>Good, because it is fuzzy.</li>
+</ul>
+<h3 id="basic-text-search-via-like" tabindex="-1">Basic text search via <code>LIKE</code></h3>
+<ul>
+<li>Good, because it provides the fastest query time.</li>
+<li>Bad, because search is not fuzzy at all.</li>
+<li>Good, because it can be implemented via Prisma <code>contains</code> filter.</li>
+</ul>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2023
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

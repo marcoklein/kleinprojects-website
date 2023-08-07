@@ -4,12 +4,67 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2023-07-30T00:00:00Z</updated>
+  <updated>2023-08-07T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Fuzzy Search Considerations for Impromat</title>
+    <link href="https://kleinprojects.com/fuzzy-search-considerations-for-impromat/"/>
+    <updated>2023-08-07T00:00:00Z</updated>
+    <id>https://kleinprojects.com/fuzzy-search-considerations-for-impromat/</id>
+    <content type="html">&lt;h2 id=&quot;context&quot; tabindex=&quot;-1&quot;&gt;Context&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Currently, the search for element is implemented with the fuzzy search library &lt;a href=&quot;https://www.fusejs.io/&quot;&gt;fuse.js&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For a search, all elements of the database are loaded and then searched via &lt;em&gt;fuse.js&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;This provided an easy and start BUT: the approach does not scale as all elements have to be searched for every call.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;technology-stack&quot; tabindex=&quot;-1&quot;&gt;Technology Stack&lt;/h3&gt;
+&lt;p&gt;The investigated options consider the current stack:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.postgresql.org/&quot;&gt;Postgresql&lt;/a&gt; as database&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.prisma.io/&quot;&gt;Prisma&lt;/a&gt; for db mapping&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thus, options span from Postgres native features to Prisma capabilities to stay with the existing stack.&lt;/p&gt;
+&lt;h2 id=&quot;decision&quot; tabindex=&quot;-1&quot;&gt;Decision&lt;/h2&gt;
+&lt;p&gt;Still unclear, how important fuzziness of the search is.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Switch to easiest &lt;code&gt;contains&lt;/code&gt; option.&lt;/li&gt;
+&lt;li&gt;Observe user experience without fuzzy search and verify it is still usable.&lt;/li&gt;
+&lt;li&gt;Switch to &lt;code&gt;pg_trgm&lt;/code&gt; in the mid-term if Prisma is not supporting a fuzzy search.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;considered-options&quot; tabindex=&quot;-1&quot;&gt;Considered Options&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Prisma Full Text Search&lt;/li&gt;
+&lt;li&gt;Postgres &lt;code&gt;pg_trgm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Basic text search via &lt;code&gt;LIKE %searchText%&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;prisma-full-text-search&quot; tabindex=&quot;-1&quot;&gt;Prisma Full Text Search&lt;/h3&gt;
+&lt;p&gt;Prisma preview feature for searching through database fields via a search logic:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Good, because Prisma is the db abstraction layer (shift complexity to abstraction layer).&lt;/li&gt;
+&lt;li&gt;Bad, because the search is not fuzzy but is a set of static search rules.&lt;/li&gt;
+&lt;li&gt;Good, because it provides huge performance benefits over the current solution.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See &lt;a href=&quot;https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search&quot;&gt;Prisma documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;postgres-pg_trgm&quot; tabindex=&quot;-1&quot;&gt;Postgres &lt;code&gt;pg_trgm&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Postgres trigram extension for fuzzy search features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bad, because it requires raw SQL (mixing with Prisma as abstraction layer).&lt;/li&gt;
+&lt;li&gt;Good, because it is extremely performant as it works directly with Postgres.&lt;/li&gt;
+&lt;li&gt;Good, because it is fuzzy.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;basic-text-search-via-like&quot; tabindex=&quot;-1&quot;&gt;Basic text search via &lt;code&gt;LIKE&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Good, because it provides the fastest query time.&lt;/li&gt;
+&lt;li&gt;Bad, because search is not fuzzy at all.&lt;/li&gt;
+&lt;li&gt;Good, because it can be implemented via Prisma &lt;code&gt;contains&lt;/code&gt; filter.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Prometheus and Grafana with Dokku</title>
