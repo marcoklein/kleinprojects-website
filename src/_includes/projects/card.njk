@@ -1,4 +1,4 @@
-<div class="card has-text-left" >
+<div class="card has-text-left">
   <div class="card-image">
     <figure class="image is16by9">
       {% dynamicImageOnHover project, project.data.coverImage, project.data.coverImageDynamic %}
@@ -12,20 +12,21 @@
         </span>
         <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
       </div>
-      
       {% if project.data.platforms %}
         {% if 'desktop' in project.data.platforms %}
           <div>
             <span class="icon">
               <i class="fas fa-desktop"></i>
-            </span> Desktop
+            </span>
+            Desktop
           </div>
         {% endif %}
         {% if 'mobile' in project.data.platforms %}
           <div>
             <span class="icon">
               <i class="fas fa-mobile-alt"></i>
-            </span> Mobile
+            </span>
+            Mobile
           </div>
         {% endif %}
       {% endif %}
@@ -35,30 +36,30 @@
     </p>
   </div>
   <div class="card-footer">
-      {% if project.data.sourceUrl %}
-        <div class="card-footer-item">
-          {% if project.data.showUrlIcons %}
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-          {% endif %}
-          <a href="{{ project.data.sourceUrl }}" target="_blank" class="">{{ project.data.sourceUrlText }}</a>
-        </div>
-      {% endif %}
-      {% if project.data.projectUrl %}
-        <div class="card-footer-item">
-          <a href="{{ project.data.projectUrl }}" class="">{{ project.data.projectUrlText }}</a>
-        </div>
-      {% endif %}
-      {% for url in project.data.urls | reverse %}
-        <div class="card-footer-item">
-          {% if url.icon and project.data.showUrlIcons %}
-            <span class="icon">
-              <i class="{{ url.icon }}"></i>
-            </span>
-          {% endif %}
-          <a href="{{ url.url }}" target="_blank" class="">{{ url.text }}</a>
-        </div>
-      {% endfor %}
+    {% if project.data.sourceUrl %}
+      <div class="card-footer-item">
+        {% if project.data.showUrlIcons %}
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+        {% endif %}
+        <a href="{{ project.data.sourceUrl }}" target="_blank" class="">{{ project.data.sourceUrlText }}</a>
+      </div>
+    {% endif %}
+    {% if project.data.projectUrl %}
+      <div class="card-footer-item">
+        <a href="{{ project.data.projectUrl }}" class="">{{ project.data.projectUrlText }}</a>
+      </div>
+    {% endif %}
+    {% for url in project.data.urls | reverse %}
+      <div class="card-footer-item">
+        {% if url.icon and project.data.showUrlIcons %}
+          <span class="icon">
+            <i class="{{ url.icon }}"></i>
+          </span>
+        {% endif %}
+        <a href="{{ url.url }}" target="_blank" class="">{{ url.text }}</a>
+      </div>
+    {% endfor %}
   </div>
 </div>

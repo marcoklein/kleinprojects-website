@@ -18,21 +18,11 @@ yarn start
 
 ## Upgrade dependencies
 
-We use [npm-check-updates](https://github.com/raineorshine/npm-check-updates) to upgrade dependencies.
-
-Check for updates
+Upgrade to latest dependencies with (check breaking changes).
 
 ```sh
-npx npm-check-updates
+yarn upgrade-interactive --latest
 ```
-
-Write updates
-
-```sh
-npx npm-check-updates -u
-```
-
-Run an `npm install` after a successful write.
 
 ## Tests
 
@@ -58,7 +48,6 @@ Both use `number` and `tag` classes for styling. To fix this we prefix Prism cla
 
 > You have to adjust Prism themes and rename the two tags if you change the Prism theme!
 
-
 # Ideas
 
 - add hover effect on cards: show shadow if hovered over card!
@@ -69,4 +58,3 @@ Both use `number` and `tag` classes for styling. To fix this we prefix Prism cla
 - normalize CSS https://necolas.github.io/normalize.css/
 - add manifest.json, site.json, robot.txt and all the SEO related stuff
 - minify HTML by adding a transform function
-

@@ -1,12 +1,13 @@
 const sass = require('sass');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
-const striptags = require("striptags")
+const striptags = require('striptags');
+const upgradeHelper = require('@11ty/eleventy-upgrade-help');
 
 // install prism plugins
 require('prismjs/plugins/custom-class/prism-custom-class');
@@ -19,7 +20,7 @@ const REGEX_IMAGE_EXTENSION = '(jpg|png|gif)';
 module.exports = function (eleventyConfig) {
   // clear site on initial build
   if (fs.existsSync('_site')) {
-    fs.rmdirSync('_site', { recursive: true });
+    fs.rmSync('_site', { recursive: true });
   }
   console.log('Cleared _site folder');
 
@@ -115,9 +116,9 @@ module.exports = function (eleventyConfig) {
 
 /**
  * Extract excerpt from first paragraph of document.
- * 
- * @param article 
- * @returns 
+ *
+ * @param article
+ * @returns
  */
 function extractExcerpt(article) {
   if (!article.hasOwnProperty('templateContent')) {
@@ -138,24 +139,21 @@ function extractExcerpt(article) {
   return excerpt;
 }
 
-function compileSass() {
+async function compileSass() {
   console.log('Compiling sass.');
-  const cssContent = sass.renderSync({ file: 'src/styles/main.scss' });
+  const cssContent = sass.compile('src/styles/main.scss');
   fs.mkdirSync('_site/css', { recursive: true });
   fs.writeFileSync('_site/css/main.css', cssContent.css);
 }
 
-
-function shortcodeDynamicImageOnHover(page, staticCoverImage, dynamicCoverImage) {
+function shortcodeDynamicImageOnHover(
+  page,
+  staticCoverImage,
+  dynamicCoverImage
+) {
   const pageInputDir = path.dirname(page.inputPath);
-  const staticCoverImageInputPath = path.join(
-    pageInputDir,
-    staticCoverImage
-  );
-  const dynamicCoverImageInputPath = path.join(
-    pageInputDir,
-    dynamicCoverImage
-  );
+  const staticCoverImageInputPath = path.join(pageInputDir, staticCoverImage);
+  const dynamicCoverImageInputPath = path.join(pageInputDir, dynamicCoverImage);
   const baseDir = page.url;
   const staticCoverImagePath = path.join(baseDir, staticCoverImage);
   const dynamicCoverImagePath = path.join(baseDir, dynamicCoverImage);
@@ -178,7 +176,6 @@ function shortcodeDynamicImageOnHover(page, staticCoverImage, dynamicCoverImage)
 
 function filterCoverImage(page) {
   // take filePathStem or pageOptions directly if it is a string (and a path)
-  var pageOptions =
-    typeof pageOptions === 'string' ? page : page.filePathStem;
+  var pageOptions = typeof pageOptions === 'string' ? page : page.filePathStem;
   return path.join(path.dirname(pageOptions), page.data.coverImageName);
 }
