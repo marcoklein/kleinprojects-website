@@ -68,39 +68,96 @@
 <p>Package <code>main</code> runs programs.</p>
 <h2 id="imports" tabindex="-1">Imports</h2>
 <p>Factored Import Statements</p>
-<pre class="language-go"><code class="language-go"><span class="token keyword">import</span> <span class="token punctuation">(</span><br>	<span class="token string">"fmt"</span><br>	<span class="token string">"math"</span><br><span class="token punctuation">)</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span></code></pre>
 <h2 id="exports" tabindex="-1">Exports</h2>
 <p>In Go, a name is exported if it begins with a capital letter.</p>
 <h2 id="functions" tabindex="-1">Functions</h2>
-<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span><br>	<span class="token keyword">return</span> x <span class="token operator">+</span> y<br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> x <span class="token operator">+</span> y
+<span class="token punctuation">}</span></code></pre>
 <p>You may omit types if they are equal for consecutive parameters.</p>
-<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span><br>	<span class="token keyword">return</span> x <span class="token operator">+</span> y<br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> x <span class="token operator">+</span> y
+<span class="token punctuation">}</span></code></pre>
 <h3 id="multiple-results" tabindex="-1">Multiple Results</h3>
-<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">swap</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	<span class="token keyword">return</span> y<span class="token punctuation">,</span> x<br><span class="token punctuation">}</span><br><br><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	a<span class="token punctuation">,</span> b <span class="token operator">:=</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"world"</span><span class="token punctuation">)</span><br>	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">swap</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> y<span class="token punctuation">,</span> x
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	a<span class="token punctuation">,</span> b <span class="token operator">:=</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"world"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
 <h3 id="naked-return" tabindex="-1">Naked return</h3>
-<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">split</span><span class="token punctuation">(</span>sum <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	x <span class="token operator">=</span> sum <span class="token operator">*</span> <span class="token prism-number">4</span> <span class="token operator">/</span> <span class="token prism-number">9</span><br>	y <span class="token operator">=</span> sum <span class="token operator">-</span> x<br>	<span class="token keyword">return</span><br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">split</span><span class="token punctuation">(</span>sum <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	x <span class="token operator">=</span> sum <span class="token operator">*</span> <span class="token prism-number">4</span> <span class="token operator">/</span> <span class="token prism-number">9</span>
+	y <span class="token operator">=</span> sum <span class="token operator">-</span> x
+	<span class="token keyword">return</span>
+<span class="token punctuation">}</span></code></pre>
 <h2 id="variables" tabindex="-1">Variables</h2>
 <pre class="language-go"><code class="language-go"><span class="token keyword">var</span> c<span class="token punctuation">,</span> python<span class="token punctuation">,</span> java <span class="token builtin">bool</span></code></pre>
 <p>Short declaration with <code>:=</code></p>
-<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	<span class="token keyword">var</span> i<span class="token punctuation">,</span> j <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token prism-number">1</span><span class="token punctuation">,</span> <span class="token prism-number">2</span><br>	k <span class="token operator">:=</span> <span class="token prism-number">3</span><br>	c<span class="token punctuation">,</span> python<span class="token punctuation">,</span> java <span class="token operator">:=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"no!"</span><br><br>	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">,</span> c<span class="token punctuation">,</span> python<span class="token punctuation">,</span> java<span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> i<span class="token punctuation">,</span> j <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token prism-number">1</span><span class="token punctuation">,</span> <span class="token prism-number">2</span>
+	k <span class="token operator">:=</span> <span class="token prism-number">3</span>
+	c<span class="token punctuation">,</span> python<span class="token punctuation">,</span> java <span class="token operator">:=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"no!"</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">,</span> c<span class="token punctuation">,</span> python<span class="token punctuation">,</span> java<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
 <h2 id="datatypes" tabindex="-1">Datatypes</h2>
-<pre class="language-go"><code class="language-go"><span class="token builtin">bool</span><br><br><span class="token builtin">string</span><br><br><span class="token builtin">int</span>  <span class="token builtin">int8</span>  <span class="token builtin">int16</span>  <span class="token builtin">int32</span>  <span class="token builtin">int64</span><br><span class="token builtin">uint</span> <span class="token builtin">uint8</span> <span class="token builtin">uint16</span> <span class="token builtin">uint32</span> <span class="token builtin">uint64</span> <span class="token builtin">uintptr</span><br><br><span class="token builtin">byte</span> <span class="token comment">// alias for uint8</span><br><br><span class="token builtin">rune</span> <span class="token comment">// alias for int32</span><br>     <span class="token comment">// represents a Unicode code point</span><br><br><span class="token builtin">float32</span> <span class="token builtin">float64</span><br><br><span class="token builtin">complex64</span> <span class="token builtin">complex128</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token builtin">bool</span>
+
+<span class="token builtin">string</span>
+
+<span class="token builtin">int</span>  <span class="token builtin">int8</span>  <span class="token builtin">int16</span>  <span class="token builtin">int32</span>  <span class="token builtin">int64</span>
+<span class="token builtin">uint</span> <span class="token builtin">uint8</span> <span class="token builtin">uint16</span> <span class="token builtin">uint32</span> <span class="token builtin">uint64</span> <span class="token builtin">uintptr</span>
+
+<span class="token builtin">byte</span> <span class="token comment">// alias for uint8</span>
+
+<span class="token builtin">rune</span> <span class="token comment">// alias for int32</span>
+     <span class="token comment">// represents a Unicode code point</span>
+
+<span class="token builtin">float32</span> <span class="token builtin">float64</span>
+
+<span class="token builtin">complex64</span> <span class="token builtin">complex128</span></code></pre>
 <h1 id="conditions-and-loops" tabindex="-1">Conditions and Loops</h1>
 <h2 id="for" tabindex="-1">For</h2>
-<pre class="language-go"><code class="language-go">sum <span class="token operator">:=</span> <span class="token prism-number">0</span><br><span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token prism-number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token prism-number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span><br>    sum <span class="token operator">+=</span> i<br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go">sum <span class="token operator">:=</span> <span class="token prism-number">0</span>
+<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token prism-number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token prism-number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+    sum <span class="token operator">+=</span> i
+<span class="token punctuation">}</span></code></pre>
 <h2 id="for-is-go's-while" tabindex="-1">For is Go's While</h2>
-<pre class="language-go"><code class="language-go"><span class="token keyword">for</span> sum <span class="token operator">&lt;</span> <span class="token prism-number">1000</span> <span class="token punctuation">{</span><br>    sum <span class="token operator">+=</span> sum<br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">for</span> sum <span class="token operator">&lt;</span> <span class="token prism-number">1000</span> <span class="token punctuation">{</span>
+    sum <span class="token operator">+=</span> sum
+<span class="token punctuation">}</span></code></pre>
 <h2 id="defer" tabindex="-1">Defer</h2>
-<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	<span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><br><br>	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
 <p><a href="https://blog.golang.org/defer-panic-and-recover">Further Reading</a></p>
 <h1 id="examples" tabindex="-1">Examples</h1>
 <p>Read in line:</p>
 <pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Scanln</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span></code></pre>
 <p>Example</p>
-<pre class="language-go"><code class="language-go"><span class="token keyword">var</span> name <span class="token builtin">string</span><br>fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name<span class="token punctuation">)</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">var</span> name <span class="token builtin">string</span>
+fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name<span class="token punctuation">)</span></code></pre>
 <h2 id="life%2C-the-universe%2C-and-everything" tabindex="-1">Life, the Universe, and Everything</h2>
 <p>Read lines until we read <code>42</code>.</p>
-<pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main<br><span class="token keyword">import</span> <span class="token string">"fmt"</span><br><br><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><br>	<span class="token comment">// your code goes here</span><br>	<span class="token keyword">var</span> line <span class="token builtin">string</span><br>	<span class="token keyword">for</span> fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span> line <span class="token operator">!=</span> <span class="token string">"42"</span><span class="token punctuation">;</span> fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><br>	<span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">// your code goes here</span>
+	<span class="token keyword">var</span> line <span class="token builtin">string</span>
+	<span class="token keyword">for</span> fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span> line <span class="token operator">!=</span> <span class="token string">"42"</span><span class="token punctuation">;</span> fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 
 </div>
 

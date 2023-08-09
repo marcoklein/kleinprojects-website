@@ -85,45 +85,134 @@
 <p>Replace <code>impromat.app</code> with your own domain.</p>
 </blockquote>
 <h2 id="install-required-plugins" tabindex="-1">Install required plugins</h2>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> dokku plugin:install http-auth https://github.com/dokku/dokku-http-auth.git<br><span class="token function">sudo</span> dokku plugin:install letsencrypt https://github.com/dokku/dokku-letsencrypt.git</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> dokku plugin:install http-auth https://github.com/dokku/dokku-http-auth.git
+<span class="token function">sudo</span> dokku plugin:install letsencrypt https://github.com/dokku/dokku-letsencrypt.git</code></pre>
 <h2 id="install-prometheus" tabindex="-1">Install Prometheus</h2>
 <p>Add dedicated network for prometheus services (see <a href="https://dokku.com/docs/networking/network/">Dokku Networking</a>):</p>
 <pre class="language-sh"><code class="language-sh">dokku network:create prometheus-bridge</code></pre>
 <p>Create <code>prometheus</code> app:</p>
-<pre class="language-sh"><code class="language-sh">dokku apps:create prometheus<br>dokku proxy:ports-add prometheus http:80:9090<br>dokku network:set prometheus attach-post-deploy prometheus-bridge</code></pre>
+<pre class="language-sh"><code class="language-sh">dokku apps:create prometheus
+dokku proxy:ports-add prometheus http:80:9090
+dokku network:set prometheus attach-post-deploy prometheus-bridge</code></pre>
 <p>Create volume mappings:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/prometheus/<span class="token punctuation">{</span>config,data<span class="token punctuation">}</span><br><span class="token function">sudo</span> <span class="token function">touch</span> /var/lib/dokku/data/storage/prometheus/config/<span class="token punctuation">{</span>alert.rules,prometheus.yml<span class="token punctuation">}</span><br><span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> nobody:nogroup /var/lib/dokku/data/storage/prometheus<br><br>dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/config:/etc/prometheus<br>dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/data:/prometheus</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/prometheus/<span class="token punctuation">{</span>config,data<span class="token punctuation">}</span>
+<span class="token function">sudo</span> <span class="token function">touch</span> /var/lib/dokku/data/storage/prometheus/config/<span class="token punctuation">{</span>alert.rules,prometheus.yml<span class="token punctuation">}</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> nobody:nogroup /var/lib/dokku/data/storage/prometheus
+
+dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/config:/etc/prometheus
+dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/data:/prometheus</code></pre>
 <p>Add prometheus docker start command:</p>
-<pre class="language-sh"><code class="language-sh">dokku config:set --no-restart prometheus <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--config.file=/etc/prometheus/prometheus.yml<br>--storage.tsdb.path=/prometheus<br>--web.console.libraries=/usr/share/prometheus/console_libraries<br>--web.console.templates=/usr/share/prometheus/consoles<br>--web.enable-lifecycle<br>--storage.tsdb.no-lockfile"</span></code></pre>
+<pre class="language-sh"><code class="language-sh">dokku config:set --no-restart prometheus <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--config.file=/etc/prometheus/prometheus.yml
+--storage.tsdb.path=/prometheus
+--web.console.libraries=/usr/share/prometheus/console_libraries
+--web.console.templates=/usr/share/prometheus/consoles
+--web.enable-lifecycle
+--storage.tsdb.no-lockfile"</span></code></pre>
 <blockquote>
 <p><code>--config.file</code> sets the location of the prometheus config path.</p>
 </blockquote>
 <p>Create config file at <code>/var/lib/dokku/data/storage/prometheus/config/prometheus.yml</code>:</p>
-<pre class="language-yml"><code class="language-yml"><span class="token key atrule">global</span><span class="token punctuation">:</span><br><span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br><br><span class="token key atrule">scrape_configs</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> <span class="token string">"prometheus"</span><br>    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br>    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span><br>          <span class="token punctuation">-</span> <span class="token string">"localhost:9090"</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>exporter<br>    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br>    <span class="token key atrule">scheme</span><span class="token punctuation">:</span> https<br>    <span class="token key atrule">basic_auth</span><span class="token punctuation">:</span><br>      <span class="token key atrule">username</span><span class="token punctuation">:</span> &lt;username<span class="token punctuation">></span><br>      <span class="token key atrule">password</span><span class="token punctuation">:</span> &lt;password<span class="token punctuation">></span><br>    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span><br>          <span class="token punctuation">-</span> <span class="token string">"node-exporter.impromat.app"</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> cadvisor<br>    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s<br>    <span class="token key atrule">scheme</span><span class="token punctuation">:</span> http<br>    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span><br>          <span class="token punctuation">-</span> cadvisor.web<span class="token punctuation">:</span><span class="token prism-number">8080</span></code></pre>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">global</span><span class="token punctuation">:</span>
+<span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s
+
+<span class="token key atrule">scrape_configs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> <span class="token string">"prometheus"</span>
+    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s
+    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token string">"localhost:9090"</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>exporter
+    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s
+    <span class="token key atrule">scheme</span><span class="token punctuation">:</span> https
+    <span class="token key atrule">basic_auth</span><span class="token punctuation">:</span>
+      <span class="token key atrule">username</span><span class="token punctuation">:</span> &lt;username<span class="token punctuation">></span>
+      <span class="token key atrule">password</span><span class="token punctuation">:</span> &lt;password<span class="token punctuation">></span>
+    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token string">"node-exporter.impromat.app"</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> cadvisor
+    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s
+    <span class="token key atrule">scheme</span><span class="token punctuation">:</span> http
+    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> cadvisor.web<span class="token punctuation">:</span><span class="token prism-number">8080</span></code></pre>
 <p>Deploy prometheus:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull prom/prometheus:latest<br><span class="token function">docker</span> tag prom/prometheus:latest dokku/prometheus:latest<br>dokku git:from-image prometheus dokku/prometheus:latest<br>dokku domains:set prometheus prometheus.impromat.app<br><br>dokku letsencrypt:enable prometheus<br>dokku http-auth:enable prometheus <span class="token environment constant">USER</span> PASSWORD</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull prom/prometheus:latest
+<span class="token function">docker</span> tag prom/prometheus:latest dokku/prometheus:latest
+dokku git:from-image prometheus dokku/prometheus:latest
+dokku domains:set prometheus prometheus.impromat.app
+
+dokku letsencrypt:enable prometheus
+dokku http-auth:enable prometheus <span class="token environment constant">USER</span> PASSWORD</code></pre>
 <p>Validate running Prometheus at https://prometheus.impromat.app/targets (using respective <code>USER</code> and <code>PASSWORD</code>)</p>
 <h2 id="create-node-exporter" tabindex="-1">Create node-exporter</h2>
-<pre class="language-sh"><code class="language-sh">dokku apps:create node-exporter<br>dokku proxy:ports-set node-exporter http:80:9100<br>dokku config:set --no-restart node-exporter <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--collector.textfile.directory=/data --path.procfs=/host/proc --path.sysfs=/host/sys"</span><br><br>dokku docker-options:add node-exporter deploy <span class="token string">"--net=host"</span><br>dokku checks:disable node-exporter</code></pre>
+<pre class="language-sh"><code class="language-sh">dokku apps:create node-exporter
+dokku proxy:ports-set node-exporter http:80:9100
+dokku config:set --no-restart node-exporter <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--collector.textfile.directory=/data --path.procfs=/host/proc --path.sysfs=/host/sys"</span>
+
+dokku docker-options:add node-exporter deploy <span class="token string">"--net=host"</span>
+dokku checks:disable node-exporter</code></pre>
 <p>Storage mounts:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/node-exporter<br><span class="token function">sudo</span> <span class="token function">chown</span> nobody:nogroup /var/lib/dokku/data/storage/node-exporter<br><br>dokku storage:mount node-exporter /proc:/host/proc:ro<br>dokku storage:mount node-exporter /:/rootfs:ro<br>dokku storage:mount node-exporter /sys:/host/sys:ro<br>dokku storage:mount node-exporter /var/lib/dokku/data/storage/node-exporter:/data</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/node-exporter
+<span class="token function">sudo</span> <span class="token function">chown</span> nobody:nogroup /var/lib/dokku/data/storage/node-exporter
+
+dokku storage:mount node-exporter /proc:/host/proc:ro
+dokku storage:mount node-exporter /:/rootfs:ro
+dokku storage:mount node-exporter /sys:/host/sys:ro
+dokku storage:mount node-exporter /var/lib/dokku/data/storage/node-exporter:/data</code></pre>
 <p>Deploy node-exporter:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> image pull prom/node-exporter:latest<br><span class="token function">docker</span> image tag prom/node-exporter:latest dokku/node-exporter:latest<br><br>dokku git:from-image node-exporter dokku/node-exporter:latest<br>dokku domains:set node-exporter node-exporter.impromat.app<br><br>dokku letsencrypt:enable node-exporter<br>dokku http-auth:enable node-exporter <span class="token environment constant">USER</span> PASSWORD</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> image pull prom/node-exporter:latest
+<span class="token function">docker</span> image tag prom/node-exporter:latest dokku/node-exporter:latest
+
+dokku git:from-image node-exporter dokku/node-exporter:latest
+dokku domains:set node-exporter node-exporter.impromat.app
+
+dokku letsencrypt:enable node-exporter
+dokku http-auth:enable node-exporter <span class="token environment constant">USER</span> PASSWORD</code></pre>
 <h2 id="create-cadvisor" tabindex="-1">Create cAdvisor</h2>
-<pre class="language-sh"><code class="language-sh">dokku apps:create cadvisor<br>dokku proxy:ports-set cadvisor http:80:8080<br>dokku config:set --no-restart cadvisor <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--docker_only --housekeeping_interval=10s --max_housekeeping_interval=60s"</span><br>dokku network:set cadvisor attach-post-deploy prometheus-bridge</code></pre>
+<pre class="language-sh"><code class="language-sh">dokku apps:create cadvisor
+dokku proxy:ports-set cadvisor http:80:8080
+dokku config:set --no-restart cadvisor <span class="token assign-left variable">DOKKU_DOCKERFILE_START_CMD</span><span class="token operator">=</span><span class="token string">"--docker_only --housekeeping_interval=10s --max_housekeeping_interval=60s"</span>
+dokku network:set cadvisor attach-post-deploy prometheus-bridge</code></pre>
 <p>Storage mounts:</p>
-<pre class="language-sh"><code class="language-sh">dokku storage:mount cadvisor /:/rootfs:ro<br>dokku storage:mount cadvisor /sys:/sys:ro<br>dokku storage:mount cadvisor /var/lib/docker:/var/lib/docker:ro<br>dokku storage:mount cadvisor /var/run:/var/run:rw</code></pre>
+<pre class="language-sh"><code class="language-sh">dokku storage:mount cadvisor /:/rootfs:ro
+dokku storage:mount cadvisor /sys:/sys:ro
+dokku storage:mount cadvisor /var/lib/docker:/var/lib/docker:ro
+dokku storage:mount cadvisor /var/run:/var/run:rw</code></pre>
 <p>Deploy cadvisor:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> image pull gcr.io/cadvisor/cadvisor:latest<br><span class="token function">docker</span> image tag gcr.io/cadvisor/cadvisor:latest dokku/cadvisor:latest<br><br>dokku git:from-image cadvisor dokku/cadvisor:latest</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> image pull gcr.io/cadvisor/cadvisor:latest
+<span class="token function">docker</span> image tag gcr.io/cadvisor/cadvisor:latest dokku/cadvisor:latest
+
+dokku git:from-image cadvisor dokku/cadvisor:latest</code></pre>
 <h2 id="setup-grafana" tabindex="-1">Setup Grafana</h2>
 <p>Create app:</p>
-<pre class="language-sh"><code class="language-sh">dokku apps:create grafana<br>dokku proxy:ports-add grafana http:80:3000<br>dokku network:set grafana attach-post-deploy prometheus-bridge</code></pre>
+<pre class="language-sh"><code class="language-sh">dokku apps:create grafana
+dokku proxy:ports-add grafana http:80:3000
+dokku network:set grafana attach-post-deploy prometheus-bridge</code></pre>
 <p>Storage mounts:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/<span class="token punctuation">{</span>config,data,plugins<span class="token punctuation">}</span><br><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/config/provisioning/datasources<br><span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token prism-number">472</span>:472 /var/lib/dokku/data/storage/grafana<br><br>dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/config/provisioning/datasources:/etc/grafana/provisioning/datasources<br>dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/data:/var/lib/grafana<br>dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/plugins:/var/lib/grafana/plugins</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/<span class="token punctuation">{</span>config,data,plugins<span class="token punctuation">}</span>
+<span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/config/provisioning/datasources
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token prism-number">472</span>:472 /var/lib/dokku/data/storage/grafana
+
+dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/config/provisioning/datasources:/etc/grafana/provisioning/datasources
+dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/data:/var/lib/grafana
+dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/plugins:/var/lib/grafana/plugins</code></pre>
 <p>Add <code>prometheus</code> data source to <code>/var/lib/dokku/data/storage/grafana/config/provisioning/datasources/prometheus.yml</code>:</p>
-<pre class="language-sh"><code class="language-sh">datasources:<br>  - name: Prometheus<br>    type: prometheus<br>    access: proxy<br>    orgId: <span class="token prism-number">1</span><br>    url: http://prometheus.web:9090<br>    basicAuth: <span class="token boolean">false</span><br>    isDefault: <span class="token boolean">true</span><br>    version: <span class="token prism-number">1</span><br>    editable: <span class="token boolean">true</span></code></pre>
+<pre class="language-sh"><code class="language-sh">datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    orgId: <span class="token prism-number">1</span>
+    url: http://prometheus.web:9090
+    basicAuth: <span class="token boolean">false</span>
+    isDefault: <span class="token boolean">true</span>
+    version: <span class="token prism-number">1</span>
+    editable: <span class="token boolean">true</span></code></pre>
 <p>Deploy Grafana:</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull grafana/grafana:latest<br><span class="token function">docker</span> tag grafana/grafana:latest dokku/grafana:latest<br>dokku git:from-image grafana dokku/grafana:latest<br>dokku letsencrypt:enable grafana</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull grafana/grafana:latest
+<span class="token function">docker</span> tag grafana/grafana:latest dokku/grafana:latest
+dokku git:from-image grafana dokku/grafana:latest
+dokku letsencrypt:enable grafana</code></pre>
 <h2 id="login-to-grafana" tabindex="-1">Login to Grafana</h2>
 <p>Go to https://grafana.impromat.app. Login via <code>admin</code>/<code>admin</code> and set a new password.</p>
 <h2 id="adding-more-data-sources" tabindex="-1">Adding more data sources</h2>
@@ -131,7 +220,22 @@
 <p>Get database info from dokku via:</p>
 <pre class="language-sh"><code class="language-sh">dokku postgres:info <span class="token operator">&lt;</span>db-service-name<span class="token operator">></span></code></pre>
 <p>Add <code>/var/lib/dokku/data/storage/grafana/config/provisioning/datasources/postgresql.yml</code>:</p>
-<pre class="language-yml"><code class="language-yml"><span class="token key atrule">datasources</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Postgres<br>    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres<br>    <span class="token key atrule">access</span><span class="token punctuation">:</span> proxy<br>    <span class="token key atrule">url</span><span class="token punctuation">:</span> &lt;Internal Ip<span class="token punctuation">></span><span class="token punctuation">:</span><span class="token prism-number">5432</span><br>    <span class="token key atrule">user</span><span class="token punctuation">:</span> postgres<br>    <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span><br>    <span class="token key atrule">secureJsonData</span><span class="token punctuation">:</span><br>      <span class="token key atrule">password</span><span class="token punctuation">:</span> &lt;DB_PASSWORD<span class="token punctuation">></span><br>    <span class="token key atrule">jsonData</span><span class="token punctuation">:</span><br>      <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span><br>      <span class="token key atrule">sslmode</span><span class="token punctuation">:</span> <span class="token string">"disable"</span> <span class="token comment"># disable/require/verify-ca/verify-full</span><br>      <span class="token key atrule">maxOpenConns</span><span class="token punctuation">:</span> <span class="token prism-number">0</span> <span class="token comment"># Grafana v5.4+</span><br>      <span class="token key atrule">maxIdleConns</span><span class="token punctuation">:</span> <span class="token prism-number">2</span> <span class="token comment"># Grafana v5.4+</span><br>      <span class="token key atrule">connMaxLifetime</span><span class="token punctuation">:</span> <span class="token prism-number">14400</span> <span class="token comment"># Grafana v5.4+</span><br>      <span class="token key atrule">postgresVersion</span><span class="token punctuation">:</span> <span class="token prism-number">1400</span> <span class="token comment"># 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10</span></code></pre>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">datasources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Postgres
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+    <span class="token key atrule">access</span><span class="token punctuation">:</span> proxy
+    <span class="token key atrule">url</span><span class="token punctuation">:</span> &lt;Internal Ip<span class="token punctuation">></span><span class="token punctuation">:</span><span class="token prism-number">5432</span>
+    <span class="token key atrule">user</span><span class="token punctuation">:</span> postgres
+    <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span>
+    <span class="token key atrule">secureJsonData</span><span class="token punctuation">:</span>
+      <span class="token key atrule">password</span><span class="token punctuation">:</span> &lt;DB_PASSWORD<span class="token punctuation">></span>
+    <span class="token key atrule">jsonData</span><span class="token punctuation">:</span>
+      <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span>
+      <span class="token key atrule">sslmode</span><span class="token punctuation">:</span> <span class="token string">"disable"</span> <span class="token comment"># disable/require/verify-ca/verify-full</span>
+      <span class="token key atrule">maxOpenConns</span><span class="token punctuation">:</span> <span class="token prism-number">0</span> <span class="token comment"># Grafana v5.4+</span>
+      <span class="token key atrule">maxIdleConns</span><span class="token punctuation">:</span> <span class="token prism-number">2</span> <span class="token comment"># Grafana v5.4+</span>
+      <span class="token key atrule">connMaxLifetime</span><span class="token punctuation">:</span> <span class="token prism-number">14400</span> <span class="token comment"># Grafana v5.4+</span>
+      <span class="token key atrule">postgresVersion</span><span class="token punctuation">:</span> <span class="token prism-number">1400</span> <span class="token comment"># 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10</span></code></pre>
 <p>See <a href="https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources">Grafana Data Sources Documentation</a></p>
 
 </div>

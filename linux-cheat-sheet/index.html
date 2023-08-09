@@ -71,7 +71,8 @@
 <h2 id="check-disk-space" tabindex="-1">Check disk space</h2>
 <pre class="language-bash"><code class="language-bash"><span class="token function">df</span> <span class="token parameter variable">-ah</span></code></pre>
 <h2 id="work-with-services" tabindex="-1">Work with services</h2>
-<pre class="language-bash"><code class="language-bash"><span class="token function">service</span> <span class="token operator">&lt;</span>service-name<span class="token operator">></span> status<br>systemctl status <span class="token operator">&lt;</span>service-name<span class="token operator">></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">service</span> <span class="token operator">&lt;</span>service-name<span class="token operator">></span> status
+systemctl status <span class="token operator">&lt;</span>service-name<span class="token operator">></span></code></pre>
 <h2 id="check-folder-size" tabindex="-1">Check folder size</h2>
 <p>Disk use</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">du</span> <span class="token parameter variable">-sh</span> <span class="token operator">&lt;</span>directory<span class="token operator">></span></code></pre>
@@ -93,7 +94,10 @@
 <p>Show permissions</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">stat</span> file.txt</code></pre>
 <p>Change permissions</p>
-<pre class="language-bash"><code class="language-bash"><span class="token comment"># denies file read for others</span><br><span class="token function">chmod</span> o-r file.txt<br><span class="token comment"># read for user, read for group, deny access to others</span><br><span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>r,g<span class="token operator">=</span>r,o<span class="token operator">=</span> file.txt</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># denies file read for others</span>
+<span class="token function">chmod</span> o-r file.txt
+<span class="token comment"># read for user, read for group, deny access to others</span>
+<span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>r,g<span class="token operator">=</span>r,o<span class="token operator">=</span> file.txt</code></pre>
 <h2 id="file-transformation" tabindex="-1">File Transformation</h2>
 <p>Use <code>jq</code> to transform JSON files.</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">cat</span> logs.json <span class="token operator">|</span> jq <span class="token string">'.["@timestamp"] + "   " + .message'</span> <span class="token operator">></span> logs.txt</code></pre>
