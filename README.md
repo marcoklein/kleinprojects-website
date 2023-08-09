@@ -1,4 +1,4 @@
-![Node.js CI](https://github.com/marcoklein/kleinprojects-website/workflows/Node.js%20CI/badge.svg)
+[![Test and Deploy](https://github.com/marcoklein/kleinprojects-website/actions/workflows/test-and-deploy.yml/badge.svg?branch=master)](https://github.com/marcoklein/kleinprojects-website/actions/workflows/test-and-deploy.yml)
 
 # Kleinprojects Website - Personal Blog and Projects
 
