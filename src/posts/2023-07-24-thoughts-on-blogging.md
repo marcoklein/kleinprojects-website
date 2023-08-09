@@ -16,14 +16,16 @@ The following are just some thoughts that I am collecting about blogging:
   - Climbing
   - Music
   - Other random stuff
-  - 
+  -
 - Professionally, I could write about things that are related to my current project or my current employer:
+
   - Topics I want do a knowledge sharing session about
   - Experiences regarding my roles in software projects
-  - Coaching 
+  - Coaching
   - Mentoring
 
 - Personal articles may be:
+
   - Incomplete in respect to thoughts and written content
   - Covering random topics
   - Might be reflective loud thinking
@@ -36,7 +38,25 @@ The following are just some thoughts that I am collecting about blogging:
 ## Draft to Release
 
 I might start writing something without finishing it. Shall I still publish?
+
 - I should, because it might be motivating to publish stuff.
 - I should, because it is hard to know when an article is truly finished for it's "release".
 - I should not, because I would publish scattered information.
 - I should not, because it might also indicated that the article is not of a high priority.
+
+## Find a group or community to share thoughts with
+
+- Could be at work or dedicated meetups.
+
+- Good, because you can go into discussions and get feedback.
+- Good, because you can validate ideas.
+- Bad, because it is more time effort than just posting it (Really? A post might also take a long time.)
+
+- In general, I see it as crucial step towards effective knowledge sharing.
+
+## Find conferences to speak at
+
+- Good, because you get a wide reach.
+- Good, because talking and presenting is fun.
+- Bad, because it might be hard to find a conference that is a good fit.
+- Bad, because it needs the most effort.
