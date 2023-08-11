@@ -99,6 +99,7 @@ module.exports = function (eleventyConfig) {
   // general config
   eleventyConfig.setFrontMatterParsingOptions({
     excerpt: true,
+    exerpt_separator: '<!-- excerpt -->',
   });
   eleventyConfig.addWatchTarget('src/**/*.md');
 

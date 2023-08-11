@@ -2,7 +2,7 @@
 title: Practical Vim Command Cheat Sheet
 date: 2021-01-10
 tags:
-  - Vim
+  - vim
 ---
 
 ### Surround with brackets

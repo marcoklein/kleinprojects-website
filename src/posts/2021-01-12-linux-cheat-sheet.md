@@ -2,7 +2,7 @@
 title: Linux Cheat Sheet
 date: 2021-01-12
 tags:
-  - Linux
+  - linux
 ---
 
 ## Check Kernel Version

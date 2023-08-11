@@ -5,16 +5,14 @@ title: Blog
 ---
 
 {%- for post in collections.posts -%}
-<div class="box">
   <h2 class="mb-3">
-    <div>
-      <a href="/{{ post.data.title | slugify }}/"> {{ post.data.title }}</a>
-      &middot;
-      {{post.data.date | formatDate}}
-    </div>
-    <p>
+    <a href="/{{ post.data.title | slugify }}/" class='has-text-weight-bold'>
+      {{ post.data.title }}</a>
+    <br/>
+    <span class='is-italic'>{{ post.data.tags.join(', ') }}</span>
+    &middot; {{ post.data.date | formatDate }}
+    <p class='has-text-weight-light'>
       {% excerpt post %}
     </p>
   </h2>
-</div>
 {%- endfor -%}

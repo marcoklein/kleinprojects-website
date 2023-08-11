@@ -1,6 +1,6 @@
 ---
 title: Go Cheat Sheet
-tags: ['Go']
+tags: ['go']
 date: 2020-11-19
 ---
 

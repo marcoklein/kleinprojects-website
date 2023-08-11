@@ -19,7 +19,11 @@ subtitle: coding projects and blog
     <div class="post-list">
       {%- for post in collections.posts -%}
         <h2 class="mb-3">
-          <a href="{{ post.data.title | slugify }}"> {{ post.data.title }}</a>
+          <a href="{{ post.data.title | slugify }}" class='has-text-weight-bold'>
+            {{ post.data.title }}</a>
+          <br/>
+          <span class='is-italic'>{{ post.data.tags.join(', ') }}</span>
+          &middot; {{ post.data.date | formatDate }}
         </h2>
       {%- endfor -%}
     </div>

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.0
+
+- Add tags to blog post overview
+
 ## 2.3.0
 
 - Optimize Playwright test setup

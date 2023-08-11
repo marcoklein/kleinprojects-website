@@ -1,6 +1,7 @@
 ---
 title: Vim for Firefox
 date: 2020-12-07
+tags: [vim]
 ---
 
 [Tridactyl](https://github.com/tridactyl/tridactyl) is a Firefox extension to enable vim key bindings for a more efficient browsing experience.

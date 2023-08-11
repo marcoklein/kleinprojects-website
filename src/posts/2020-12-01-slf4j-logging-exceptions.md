@@ -2,7 +2,7 @@
 title: Logging Exceptions with SLF4J
 date: 2020-12-01
 tags:
-    - Java
+  - java
 ---
 
 Exception logging in SLF4J works without including it in the format:
