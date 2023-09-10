@@ -10457,3 +10457,27 @@ code[class*=language-css] {
 .float-right {
   float: right;
 }
+
+.responsive-image {
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .responsive-image {
+    width: 100%;
+  }
+}
+/* Styles for medium screens */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .responsive-image {
+    width: 50%;
+    max-width: 800px;
+  }
+}
+/* Styles for large screens */
+@media only screen and (min-width: 1025px) {
+  .responsive-image {
+    width: 50%;
+    max-width: 800px;
+  }
+}

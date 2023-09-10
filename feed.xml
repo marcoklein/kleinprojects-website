@@ -4,12 +4,53 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2023-08-13T00:00:00Z</updated>
+  <updated>2023-09-10T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Improving the Navigation of Impromat.app with a Bottom Navigation Bar</title>
+    <link href="https://kleinprojects.com/improving-the-navigation-of-impromat-app-with-a-bottom-navigation-bar/"/>
+    <updated>2023-09-10T00:00:00Z</updated>
+    <id>https://kleinprojects.com/improving-the-navigation-of-impromat-app-with-a-bottom-navigation-bar/</id>
+    <content type="html">&lt;!-- Motivation &amp; Background --&gt;
+&lt;p&gt;To collect information about user behavior, I observed individuals using &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat.app&lt;/a&gt;. Quickly, I noticed, that one issue was the navigation. For instance, users were not clicking on the drawer icon located in the top-right corner in order to view all functions of the app (such as the ability to search for improv exercises and games, build a personal workshop, or manage individual exercises and games). Even worse, some mobile devices have a native feature that navigates back when swiping from left to right. This made it extremely difficult to navigate the app, as users were unable to open the drawer.&lt;/p&gt;
+&lt;!-- Problem Summary --&gt;
+&lt;p&gt;So, I sought a solution to improve the discoverability of &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat.app&lt;/a&gt; and enable swiping from left to right to open a drawer on devices lacking the option. Below is a screenshot of the elements page which allows improvisers to search existing elements and exercises.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://kleinprojects.com/images/2023-09-10-impromat-drawer-layout.png&quot; class=&quot;responsive-image&quot; /&gt;
+  &lt;figcaption&gt;The screen displays Elements for searching exercises and games.  The app&#39;s other features are concealed in the drawer (refer to below), which may lead users to believe that only &quot;exploration,&quot; &quot;liking,&quot; or &quot;my library&quot; are possible actions.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;However, clicking on the drawer icon on the top right reveals the full functionality of the app.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://kleinprojects.com/images/2023-09-10-impromat_drawer_open_layout.png&quot; class=&quot;responsive-image&quot; /&gt;
+  &lt;figcaption&gt;Open drawer that shows all available sub-pages. Please note that the search function is only one of its components.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;!-- Possible Solutions --&gt;
+&lt;h2 id=&quot;the-navigation-bar-solution&quot; tabindex=&quot;-1&quot;&gt;The Navigation Bar Solution&lt;/h2&gt;
+&lt;p&gt;Initially, I had considered dropping web app support and exclusively backing the locally installed application to avoid browser incompatibilities. However, this solution would not resolve the app&#39;s discoverability.&lt;/p&gt;
+&lt;p&gt;Therefore, I researched other frameworks and applications and discovered the top-level navigation of tabs, which are utilized by apps such as Spotify and Google Play store.&lt;/p&gt;
+&lt;p&gt;The Material 3 design offers &lt;a href=&quot;https://m3.material.io/foundations/layout/applying-layout/compact#f328a230-8f35-4b54-adca-be4acc42fa25&quot;&gt;helpful documentation on its website&lt;/a&gt;. According to their suggestions, a bottom tabs navigation (referred to as a &amp;quot;navigation bar&amp;quot;) is suitable for compact screens, while a side bar navigation is better for larger screens.&lt;/p&gt;
+&lt;p&gt;Given the mobile-centric approach of &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat&lt;/a&gt;, the bottom navigation bar with tabs is an appropriate starting point. Here is a preliminary version of the bottom navigation bar:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;!-- &lt;img src=&quot;../images/2023-09-10-impromat_three_tabs_layout.png&quot; style=&quot;min-width: 600px; width: 50%; max-width: 840px;&quot;&gt; --&gt;
+  &lt;img src=&quot;https://kleinprojects.com/images/2023-09-10-impromat_three_tabs_layout.png&quot; class=&quot;responsive-image&quot; /&gt;
+  &lt;figcaption&gt;Impromat with a navigation bar to reveal more functions and simplify user interaction.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Sections are divided into the three main areas:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Home&lt;/strong&gt;: About information, news, profile, settings, legal notice, data privacy, etc.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exercises &amp;amp; Games&lt;/strong&gt;: Search improvisational theater elements that you can add to workshops and manage your own entries.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Workshops&lt;/strong&gt;: Plan and share your improv workshops.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;wrap-up&quot; tabindex=&quot;-1&quot;&gt;Wrap-up&lt;/h2&gt;
+&lt;p&gt;The implementation of the new navigation approach is currently under development, but I already like it a lot for its easy app discoverability, conciseness, and ease of use (just one click instead of a swipe gesture). However, I am still determining the optimal high-level differentiation, which will depend on users&#39; goals when they open &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the future, I will integrate a more adaptive design following the guidelines of Material Design &lt;a href=&quot;https://m3.material.io/foundations/layout/applying-layout&quot;&gt;source&lt;/a&gt;. Currently, I must assess whether implementing these changes will enhance the user experience before proceeding.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Navigating an Uncertain Project Landscape: Finding Your Path When Direction is Unknown</title>
