@@ -4,12 +4,58 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2023-09-10T00:00:00Z</updated>
+  <updated>2023-10-14T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Project Steering through Stakeholder Mapping</title>
+    <link href="https://kleinprojects.com/project-steering-through-stakeholder-mapping/"/>
+    <updated>2023-10-14T00:00:00Z</updated>
+    <id>https://kleinprojects.com/project-steering-through-stakeholder-mapping/</id>
+    <content type="html">&lt;figure&gt;
+  &lt;img src=&quot;https://kleinprojects.com/images/2023-10-14-company.png&quot; class=&quot;responsive-image&quot; /&gt;
+  &lt;!-- &quot;one big maze in a company building with desks and people and projects, colourful, between and confusion and clearness, photo realistic, 4k&quot; --&gt;
+  &lt;figcaption&gt;AI Art: Company structures might seem complex and messy at first.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h1 id=&quot;project-steering-through-stakeholder-mapping&quot; tabindex=&quot;-1&quot;&gt;Project Steering through Stakeholder Mapping&lt;/h1&gt;
+&lt;p&gt;Steering new projects can be challenging, especially in large companies where navigating relationships with multiple stakeholders and projects is crucial. How can you guarantee that your project goals align with those of the company? And how can you ensure that the actions you take lead in the right direction?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This article discusses an approach to stakeholder management that provides a better understanding of how to turn unknown environments into known dependencies by &lt;strong&gt;focusing on people&lt;/strong&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;collecting-related-people&quot; tabindex=&quot;-1&quot;&gt;Collecting related people&lt;/h2&gt;
+&lt;p&gt;People constitute the backbone of a company. The first step, therefore, is to gather the people involved in your project activities.&lt;/p&gt;
+&lt;p&gt;Along with their names, you should collect their roles and project involvement. Understanding who you work with is crucial to understanding the company&#39;s workings. The interim result is a prioritized list of stakeholders that forms the basis for further assessments.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sample for a raw collection:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Bob Siegler&lt;/em&gt;: Project Lead of Project X&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Anton May&lt;/em&gt;: Software Engineer in Project X&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Mary Cherry&lt;/em&gt;: Project Lead of Project Y&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Jutta Bern&lt;/em&gt;: CEO&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;...&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Prioritize relevant people, even if it&#39;s a large group. In a recent project, I extracted over 70 individuals from meeting minutes associated with a particular project.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;putting-people-in-perspective&quot; tabindex=&quot;-1&quot;&gt;Putting People in Perspective&lt;/h2&gt;
+&lt;p&gt;Step two involves understanding the relationships between people and your project. With the sample list from above a visualisation looks like this&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://kleinprojects.com/images/2023-10-14%20Stakeholder%20Management%202023-10-14%2012.24.27.excalidraw.svg&quot; class=&quot;responsive-image&quot; /&gt;
+  &lt;figcaption&gt;Basic stakeholder map&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Each box denotes a project scope or responsibility. Jutta Bern is sponsoring the project, while &lt;em&gt;Our Project&lt;/em&gt; relies on the functionality of &lt;em&gt;Project X&lt;/em&gt;. Additionally, &lt;em&gt;Project Y&lt;/em&gt; is interested in utilizing our project&#39;s features.&lt;/p&gt;
+&lt;h2 id=&quot;deriving-understanding&quot; tabindex=&quot;-1&quot;&gt;Deriving Understanding&lt;/h2&gt;
+&lt;p&gt;Despite the visualization being a basic sketch, it&#39;s still possible to comprehend certain situations and the significance of people involved.&lt;/p&gt;
+&lt;p&gt;For instance, what measures should we take to ensure Jutta&#39;s continued sponsorship? Has she already committed to the project or is more persuasion necessary?&lt;/p&gt;
+&lt;p&gt;Anton May might not seem like an important person in terms of project scope or governance, but you might have some questions about functionality that your project depends on, and Anton might be the fastest person to answer (instead of going through Bob).&lt;/p&gt;
+&lt;p&gt;Mary Cherry may frequently contact you if you neglect to keep them informed about your next project delivery. To further define project scope and direction, you can even discuss requirements with them.&lt;/p&gt;
+&lt;p&gt;Utilize the map to establish a shared understanding within your project team: who needs to be contacted? Who has a relationship with whom? Perhaps one of your developers has a strong connection with Anton, while the project manager is familiar with Bob through other project engagements.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This article presents a method for stakeholder management that involves gathering relevant individuals and visualizing their dependencies. The resulting map can aid internal project team alignment and facilitate comprehension of project decisions and their impact on the immediate environment.&lt;/p&gt;
+&lt;p&gt;This is just one perspective on stakeholder management, but there are various approaches discussed in the &lt;a href=&quot;https://miro.com/blog/stakeholder-mapping/&quot;&gt;Miro blog&lt;/a&gt; or related topics on &lt;a href=&quot;https://staffeng.com/guides/&quot;&gt;staffeng.com&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Improving the Navigation of Impromat.app with a Bottom Navigation Bar</title>
