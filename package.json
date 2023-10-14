@@ -1,6 +1,6 @@
 {
   "name": "kleinprojects-website",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Landing page of Kleinprojects with blog and projects",
   "dependencies": {
     "striptags": "^3.2.0"
@@ -20,14 +20,14 @@
   },
   "scripts": {
     "start": "eleventy --serve",
-    "dev": "yarn start",
+    "dev": "npm start",
     "build": "eleventy",
     "test": "playwright test",
-    "test:headed": "yarn test --headed",
+    "test:headed": "npm test --headed",
     "playwright:codegen": "playwright codegen",
     "playwright:install": "playwright install --with-deps",
-    "deploy": "yarn build && gh-pages -d _site",
-    "deps:upgrade": "yarn upgrade-interactive --latest"
+    "deploy": "npm build && gh-pages -d _site",
+    "deps:upgrade": "npm upgrade-interactive --latest"
   },
   "keywords": [
     "Eleventy",
@@ -36,5 +36,6 @@
     "kleinprojects"
   ],
   "author": "Marco Klein",
-  "license": "CC-BY-3.0"
+  "license": "CC-BY-3.0",
+  "packageManager": "npm"
 }

@@ -15,15 +15,15 @@
 /* Styles for medium screens */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .responsive-image {
-    width: 50%;
-    max-width: 800px;
+    width: 70%;
+    // max-width: 800px;
   }
 }
 
 /* Styles for large screens */
 @media only screen and (min-width: 1025px) {
   .responsive-image {
-    width: 50%;
+    width: 70%;
     max-width: 800px;
   }
 }

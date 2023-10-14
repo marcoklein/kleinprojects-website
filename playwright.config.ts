@@ -2,8 +2,8 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
   webServer: {
-    command: "yarn start",
-    url: "http://localhost:8080/",
+    command: 'npm start',
+    url: 'http://localhost:8080/',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
   },
@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
     headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
-    baseURL: "http://localhost:8080/",
+    baseURL: 'http://localhost:8080/',
   },
 };
 export default config;

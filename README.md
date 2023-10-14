@@ -7,13 +7,13 @@ Built with Eleventy and Bulma
 ## Install dependencies
 
 ```sh
-yarn install
+npm install
 ```
 
 ## Run locally
 
 ```sh
-yarn start
+npm start
 ```
 
 ## Upgrade dependencies
@@ -21,7 +21,7 @@ yarn start
 Upgrade to latest dependencies with (check breaking changes).
 
 ```sh
-yarn upgrade-interactive --latest
+npm upgrade-interactive --latest
 ```
 
 ## Tests
@@ -31,13 +31,13 @@ Playwright executes end-to-end tests.
 To run tests start the application and run
 
 ```sh
-yarn test:headed
+npm run test:headed
 ```
 
 To create a new test use the code generation with
 
 ```sh
-yarn playwright:codegen
+npm run playwright:codegen
 ```
 
 ## Changes to the Prism theme

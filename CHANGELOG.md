@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.5.0
+
+- Switch to `npm` as the standard package manager provides all necessary features.
+- Allow figures to be opened fullscreen (see `2023-10-14-stakeholder-mapping.md`)
+
 ## 2.4.0
 
 - Add tags to blog post overview
