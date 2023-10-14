@@ -10,15 +10,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Use Node.js 18
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: yarn install --frozen-lockfile
-      - run: yarn playwright:install
-      - run: yarn test
+          cache: npm
+      - run: npm install --frozen-lockfile
+      - run: npm run playwright:install
+      - run: npm test
       - name: Publish test results
         uses: actions/upload-artifact@v2
         if: always()
@@ -29,6 +28,6 @@ jobs:
       - name: Publish to GitHub Pages if on master branch
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/marcoklein/kleinprojects-website.git
-          yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
+          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

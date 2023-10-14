@@ -5,12 +5,12 @@ tags: [consulting]
 ---
 
 <figure>
-  <img src="../images/2023-10-14-company.png" class="responsive-image">
+  <a href="../images/2023-10-14-company.png">
+    <img src="../images/2023-10-14-company.png" class="responsive-image">
+  </a>
   <!-- "one big maze in a company building with desks and people and projects, colourful, between and confusion and clearness, photo realistic, 4k" -->
   <figcaption>AI Art: Company structures might seem complex and messy at first.</figcaption>
 </figure>
-
-# Project Steering through Stakeholder Mapping
 
 Steering new projects can be challenging, especially in large companies where navigating relationships with multiple stakeholders and projects is crucial. How can you guarantee that your project goals align with those of the company? And how can you ensure that the actions you take lead in the right direction?
 
@@ -37,7 +37,9 @@ Along with their names, you should collect their roles and project involvement. 
 Step two involves understanding the relationships between people and your project. With the sample list from above a visualisation looks like this
 
 <figure>
-  <img src="../images/2023-10-14 Stakeholder Management 2023-10-14 12.24.27.excalidraw.svg" class="responsive-image">
+  <a href="../images/2023-10-14 Stakeholder Management 2023-10-14 12.24.27.excalidraw.svg">
+    <img src="../images/2023-10-14 Stakeholder Management 2023-10-14 12.24.27.excalidraw.svg" class="responsive-image">
+  </a>
   <figcaption>Basic stakeholder map</figcaption>
 </figure>
 
