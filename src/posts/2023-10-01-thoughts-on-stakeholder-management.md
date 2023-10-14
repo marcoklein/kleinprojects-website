@@ -5,26 +5,87 @@ tags: [consulting]
 unlisted: true
 ---
 
-<figure>
-  <img src="../images/2023-10-01-company.png" class="responsive-image">
-  <!-- "one big maze in a company building with desks and people and projects, colourful, between and confusion and clearness, photo realistic, 4k" -->
-</figure>
+> This is an unpublished article. It got superseded by another article iteration.
 
-Companies are complex structures with the larger ones having systems in place to steer and align through hierarchies, budget plans, and visionary directions in a multitude of business domains. Those structures create one big net of known and unknown dependencies, complexities, including company politics, or information silos.
+<!-- A corporate company has tasked you with supporting the founding of a new project. It feels messy at first as you are not yet grasping the full picture of dependencies and ongoing politics. This article discusses approaches to bring structure and understanding into a company. -->
 
-_Now imagine you are tasked to establish a new project within a company jungle, without yet grasping the full picture of dependencies and ongoing politics._
+<!-- Catchy introduction that hooks readers. -->
 
-This article discusses an approach to structure the process of establishing a new project within an already existing and interweaved ecosystem of a large company.
+Problem statement:
+
+- A new environment or changing project structures bring unforeseen complexity.
+- This article discusses how you can steer within such an environment by knowing people and projects that are involved
 
 ## Beginning of a new project
 
-> Who should you talk to? How can you be confident with decisions?
+It is the beginning of a new project that I join. Tasked by a client of a corporate company to support with the creation of a new project in the role of a software architect. I lack the overview of important people, opinions and knowledge. There is no overview except for inaccurate org charts on the intranet.
 
-It is the beginning of a new project. I am unsure who to talk to. I lack the overview of important people. I have no idea who has what opinion and what knowledge. There is no structured approach of communication, but it is rather a "we talk to the people we talk to". We have no confidence in our communication strategy.
+_Where should I start?_
 
-Where should I start?
+Initially, there is no technical system to design what I am rather used to do. But it's about the creation of a concept that we can present stakeholders and business owners to get further funding for our project.
 
-How could we identify the right people that we should talk to? How can I align with the team on how we approach the right people? How can I be confidently concluding that our approach is leading into the best possible direction?
+I am used to software systems that follow certain well established patterns. Where something works or doesn't work because it is built on logical components.
+
+<!-- How could we identify the right people that we should talk to? How can I align with the team on how we approach the right people? How can I be confidently concluding that our approach is leading into the best possible direction? -->
+
+## A company is a system
+
+So, I take the approach of treating the company as a system. What would I do to design a new architecture?
+
+1. _Collect what is there_: Create an overview of all available resources and options. In the case of understanding a company and project dynamics it is **people** and **other projects**.
+2. _Prioritize_: Which component is the most important one? Or in other words: which projects have the highest potentials? Who has the most influence or the greatest benefit?
+3. _Go and build_: Align with the team who to approach and when.
+
+## Collecting what is there
+
+First, I collect all that is there:
+
+- From my notes I collect all related **people** that I have met so far.
+- I yot down all related **projects** (teams, products, companies).
+- I gather relevant notes to understand **connections** between them.
+
+For **people** I collect all the names with titles that usually give an indication of importance. Sometimes, I try to be thorough - even the collection of team members is useful to understand team structures.
+
+With **projects** I understand _groups of people_. For instance, this could be a team of people, a product, or even a company. More abstract speaking it is the _buckets_ that I place people in to create some sort of systematic boundary.
+
+Understanding **connections** is often the toughest exercise. Sometimes there is a clear distinction of who is supporting which team, however, there might also be individuals supporting multiple projects. Understanding how higher management is involved is also sometimes tough to grasp.
+
+A small collection in text might look like this:
+
+- Project Pen
+  - Kim (Product Lead)
+  - Carl (Software Architect)
+- Project Flower
+  - Bob (Product Lead)
+- [Our Project]
+  - Timmy
+  - Myself
+
+## Network map
+
+The next step maps out all people, projects, and connections:
+
+<figure>
+  <img style="max-width:600px; width:100%;" src="/images/2023-08-13-Navigating-Unknown-Project-Overview.svg"/>
+</figure>
+
+It is a visual representation of the previous collection that allows a much easier understanding of project dynamics.
+
+<figure>
+  <img style="max-width:600px; width:100%;" src="/images/2023-10-01-stakeholder-map.png"/>
+</figure>
+
+## Potentials
+
+- Alignment within team
+- Add information that are relevant for ure case
+
+## Limitations
+
+- It is a snapshot - you have to keep it up-to-date
+- It is only one dimension
+
+---
 
 ## Collecting people
 
