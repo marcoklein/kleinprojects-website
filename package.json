@@ -27,7 +27,7 @@
     "test:headed": "npm test --headed",
     "playwright:codegen": "playwright codegen",
     "playwright:install": "playwright install --with-deps",
-    "deploy": "npm build && gh-pages -d _site",
+    "deploy": "npm run build && gh-pages -d _site",
     "deps:upgrade": "ncu"
   },
   "keywords": [
