@@ -24,17 +24,17 @@ Along with their names, you should collect their roles and project involvement. 
 
 **Sample for a raw collection:**
 
-- _Bob Siegler_: Project Lead of Project X
-- _Anton May_: Software Engineer in Project X
-- _Mary Cherry_: Project Lead of Project Y
 - _Jutta Bern_: CEO
+- _Bob Siegler_: Project Lead of Project X
+- _Mary Cherry_: Project Lead of Project Y
+- _Anton May_: Software Engineer in Project X
 - _..._
 
-> Prioritize relevant people, even if it's a large group. In a recent project, I extracted over 70 individuals from meeting minutes associated with a particular project.
+> Prioritize relevant people for the collection phase, especially if it's a large group. In a recent project, I extracted over 70 individuals from meeting minutes associated with a particular project.
 
 ## Putting People in Perspective
 
-Step two involves understanding the relationships between people and your project. With the sample list from above a visualisation looks like this
+Step two involves understanding the relationships between people and your project. With the sample list from above a visualization looks like this:
 
 <figure>
   <a href="../images/2023-10-14 Stakeholder Management 2023-10-14 12.24.27.excalidraw.svg">
