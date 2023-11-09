@@ -12,29 +12,46 @@ tags: [consulting]
   <figcaption>AI Art: Company structures might seem complex and messy at first.</figcaption>
 </figure>
 
-Steering new projects can be challenging, especially in large companies where navigating relationships with multiple stakeholders and projects is crucial. How can you guarantee that your project goals align with those of the company? And how can you ensure that the actions you take lead in the right direction?
+Steering new projects as a project lead can be challenging, especially in large companies where navigating relationships with multiple stakeholders and projects is crucial. How can you guarantee that your project goals align with those of the company? And how can you ensure that the actions you take lead in the right direction?
 
 _This article discusses an approach to stakeholder management that provides a better understanding of how to turn unknown environments into known dependencies by **focusing on people**._
 
-## Collecting related people
+## Gather related people
 
-People constitute the backbone of a company. The first step, therefore, is to gather the people involved in your project activities.
+At the core of an organisation are individuals. The first step to stakeholder mapping, therefore, is to gather the people involved in your project activities. You could get them from meeting minutes, the company organizational chart, or by asking other project members. It's important to collect their names, roles and project involvement. Everything that provides context to that persons background. For important people you may also want to collect pictures so that you recognize them when you bump into them in the office. You could get those pictures from the company profile picture or from business networks like LinkedIn. Even though we are going to prioritize those people try to stick with important individuals and skip unrelated ones.
 
-Along with their names, you should collect their roles and project involvement. Understanding who you work with is crucial to understanding the company's workings. The interim result is a prioritized list of stakeholders that forms the basis for further assessments.
+**Sample for a raw collection (made-up names):**
 
-**Sample for a raw collection:**
-
-- _Jutta Bern_: CEO
-- _Bob Siegler_: Project Lead of Project X
-- _Mary Cherry_: Project Lead of Project Y
-- _Anton May_: Software Engineer in Project X
+- _Mary_: CEO
+- _Robert_: Project Lead of Project X
+- _Susan_: Project Lead of Project Y
+- _Thomas_: Software Engineer in Project X
 - _..._
 
-> Prioritize relevant people for the collection phase, especially if it's a large group. In a recent project, I extracted over 70 individuals from meeting minutes associated with a particular project.
+Take this sample collection as an example: there are 2 different projects and the CEO is also noted as the project has a direct relation to Mary. You can choose a representation that you are the most comfortable with. In a following step all those people are visualized so you could also directly collect them in a diagramming tool.
+
+> In the beginning of projects I usually rely on the people that have been involved in the project already. As I take extensive meeting minutes I can then usually extract relevant individuals directly from my notes.
+
+## Prioritizing and Clustering
+
+This section describes how the collection is stripped down to most crucial and relevant individuals. There exist various dimensions on which the prioritization could be based on. Try to reduce the collection while retaining the most comprehensive overview. It comes down to your project stage and what you identify as the most influential individuals.
+
+- If you have many different projects ensure to have at least **one main responsible person per project** that you are in contact with.
+  _Example_: your list contains five people for project X and the project is not that relevant you write down only the main contact person.
+- To represent decision hierarchy prioritize by the role and the respective **influence of that person**.
+  _Example_: people within a steering committee take budget decisions which has a direct influence on project extensions.
+- A **personal or superior relationship** with particluar individuals might also be someting that you want to consider.
+  _Example:_ you have worked with _Thomas_ (from collected persons) in a previous project so you could exchange with him on a deeper level to get valuable insights into Project Y.
+
+This is just an inspiration of dimensions and incomplete. Eventually, it is important for you to understand what your project currently needs: are you planning the next project extension? Then it is important to collect all decision makers for the budget. Are you planning on implementing an upcoming feature? Then it is crucial to prioritize people and projects that influence or depend on that feature.
+
+> In a recent project, I extracted over 70 individuals from meeting minutes associated with a particular project. After prioritization, I reduced the list to 10. I used a combination of dimensions to ensure that the most important people and projects were captured.
 
 ## Putting People in Perspective
 
-Step two involves understanding the relationships between people and your project. With the sample list from above a visualization looks like this:
+This sections describes how the priorized collection is mapped into a dependency map of stakeholders. Take you favorite visualization tool. If you are creating the map collaboratively ensure to have a tool that synchronizes changes. Also think about maintenance: are you creating the map for depicting a one-time visualization or do you want to continuously update changes potentially even within the team?
+
+With people names and roles wrapped in ellipses and project scopes denoted by rectangles a basic visualization of aboves collection looks like the following picture. Arrows with a short text describe the relation of your project to other projects. The description is based on your understanding of the relation and might be directly related to a project or a person. If you are unsure about the relation you can also omit them in an initial step and just place a directional arrow.
 
 <figure>
   <a href="../images/2023-10-14 Stakeholder Management 2023-10-14 12.24.27.excalidraw.svg">
@@ -43,22 +60,24 @@ Step two involves understanding the relationships between people and your projec
   <figcaption>Basic stakeholder map</figcaption>
 </figure>
 
-Each box denotes a project scope or responsibility. Jutta Bern is sponsoring the project, while _Our Project_ relies on the functionality of _Project X_. Additionally, _Project Y_ is interested in utilizing our project's features.
+Mary as the CEO is sponsoring the project, while _Our Project_ relies on the functionality of _Project X_ and, _Project Y_ is interested in utilizing our project's features. Note that you might want to add profile pictures to recognize people if you bump into them.
+
+> I usually have different maps for different occasions with different people. One time I had to visualize dependencies across companies and thus introduced a company boundary. Over time I have also established a fixed set of figures inspired by the [C4 modelling](https://c4model.com/) technique.
 
 ## Deriving Understanding
 
-Despite the visualization being a basic sketch, it's still possible to comprehend certain situations and the significance of people involved.
+Your relational stakeholder map can help you understand the decisions and importance of the people involved. For example, what action should you take to secure Mary's continued sponsorship? This would require a deeper understanding of her goals and interests in your project, which you could derive from the stakeholder map.
 
-For instance, what measures should we take to ensure Jutta's continued sponsorship? Has she already committed to the project or is more persuasion necessary?
+If you were only looking at titles, Thomas might not seem important in terms of project scope or governance, but you might have some questions about functionality that your project depends on, and Thomas might be the quickest person to answer (rather than going through Robert). Susan may contact you frequently if you fail to keep her informed of your next project delivery. To further define the scope and direction of the project, you could discuss the requirements with them.
 
-Anton May might not seem like an important person in terms of project scope or governance, but you might have some questions about functionality that your project depends on, and Anton might be the fastest person to answer (instead of going through Bob).
+Once you have mapped all the important dependencies, you should share the map with your team, or anyone else who you think will find the map useful in understanding the bigger picture. The map allows you to create a shared understanding of your current project dependencies. It allows you to create alignment by clarifying relationships with people (who knows whom?).
 
-Mary Cherry may frequently contact you if you neglect to keep them informed about your next project delivery. To further define project scope and direction, you can even discuss requirements with them.
+The stakeholder map you create is a living document. It is a snapshot of one dimension rather than a holistic understanding of the project. Use it as a tool to understand dependencies and create alignment. You will need to refine and update it as your project environment changes.
 
-Utilize the map to establish a shared understanding within your project team: who needs to be contacted? Who has a relationship with whom? Perhaps one of your developers has a strong connection with Anton, while the project manager is familiar with Bob through other project engagements.
+> I usually just create shared stakeholder maps that everyone in the team can access and edit. Especially at the beginning of new projects or when there is a big change in scope, the mapping has helped a lot to get a common understanding of the project.
 
 ## Conclusion
 
-This article presents a method for stakeholder management that involves gathering relevant individuals and visualizing their dependencies. The resulting map can aid internal project team alignment and facilitate comprehension of project decisions and their impact on the immediate environment.
+This article presents a stakeholder management method that involves gathering relevant individuals and visualising their interdependencies. The resulting map can aid internal project team alignment and facilitate understanding of project decisions and their impact on the immediate environment.
 
-This is just one perspective on stakeholder management, but there are various approaches discussed in the [Miro blog](https://miro.com/blog/stakeholder-mapping/) or related topics on [staffeng.com](https://staffeng.com/guides/).
+It represents only one dimension of the overall project setup and requires effort to keep it up to date. In addition, there are many other perspectives on stakeholder management, such as approaches discussed in the [Miro blog](https://miro.com/blog/stakeholder-mapping/) or related topics on [staffeng.com](https://staffeng.com/guides/).
