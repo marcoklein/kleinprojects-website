@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.0
+
+- Add GoatCounter for privacy friendly analytics
+
 ## 2.5.0
 
 - Switch to `npm` as the standard package manager provides all necessary features.
