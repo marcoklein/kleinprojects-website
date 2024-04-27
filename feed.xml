@@ -4,12 +4,52 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2023-10-14T00:00:00Z</updated>
+  <updated>2024-04-27T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Impromat Strategy</title>
+    <link href="https://kleinprojects.com/impromat-strategy/"/>
+    <updated>2024-04-27T00:00:00Z</updated>
+    <id>https://kleinprojects.com/impromat-strategy/</id>
+    <content type="html">&lt;p&gt;As I am currently reading An Elegant Puzzle by Will Larson, I am reflecting on the approach on writing strategies. I want to try out the approach of writing strategies with my personal application &lt;a href=&quot;https://impromat.app/&quot;&gt;impromat.app&lt;/a&gt;, a tool for planning improvisational theatre workshops.&lt;/p&gt;
+&lt;p&gt;To test it out, I am going to tackle the challenge of me being the only developer in Impromat (because it&#39;s my hobby project) and me not finding the right cut to release a version 1.0 that I can then potentially market in Reddit or other improv communities.&lt;/p&gt;
+&lt;h2 id=&quot;diagnosis&quot; tabindex=&quot;-1&quot;&gt;Diagnosis&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A diagnosis that defines or explains the nature of the challenge. A good diagnosis simplifies the often overwhelming complexity of reality by identifying certain aspects of the situation as critical.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I am the only developer in Impromat with a technical background, lots of ideas but limited time. I love implementing things and work on technical tasks but it is challenging for me to find the cut of when to end development and when to start marketing or generating a user basis.&lt;/p&gt;
+&lt;p&gt;The challenge is rather, that I often loose focus on the features that I planned or that I did not even plan those features but just dive into the first technical challenge that comes up. This leads to feature development that might sometimes be unnecessary for the success of Impromat as a product.&lt;/p&gt;
+&lt;p&gt;I am sometimes working on CI/CD because it is fun to optimize the deployment process. I work on framework optimizations and minor features that are fun to work with but not necessarily needed for the first version.&lt;/p&gt;
+&lt;h2 id=&quot;guiding-policy&quot; tabindex=&quot;-1&quot;&gt;Guiding Policy&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A guiding policy for dealing with the challenge. This is an overall approach chosen to cope with or overcome the obstacles identified in the diagnosis.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Stick to the features that are needed for the first version.&lt;/li&gt;
+&lt;li&gt;Show what you got to others, even if it is not perfect.&lt;/li&gt;
+&lt;li&gt;If it works, it is good enough for the first version. Do not optimize that.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;coherent-actions&quot; tabindex=&quot;-1&quot;&gt;Coherent Actions&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Coherent actions designed to carry out the guiding policy. These are steps that are coordinated with one another to work together in accomplishing the guiding policy.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Define target group for version 1.0. Who are the users that I want to target with the first version?&lt;/li&gt;
+&lt;li&gt;Define features for version 1.0 to target the defined group.&lt;/li&gt;
+&lt;li&gt;Implement exactly those features. Not more.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;references&quot; tabindex=&quot;-1&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=4uWKEG0s9Kc&quot;&gt;Podcast with Good Strategy, Bad Strategy by Richard Rumelt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://lethain.com/good-strategy-bad-strategy/&quot;&gt;Will Larson notes on Good Strategy, Bad Strategy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Project Steering through Stakeholder Mapping</title>
