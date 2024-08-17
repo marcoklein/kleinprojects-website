@@ -4,12 +4,52 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2024-05-01T00:00:00Z</updated>
+  <updated>2024-08-17T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Documenting Decisions</title>
+    <link href="https://kleinprojects.com/documenting-decisions/"/>
+    <updated>2024-08-17T00:00:00Z</updated>
+    <id>https://kleinprojects.com/documenting-decisions/</id>
+    <content type="html">&lt;p&gt;This sheet describes some of my experiences with documentation. In particular decisions that would impact technologies and teams. There exist several approaches, one of the is the documentation via Markdown in the ADR or MADR format.&lt;/p&gt;
+&lt;p&gt;ADR is an architectural decision record, while MADR builds on that an tries to widen the scope to all decisions that are made in a project. Eventually, it doesn&#39;t matter what kind of format you would use as long as you decide on writing down agreements and context for your problems.&lt;/p&gt;
+&lt;h2 id=&quot;most-important-sections-of-a-decision&quot; tabindex=&quot;-1&quot;&gt;Most Important Sections of a Decision&lt;/h2&gt;
+&lt;p&gt;The most important sections of a decision record are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Context and Problem Statement&lt;/li&gt;
+&lt;li&gt;Considered Options&lt;/li&gt;
+&lt;li&gt;Decision Outcome&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;context-and-problem-statement&quot; tabindex=&quot;-1&quot;&gt;Context and Problem Statement&lt;/h3&gt;
+&lt;p&gt;When writing the decision record, the most important section is the description of &lt;em&gt;Context and Problem Statement&lt;/em&gt;. This should describe the situation that led to the decision. Be clear and concise about the background and problem at hand.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;When constructing the `o_employee` table, we realized that there are false entries. For example, it showed roles for certain engagements that were not added by the intended user. This sheet documents how the issue was debugged and the proposed solutions.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;considered-options&quot; tabindex=&quot;-1&quot;&gt;Considered Options&lt;/h3&gt;
+&lt;p&gt;The considered options gives a background on all options that you evaluated or thought about. You do not have to go into detail about each option, but this is the chance of providing a brief overview.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Improve the internal merging of engagements for the employee table.
+- Allow users to flag false and confirm correct merges.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;decision-outcome&quot; tabindex=&quot;-1&quot;&gt;Decision Outcome&lt;/h3&gt;
+&lt;p&gt;This section describes the decision that was made. If applicable, you can add an implication section that depicts consequences of the decision.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;We decided to improve the internal merging of engagements. This will allow us to keep the system less complex because we would have to add additional logic for dealing with user input. The limitation is, that we might still miss on edge cases due to the complexity of merging engagements.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;It can be very easy to document decisions but it is so often overlooked or de-prioritized. In my experience, writing down small decisions help a lot with improving team collaboration and communication by pulling out already taken decisions to avoid reoccurring conversations about tech choices.&lt;/p&gt;
+&lt;h2 id=&quot;references&quot; tabindex=&quot;-1&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/joelparkerhenderson/architecture-decision-record&quot;&gt;Examples for Architecture Decision Records&lt;/a&gt;: GitHub repo with examples for ADRs&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/adr/madr&quot;&gt;Markown Any Decision Record&lt;/a&gt;: approach to document all decisions (not only architecture decisions) in a consistent way&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   
   <entry>
     <title>The Hardest Part of a Personal Project is the Release</title>

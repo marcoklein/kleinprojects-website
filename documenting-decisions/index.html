@@ -1,0 +1,124 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Documenting Decisions | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero has-background-info-light">
+  <div class="hero-header">
+    <div class="columns is-centered">
+  <div class="column is-half-tablet">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="/">
+          <img src="/images/logo.png">
+            <span class="ml-1">Kleinprojects</span>
+          </a>
+        </div>
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item " href="/projects/">
+              Projects
+            </a>
+            <a class="navbar-item is-active" href="/blog/">
+              Blog
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item " href="/about/">
+              About Me
+            </a>
+            <a class="navbar-item" href="https://github.com/marcoklein" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Documenting Decisions</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">August 2024</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <p>This sheet describes some of my experiences with documentation. In particular decisions that would impact technologies and teams. There exist several approaches, one of the is the documentation via Markdown in the ADR or MADR format.</p>
+<p>ADR is an architectural decision record, while MADR builds on that an tries to widen the scope to all decisions that are made in a project. Eventually, it doesn't matter what kind of format you would use as long as you decide on writing down agreements and context for your problems.</p>
+<h2 id="most-important-sections-of-a-decision" tabindex="-1">Most Important Sections of a Decision</h2>
+<p>The most important sections of a decision record are:</p>
+<ul>
+<li>Context and Problem Statement</li>
+<li>Considered Options</li>
+<li>Decision Outcome</li>
+</ul>
+<h3 id="context-and-problem-statement" tabindex="-1">Context and Problem Statement</h3>
+<p>When writing the decision record, the most important section is the description of <em>Context and Problem Statement</em>. This should describe the situation that led to the decision. Be clear and concise about the background and problem at hand.</p>
+<p>Example:</p>
+<pre><code>When constructing the `o_employee` table, we realized that there are false entries. For example, it showed roles for certain engagements that were not added by the intended user. This sheet documents how the issue was debugged and the proposed solutions.
+</code></pre>
+<h3 id="considered-options" tabindex="-1">Considered Options</h3>
+<p>The considered options gives a background on all options that you evaluated or thought about. You do not have to go into detail about each option, but this is the chance of providing a brief overview.</p>
+<p>Example:</p>
+<pre><code>- Improve the internal merging of engagements for the employee table.
+- Allow users to flag false and confirm correct merges.
+</code></pre>
+<h3 id="decision-outcome" tabindex="-1">Decision Outcome</h3>
+<p>This section describes the decision that was made. If applicable, you can add an implication section that depicts consequences of the decision.</p>
+<p>Example:</p>
+<pre><code>We decided to improve the internal merging of engagements. This will allow us to keep the system less complex because we would have to add additional logic for dealing with user input. The limitation is, that we might still miss on edge cases due to the complexity of merging engagements.
+</code></pre>
+<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<p>It can be very easy to document decisions but it is so often overlooked or de-prioritized. In my experience, writing down small decisions help a lot with improving team collaboration and communication by pulling out already taken decisions to avoid reoccurring conversations about tech choices.</p>
+<h2 id="references" tabindex="-1">References</h2>
+<ul>
+<li><a href="https://github.com/joelparkerhenderson/architecture-decision-record">Examples for Architecture Decision Records</a>: GitHub repo with examples for ADRs</li>
+<li><a href="https://github.com/adr/madr">Markown Any Decision Record</a>: approach to document all decisions (not only architecture decisions) in a consistent way</li>
+</ul>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+    </p>
+    <p>
+      &copy; Marco Klein 2024
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
+
+---
+---
+
+
+<script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>
