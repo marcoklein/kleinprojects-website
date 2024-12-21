@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 18
+      - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: lts
+          node-version: 22
           cache: npm
       - run: npm install --frozen-lockfile
       - run: npm run playwright:install
