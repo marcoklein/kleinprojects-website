@@ -26,6 +26,12 @@
 &lt;p&gt;...&lt;/p&gt;
 &lt;p&gt;Three years pass and I am ready to introduce:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://impromat.app/&quot;&gt;impromat.app&lt;/a&gt; - &lt;em&gt;dead simple improvisational theatre planning.&lt;/em&gt;&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://impromat.app/&quot;&gt;
+    &lt;img src=&quot;https://kleinprojects.com/images/2024-12-21-Impromat.app-screenshot.png&quot; class=&quot;responsive-image&quot; style=&quot;max-width: 400px&quot; /&gt;
+  &lt;/a&gt;
+  &lt;figcaption&gt;Create Improv Sessions with &lt;a href=&quot;https://impromat.app/&quot;&gt;impromat.app&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&quot;why-an-improv-app%3F&quot; tabindex=&quot;-1&quot;&gt;Why an Improv app?&lt;/h2&gt;
 &lt;p&gt;In most improv groups, one person facilitates an improv session. That person is responsible for providing structure, exercises, games and in rare cases, fun.&lt;/p&gt;
 &lt;p&gt;There is books on improv. There exist encyclopedias like improwiki, improvencyclopedia, improvressourcecenter. Improv groups posses knowledge and unique styles. Most of that are individual games and exercises that exist to have fun. They are labelled sometimes. For example, the improwiki website assigns tags to their elements. That eases the search for warmup, exercises, or games.&lt;/p&gt;
@@ -47,12 +53,6 @@
 &lt;h4 id=&quot;how-can-i-use-it%3F&quot; tabindex=&quot;-1&quot;&gt;How can I use it?&lt;/h4&gt;
 &lt;p&gt;You can access Impromat on any device with a browser. It supports mobile and desktop layouts so you can dive into improv when procrastinating other important work on your PC, sitting in the bus or walking unprepared into the room where you should lead the next improv session.&lt;/p&gt;
 &lt;p&gt;Over 1000 fun and boring improv elements are waiting to be opened on &lt;a href=&quot;https://impromat.app/elements&quot;&gt;Impromat Elements&lt;/a&gt;. Browse them, search them, give them a pet. If you like them, they like you. If you don&#39;t like them, you have the power to make them better, or pick another one.&lt;/p&gt;
-&lt;figure&gt;
-  &lt;a href=&quot;https://kleinprojects.com/images/2024-12-21-Impromat.app-screenshot&quot;&gt;
-    &lt;img src=&quot;https://kleinprojects.com/images/2024-12-21-Impromat.app-screenshot&quot; class=&quot;responsive-image&quot; /&gt;
-  &lt;/a&gt;
-  &lt;figcaption&gt;Create Improv Sessions with &lt;a href=&quot;https://impromat.app/&quot;&gt;Impromat.app&lt;/a&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
 &lt;p&gt;For planning your workshops you can start with &lt;a href=&quot;https://impromat.app/workshops/create&quot;&gt;Creating a Workshop&lt;/a&gt;. Here you can use our improv workshop generation engine or start with a plain collection to fill in your ideas.&lt;/p&gt;
 &lt;p&gt;Use your private space to start with your creation. Contribute to the improv community by publishing your workshop so improvisers can use your inspiration.&lt;/p&gt;
 &lt;h2 id=&quot;future&quot; tabindex=&quot;-1&quot;&gt;Future&lt;/h2&gt;
