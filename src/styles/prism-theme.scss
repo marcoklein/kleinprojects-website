@@ -49,8 +49,8 @@ pre[class*='language-'] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  border: 1px solid #dddddd;
-  background-color: white;
+  border: 1px solid var(--bulma-border);
+  background-color: var(--bulma-scheme-main);
 }
 
 /* Inline code */
@@ -59,7 +59,7 @@ pre[class*='language-'] {
   padding-top: 1px;
   padding-bottom: 1px;
   background: #f8f8f8;
-  border: 1px solid #dddddd;
+  border: 1px solid var(--bulma-border);
 }
 
 .token.comment,

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.7.0
+
+- Upgrade eleventy to version 3
+- Restructure navigation bar to contain basic nav items only
+- Move About me and GitHub to the bottom
+
 ## 2.6.0
 
 - Add GoatCounter for privacy friendly analytics

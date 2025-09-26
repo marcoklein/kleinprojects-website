@@ -12,7 +12,7 @@ title: Blog
     <span class='is-italic'>{{ post.data.tags.join(', ') }}</span>
     &middot; {{ post.data.date | formatDate }}
     <p class='has-text-weight-light'>
-      {% excerpt post %}
+      {{ post.content | excerpt }}
     </p>
   </h2>
 {%- endfor -%}
