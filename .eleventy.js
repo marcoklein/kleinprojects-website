@@ -7,7 +7,7 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 const striptags = require('striptags');
-const upgradeHelper = require('@11ty/eleventy-upgrade-help');
+// const upgradeHelper = require('@11ty/eleventy-upgrade-help');
 
 // install prism plugins
 require('prismjs/plugins/custom-class/prism-custom-class');
@@ -27,9 +27,19 @@ module.exports = function (eleventyConfig) {
   const isServing = process.argv.includes('--serve');
   if (isServing) {
     // watch only files if we are serving
-    fs.watch('src/styles', (event, filepath) => {
+    const watcher = fs.watch('src/styles', (event, filepath) => {
       console.log('Styles file changed', filepath);
       compileSass();
+    });
+
+    process.on('SIGINT', () => {
+      console.log('Stopping file watcher...');
+      watcher.close();
+    });
+
+    process.on('SIGTERM', () => {
+      console.log('Stopping file watcher...');
+      watcher.close();
     });
   }
   compileSass();
@@ -103,8 +113,15 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.addWatchTarget('src/**/*.md');
 
-  // excerpts
-  eleventyConfig.addShortcode('excerpt', article => extractExcerpt(article));
+  // excerpts - use filter instead of shortcode to avoid templateContent timing issues
+  eleventyConfig.addFilter('excerpt', function (content) {
+    if (!content) return '';
+    const excerpt = striptags(content)
+      .substring(0, 200) // Cap at 200 characters
+      .replace(/^\s+|\s+$|\s+(?=\s)/g, '')
+      .trim();
+    return excerpt ? excerpt + '...' : '';
+  });
 
   // configuration object
   return {
@@ -114,31 +131,6 @@ module.exports = function (eleventyConfig) {
     jsDataFileSuffix: '.data',
   };
 };
-
-/**
- * Extract excerpt from first paragraph of document.
- *
- * @param article
- * @returns
- */
-function extractExcerpt(article) {
-  if (!article.hasOwnProperty('templateContent')) {
-    console.warn(
-      'Failed to extract excerpt: Document has no property "templateContent".'
-    );
-    return null;
-  }
-
-  let excerpt = null;
-  const content = article.templateContent;
-
-  excerpt = striptags(content)
-    .substring(0, 200) // Cap at 200 characters
-    .replace(/^\\s+|\\s+$|\\s+(?=\\s)/g, '')
-    .trim()
-    .concat('...');
-  return excerpt;
-}
 
 async function compileSass() {
   console.log('Compiling sass.');
