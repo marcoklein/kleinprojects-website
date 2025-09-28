@@ -4,12 +4,51 @@
   <subtitle>Personal Projects and Blog by Marco Klein</subtitle>
   <link href="https://kleinprojects.com/feed.xml" rel="self"/>
   <link href="https://kleinprojects.com/"/>
-  <updated>2024-12-21T00:00:00Z</updated>
+  <updated>2025-09-28T00:00:00Z</updated>
   <id>https://kleinprojects.com/</id>
   <author>
     <name>Marco Klein</name>
     <email>marco.klein94@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Experimenting with LLMs for Dynamic Game Content Generation</title>
+    <link href="https://kleinprojects.com/experimenting-with-llms-for-dynamic-game-content-generation/"/>
+    <updated>2025-09-28T00:00:00Z</updated>
+    <id>https://kleinprojects.com/experimenting-with-llms-for-dynamic-game-content-generation/</id>
+    <content type="html">&lt;figure&gt;
+  &lt;img src=&quot;https://kleinprojects.com/images/2025-09-28-llm-game.png&quot; class=&quot;responsive-image&quot; style=&quot;max-width: 400px&quot; /&gt;
+  &lt;figcaption&gt;AI generated blobs in the game&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;I recently built a proof of concept to experiment with large language models inside games, using a locally running LLM to generate dynamic content in real-time. The goal was to create a unique gaming experience where the game evolves based on player actions, with each level featuring procedurally generated content that responds to gameplay.&lt;/p&gt;
+&lt;p&gt;You can find the complete implementation in the &lt;a href=&quot;https://github.com/marcoklein/llm-game&quot;&gt;llm-game repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;the-core-challenge%3A-constraining-creativity&quot; tabindex=&quot;-1&quot;&gt;The Core Challenge: Constraining Creativity&lt;/h2&gt;
+&lt;p&gt;The fundamental challenge with integrating LLMs into games is finding the right balance between creative freedom and system stability. You need to constrain the AI within a specific frame so that a small, locally running LLM can generate content without breaking the game mechanics.&lt;/p&gt;
+&lt;p&gt;However, this constraint comes with a significant downside: reduced creativity. In my implementation, I limited all entities to circles to simplify collision detection and positioning logic. While this made the system robust, it also made the generated content somewhat monotonous - everything was just circles with different colors and sizes.&lt;/p&gt;
+&lt;p&gt;If I would loosen it up too much, I run in the risk of the LLM hallucinating or producing wrong code which would mitigate the player experience.&lt;/p&gt;
+&lt;h2 id=&quot;how-the-system-works&quot; tabindex=&quot;-1&quot;&gt;How the System Works&lt;/h2&gt;
+&lt;p&gt;The core game is limited to a Player, that is controlled with arrow keys, a target that the player has to reach and LLM-generated NPCs. When the player reaches the target the game generates a new NPC and thus gradually generating more and more game content.&lt;/p&gt;
+&lt;p&gt;For each level, the system generates one or more NPCs with properties. The interface is limited, to reduce errors with the usage of the small LLM. The &lt;code&gt;behaviorCode&lt;/code&gt; is the only generated property that the game engine executes.&lt;/p&gt;
+&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;NPCData&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  position&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; x&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; y&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  color&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  size&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  behaviorCode&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Behavior code wrapped into a TypeScript template and directly executed:&lt;/p&gt;
+&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;npc&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; deltaTime&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;code&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// LLM generated code is added here&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;AI behavior error:&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; e&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This function is executed every update, giving the LLM access to the npc, context, and deltaTime variables.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Entity constraints (like only drawing circles), while necessary for system stability, severely limited visual variety and variety in behaviors. Everything generated was fundamentally the same shape, just with different colors and sizes. Those generations could have been done by a simpler generation algorithm. Next time, I would thus explore more fields where LLMs would really excel (like text and story generation).&lt;/p&gt;
+&lt;p&gt;For me, the experiment reinforced that successful AI integration requires careful architectural decisions and robust fallback systems. The idea shows promise, but finding the right balance between creative freedom and constraints is challenging.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Announcing ... Impromat ... Improvisational Theatre Session Planning</title>

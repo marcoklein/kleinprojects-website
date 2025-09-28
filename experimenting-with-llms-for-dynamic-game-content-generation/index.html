@@ -1,0 +1,111 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Experimenting with LLMs for Dynamic Game Content Generation | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero is-primary">
+  <div class="hero-header">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="/images/logo.png"></a>
+      <a class="navbar-item " href="/">
+        Kleinprojects
+      </a>
+    </div>
+    <a class="navbar-item " href="/projects/">
+      Projects
+    </a>
+    <a class="navbar-item is-active" href="/blog/">
+      Blog
+    </a>
+  </div>
+</nav>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Experimenting with LLMs for Dynamic Game Content Generation</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">September 2025</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <figure>
+  <img src="../images/2025-09-28-llm-game.png" class="responsive-image" style="max-width: 400px">
+  <figcaption>AI generated blobs in the game</figcaption>
+</figure>
+<p>I recently built a proof of concept to experiment with large language models inside games, using a locally running LLM to generate dynamic content in real-time. The goal was to create a unique gaming experience where the game evolves based on player actions, with each level featuring procedurally generated content that responds to gameplay.</p>
+<p>You can find the complete implementation in the <a href="https://github.com/marcoklein/llm-game">llm-game repository</a>.</p>
+<h2 id="the-core-challenge%3A-constraining-creativity" tabindex="-1">The Core Challenge: Constraining Creativity</h2>
+<p>The fundamental challenge with integrating LLMs into games is finding the right balance between creative freedom and system stability. You need to constrain the AI within a specific frame so that a small, locally running LLM can generate content without breaking the game mechanics.</p>
+<p>However, this constraint comes with a significant downside: reduced creativity. In my implementation, I limited all entities to circles to simplify collision detection and positioning logic. While this made the system robust, it also made the generated content somewhat monotonous - everything was just circles with different colors and sizes.</p>
+<p>If I would loosen it up too much, I run in the risk of the LLM hallucinating or producing wrong code which would mitigate the player experience.</p>
+<h2 id="how-the-system-works" tabindex="-1">How the System Works</h2>
+<p>The core game is limited to a Player, that is controlled with arrow keys, a target that the player has to reach and LLM-generated NPCs. When the player reaches the target the game generates a new NPC and thus gradually generating more and more game content.</p>
+<p>For each level, the system generates one or more NPCs with properties. The interface is limited, to reduce errors with the usage of the small LLM. The <code>behaviorCode</code> is the only generated property that the game engine executes.</p>
+<pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">NPCData</span> <span class="token punctuation">{</span>
+  position<span class="token operator">:</span> <span class="token punctuation">{</span> x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> y<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  color<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  size<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  behaviorCode<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Behavior code wrapped into a TypeScript template and directly executed:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>npc<span class="token punctuation">,</span> context<span class="token punctuation">,</span> deltaTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        $<span class="token punctuation">{</span>code<span class="token punctuation">}</span> <span class="token comment">// LLM generated code is added here</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'AI behavior error:'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>This function is executed every update, giving the LLM access to the npc, context, and deltaTime variables.</p>
+<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<p>Entity constraints (like only drawing circles), while necessary for system stability, severely limited visual variety and variety in behaviors. Everything generated was fundamentally the same shape, just with different colors and sizes. Those generations could have been done by a simpler generation algorithm. Next time, I would thus explore more fields where LLMs would really excel (like text and story generation).</p>
+<p>For me, the experiment reinforced that successful AI integration requires careful architectural decisions and robust fallback systems. The idea shows promise, but finding the right balance between creative freedom and constraints is challenging.</p>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+      &middot;
+      <a href="/about/">
+        About Me
+      </a>
+      &middot;
+      <a href="https://github.com/marcoklein" target="_blank">
+        GitHub
+      </a>
+    </p>
+    <p>
+      &copy; Marco Klein 2025
+    </p>
+  </div>
+</footer></body></html>
+
+
+<script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>
