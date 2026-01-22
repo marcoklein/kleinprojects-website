@@ -1,0 +1,238 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Testing HTMX 2 with Happy Dom | Kleinprojects</title>
+    
+  </head>
+  <body>
+
+
+  <section class="hero is-primary">
+  <div class="hero-header">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="/images/logo.png"></a>
+      <a class="navbar-item " href="/">
+        Kleinprojects
+      </a>
+    </div>
+    <a class="navbar-item " href="/projects/">
+      Projects
+    </a>
+    <a class="navbar-item is-active" href="/blog/">
+      Blog
+    </a>
+  </div>
+</nav>
+  </div>
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Testing HTMX 2 with Happy Dom</h1>
+    <h2 class="subtitle is-4"></h2>
+    
+      <div class="format-right">January 2026</div>
+    
+  </div>
+</section>
+
+
+<main class="container  content">
+  <section class="section">
+    
+
+<div class="content">
+  <p>I have a long running e2e test setup with Playwright that takes around 30 seconds to complete on my local computer and around two minutes in CI. Since I have adopted HTMX I am trying to find a better approach for testing HTMX interactivity without having to work in a real, slow browser environment.</p>
+<p>The ~400 other unit tests execute in under a second - why can't I also run interactive tests via HTMX in under a second?</p>
+<p>So I gave (Happy Dom](https://github.com/capricorn86/happy-dom) a shot as it's supposed to be faster then the other popular JSDOM alternatives. However, I hit some limitations in the process. First off, Happy Dom does not implement the <a href="https://developer.mozilla.org/de/docs/Web/API/XPathEvaluator">XPathEvaluator</a> that HTMX 2 needs:</p>
+<pre class="language-js"><code class="language-js"><span class="token literal-property property">ReferenceError</span><span class="token operator">:</span> XPathEvaluator is not defined
+      at <span class="token operator">&lt;</span>anonymous<span class="token operator">></span> <span class="token punctuation">(</span><span class="token operator">/</span><span class="token operator">...</span><span class="token operator">/</span><span class="token keyword">public</span><span class="token operator">/</span>libs<span class="token operator">/</span>htmx<span class="token operator">-</span><span class="token prism-number">2.0</span><span class="token prism-number">.7</span><span class="token punctuation">.</span>min<span class="token punctuation">.</span>js<span class="token operator">:</span><span class="token prism-number">1</span><span class="token operator">:</span><span class="token prism-number">24685</span><span class="token punctuation">)</span></code></pre>
+<p>Since I was not using XPaths at all I mocked the XPathEvaluator implementation with a stub (see code appendix).</p>
+<p>In the test itself, I just apply the html to the Happy Dom document like this:</p>
+<pre class="language-ts"><code class="language-ts">document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> html<span class="token punctuation">;</span></code></pre>
+<p>However, I faced a second issue with an <code>TypeError: window[PropertySymbol.dispatchError] is not a function.</code> error which turns out as a Happy Dom limitation due to the <code>onclick</code> listeners that are directly assigned in some places:</p>
+<pre class="language-html"><code class="language-html"><span class="token prism-tag"><span class="token prism-tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">window<span class="token punctuation">.</span><span class="token function">scrollTo</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">top</span><span class="token operator">:</span> <span class="token prism-number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">behavior</span><span class="token operator">:</span> <span class="token string">'smooth'</span><span class="token punctuation">}</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token prism-tag"><span class="token prism-tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+<p>I had to refactor those instances, in my case to <a href="https://hyperscript.org/">hyperscript</a> which looks like this:</p>
+<pre class="language-html"><code class="language-html"><span class="token prism-tag"><span class="token prism-tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">_</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>on click go to the top of the body smoothly<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token prism-tag"><span class="token prism-tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+<p>And then it works! With bun the initial test ran in around <em>500ms</em> and the existing Playwright test in around <code>2000ms</code> making the non-browser version around 4x faster on first sight.</p>
+<p>To not execute too many scripts I added an allow-list of scripts that I wanted to execute (see code appendix).</p>
+<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<p>I am happy that I am able to test HTMX interactions without having to spin up a full browser. However, I thought that the test would also run faster then <em>500ms</em>. Going forward I hope this can guide someone into a better testing setup for HTMX applications.</p>
+<p>I'll now wander off to migrate more tests into that new setup.</p>
+<h2 id="code-appendix" tabindex="-1">Code Appendix</h2>
+<p><strong>This is the code for the stub:</strong></p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name">XPathEvaluatorPolyfill</span> <span class="token punctuation">{</span>
+  <span class="token function">createExpression</span><span class="token punctuation">(</span>expression<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> XPathExpression <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">XPathExpressionPolyfill</span><span class="token punctuation">(</span>expression<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">XPathExpressionPolyfill</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> expression<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token function">evaluate</span><span class="token punctuation">(</span>
+    contextNode<span class="token operator">:</span> Node<span class="token punctuation">,</span>
+    type<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+    result<span class="token operator">:</span> XPathResult <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> XPathResult <span class="token punctuation">{</span>
+    <span class="token comment">// For now, return an empty result since HTMX primarily uses CSS selectors</span>
+    <span class="token comment">// and only uses XPath for advanced attribute queries</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">XPathResultPolyfill</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">unknown</span> <span class="token keyword">as</span> XPathResult<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">XPathResultPolyfill</span> <span class="token punctuation">{</span>
+  resultType <span class="token operator">=</span> <span class="token prism-number">5</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> index <span class="token operator">=</span> <span class="token prism-number">0</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Add required XPathResult properties (unused but needed for interface)</span>
+  booleanValue <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  invalidIteratorState <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  numberValue <span class="token operator">=</span> <span class="token prism-number">0</span><span class="token punctuation">;</span>
+  singleNodeValue <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  stringValue <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  snapshotLength <span class="token operator">=</span> <span class="token prism-number">0</span><span class="token punctuation">;</span>
+
+  <span class="token constant">ANY_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">0</span><span class="token punctuation">;</span>
+  <span class="token constant">NUMBER_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">1</span><span class="token punctuation">;</span>
+  <span class="token constant">STRING_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">2</span><span class="token punctuation">;</span>
+  <span class="token constant">BOOLEAN_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">3</span><span class="token punctuation">;</span>
+  <span class="token constant">UNORDERED_NODE_ITERATOR_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">4</span><span class="token punctuation">;</span>
+  <span class="token constant">ORDERED_NODE_ITERATOR_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">5</span><span class="token punctuation">;</span>
+  <span class="token constant">UNORDERED_NODE_SNAPSHOT_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">6</span><span class="token punctuation">;</span>
+  <span class="token constant">ORDERED_NODE_SNAPSHOT_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">7</span><span class="token punctuation">;</span>
+  <span class="token constant">ANY_UNORDERED_NODE_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">8</span><span class="token punctuation">;</span>
+  <span class="token constant">FIRST_ORDERED_NODE_TYPE</span> <span class="token operator">=</span> <span class="token prism-number">9</span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> nodes<span class="token operator">:</span> Node<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>snapshotLength <span class="token operator">=</span> nodes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">iterateNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Node <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>index <span class="token operator">&lt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>nodes<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>nodes<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>index<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">snapshotItem</span><span class="token punctuation">(</span>index<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> Node <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>nodes<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Adding to global</span>
+globalThis<span class="token punctuation">.</span>XPathEvaluator <span class="token operator">=</span> XPathEvaluatorPolyfill<span class="token punctuation">;</span></code></pre>
+<p><strong>Happy Dom setup as global registration:</strong></p>
+<pre class="language-ts"><code class="language-ts"><span class="token comment">// Whitelist of scripts that should be loaded during tests</span>
+<span class="token comment">// Scripts not in this list will be blocked to prevent errors from missing browser APIs</span>
+<span class="token keyword">const</span> <span class="token constant">SCRIPT_WHITELIST</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'htmx'</span><span class="token punctuation">,</span> <span class="token string">'hyperscript'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Helper to check if a script path matches the whitelist</span>
+<span class="token keyword">const</span> isScriptAllowed <span class="token operator">=</span> <span class="token punctuation">(</span>pathname<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token constant">SCRIPT_WHITELIST</span><span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span>allowed <span class="token operator">=></span> pathname<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>allowed<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// App is a mocked implementation of the web server (in this case Hono with Bun)</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">createApplication</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+GlobalRegistrator<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  settings<span class="token operator">:</span> <span class="token punctuation">{</span>
+    enableJavaScriptEvaluation<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    suppressInsecureJavaScriptEnvironmentWarning<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    disableCSSFileLoading<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    disableJavaScriptFileLoading<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    handleDisabledFileLoadingAsSuccess<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    fetch<span class="token operator">:</span> <span class="token punctuation">{</span>
+      virtualServers<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          url<span class="token operator">:</span> <span class="token string">'http://test.local/libs/'</span><span class="token punctuation">,</span>
+          directory<span class="token operator">:</span> <span class="token string">'./public/libs'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      interceptor<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token function-variable function">beforeAsyncRequest</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> request<span class="token punctuation">,</span> window <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token constant">URL</span></span><span class="token punctuation">(</span>request<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>url<span class="token punctuation">.</span>pathname<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">'/libs/'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isScriptAllowed</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>pathname<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token comment">// Let virtualServers handle it</span>
+              <span class="token keyword">return</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+              <span class="token comment">// Return empty response to prevent script execution errors</span>
+              <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">window</span><span class="token punctuation">.</span><span class="token function">Response</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+                status<span class="token operator">:</span> <span class="token prism-number">200</span><span class="token punctuation">,</span>
+                statusText<span class="token operator">:</span> <span class="token string">'OK'</span><span class="token punctuation">,</span>
+                headers<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token string-property property">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'application/javascript'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+
+          <span class="token comment">// Build headers object from happy-dom's headers</span>
+          <span class="token keyword">const</span> headersObj<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+          request<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+            headersObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token comment">// Forward request to Hono app using URL string</span>
+          <span class="token keyword">const</span> honoResponse <span class="token operator">=</span> <span class="token keyword">await</span> app<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>pathname<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            method<span class="token operator">:</span> request<span class="token punctuation">.</span>method<span class="token punctuation">,</span>
+            headers<span class="token operator">:</span> headersObj<span class="token punctuation">,</span>
+            body<span class="token operator">:</span> request<span class="token punctuation">.</span>body <span class="token keyword">as</span> <span class="token builtin">unknown</span> <span class="token keyword">as</span> BodyInit<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token comment">// Convert Hono Response to happy-dom Response</span>
+          <span class="token keyword">const</span> responseText <span class="token operator">=</span> <span class="token keyword">await</span> honoResponse<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">const</span> responseHeaders<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+          honoResponse<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> key<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+            responseHeaders<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">const</span> happyDomResponse <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">window</span><span class="token punctuation">.</span><span class="token function">Response</span><span class="token punctuation">(</span>responseText<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            status<span class="token operator">:</span> honoResponse<span class="token punctuation">.</span>status<span class="token punctuation">,</span>
+            statusText<span class="token operator">:</span> honoResponse<span class="token punctuation">.</span>statusText<span class="token punctuation">,</span>
+            headers<span class="token operator">:</span> responseHeaders<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">return</span> happyDomResponse<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="/legal/">Legal Notice</a>
+      &middot;
+      <a href="/feed.xml">RSS Feed</a>
+      &middot;
+      <a href="/about/">
+        About Me
+      </a>
+      &middot;
+      <a href="https://github.com/marcoklein" target="_blank">
+        GitHub
+      </a>
+    </p>
+    <p>
+      &copy; Marco Klein 2026
+    </p>
+  </div>
+</footer></body></html>
+
+
+<script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>
