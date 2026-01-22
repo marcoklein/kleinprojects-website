@@ -35,13 +35,13 @@ I had to refactor those instances, in my case to [hyperscript](https://hyperscri
 <button _="on click go to the top of the body smoothly"></button>
 ```
 
-And then it works! With bun the initial test ran in around _500ms_ and the existing Playwright test in around `2000ms` making the non-browser version around 4x faster on first sight.
+And then it works! With bun the initial test ran in around _20ms_ and the existing Playwright test in around `2000ms` making the non-browser version around 100x faster on first sight.
 
 To not execute too many scripts I added an allow-list of scripts that I wanted to execute (see code appendix).
 
 ## Conclusion
 
-I am happy that I am able to test HTMX interactions without having to spin up a full browser. However, I thought that the test would also run faster then _500ms_. Going forward I hope this can guide someone into a better testing setup for HTMX applications.
+I am happy that I am able to test HTMX interactions without having to spin up a full browser. Going forward I hope this can guide someone into a better testing setup for HTMX applications.
 
 I'll now wander off to migrate more tests into that new setup.
 
