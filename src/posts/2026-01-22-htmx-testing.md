@@ -8,7 +8,7 @@ I have a long running e2e test setup with Playwright that takes around 30 second
 
 The ~400 other unit tests execute in under a second - why can't I also run interactive tests via HTMX in under a second?
 
-So I gave (Happy Dom](https://github.com/capricorn86/happy-dom) a shot as it's supposed to be faster then the other popular JSDOM alternatives. However, I hit some limitations in the process. First off, Happy Dom does not implement the [XPathEvaluator](https://developer.mozilla.org/de/docs/Web/API/XPathEvaluator) that HTMX 2 needs:
+So I gave [Happy Dom](https://github.com/capricorn86/happy-dom) a shot as it's supposed to be faster then the other popular JSDOM alternatives. However, I hit some limitations in the process. First off, Happy Dom does not implement the [XPathEvaluator](https://developer.mozilla.org/de/docs/Web/API/XPathEvaluator) that HTMX 2 needs:
 
 ```js
 ReferenceError: XPathEvaluator is not defined
