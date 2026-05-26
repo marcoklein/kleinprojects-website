@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Scoping a Hobby Project - Personal Learnings | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Scoping a Hobby Project - Personal Learnings</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">April 2022</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Scoping a Hobby Project - Personal Learnings</h1>
+    
+      <p><time datetime="2022-04-16">April 2022</time></p>
+    
+  </header>
   <p>This post is meant to be a small self-reflection for a personal note taking application called Noteberry.</p>
 <p>Noteberry is a hobby project I have been working on during evenings or weekends for the past months (think I started 1.5 years ago in around December 2020). It should have been <em>"a toolbox for working with block-based linked markdown notes"</em> (<a aria-label-position="top" aria-label="https://github.com/marcoklein/noteberry" rel="noopener" class="external-link" href="https://github.com/marcoklein/noteberry" target="_blank">GitHub Repo</a>). It was meant to be an application to deal with my local markdown notes.</p>
 <p>However, I escalated a little too much in scope and built first of all an editor with VIM support to support easy editing. Then I continued developing a parser for markdown with wikilinks (<code>[[wikilink]]</code>) and so on... I realised, that there were already applications that would implement exactly the thing that I was trying to develop (like <a aria-label-position="top" aria-label="http://logseq.com" rel="noopener" class="external-link" href="http://logseq.com" target="_blank">LogSeq</a>, <a aria-label-position="top" aria-label="http://obsidian.md" rel="noopener" class="external-link" href="http://obsidian.md" target="_blank">Obsidian</a> or <a aria-label-position="top" aria-label="https://github.com/srid/neuron" rel="noopener" class="external-link" href="https://github.com/srid/neuron" target="_blank">Neuron</a>. And I also realised that they have either spent a very long time developing it or have a whole team behind it.</p>
@@ -77,14 +71,14 @@
 <p>With these questions I should have a good foundation for scoping future (hobby) projects.</p>
 <p>Nonetheless, development and implementing stuff should also be fun and I will not only create projects to solve specific issues. I will also keep that in mind :)</p>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -96,12 +90,15 @@
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

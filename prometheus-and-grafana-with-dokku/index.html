@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Prometheus and Grafana with Dokku | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Prometheus and Grafana with Dokku</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">July 2023</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Prometheus and Grafana with Dokku</h1>
+    
+      <p><time datetime="2023-07-30">July 2023</time></p>
+    
+  </header>
   <p>The following instructions describe how I have setup server-side monitoring for <a href="https://impromat.app">Impromat.app</a>. The server is running <a href="https://dokku.com">Dokku</a> for managing all services.</p>
 <p>The monitoring primarily relies on:</p>
 <ul>
@@ -121,7 +115,7 @@ dokku storage:mount prometheus /var/lib/dokku/data/storage/prometheus/data:/prom
     <span class="token key atrule">scheme</span><span class="token punctuation">:</span> http
     <span class="token key atrule">static_configs</span><span class="token punctuation">:</span>
       <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span>
-          <span class="token punctuation">-</span> cadvisor.web<span class="token punctuation">:</span><span class="token prism-number">8080</span></code></pre>
+          <span class="token punctuation">-</span> cadvisor.web<span class="token punctuation">:</span><span class="token number">8080</span></code></pre>
 <p>Deploy prometheus:</p>
 <pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull prom/prometheus:latest
 <span class="token function">docker</span> tag prom/prometheus:latest dokku/prometheus:latest
@@ -178,7 +172,7 @@ dokku network:set grafana attach-post-deploy prometheus-bridge</code></pre>
 <p>Storage mounts:</p>
 <pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/<span class="token punctuation">{</span>config,data,plugins<span class="token punctuation">}</span>
 <span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/dokku/data/storage/grafana/config/provisioning/datasources
-<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token prism-number">472</span>:472 /var/lib/dokku/data/storage/grafana
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token number">472</span>:472 /var/lib/dokku/data/storage/grafana
 
 dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/config/provisioning/datasources:/etc/grafana/provisioning/datasources
 dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/data:/var/lib/grafana
@@ -188,11 +182,11 @@ dokku storage:mount grafana /var/lib/dokku/data/storage/grafana/plugins:/var/lib
   - name: Prometheus
     type: prometheus
     access: proxy
-    orgId: <span class="token prism-number">1</span>
+    orgId: <span class="token number">1</span>
     url: http://prometheus.web:9090
     basicAuth: <span class="token boolean">false</span>
     isDefault: <span class="token boolean">true</span>
-    version: <span class="token prism-number">1</span>
+    version: <span class="token number">1</span>
     editable: <span class="token boolean">true</span></code></pre>
 <p>Deploy Grafana:</p>
 <pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> pull grafana/grafana:latest
@@ -210,7 +204,7 @@ dokku letsencrypt:enable grafana</code></pre>
   <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Postgres
     <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
     <span class="token key atrule">access</span><span class="token punctuation">:</span> proxy
-    <span class="token key atrule">url</span><span class="token punctuation">:</span> &lt;Internal Ip<span class="token punctuation">></span><span class="token punctuation">:</span><span class="token prism-number">5432</span>
+    <span class="token key atrule">url</span><span class="token punctuation">:</span> &lt;Internal Ip<span class="token punctuation">></span><span class="token punctuation">:</span><span class="token number">5432</span>
     <span class="token key atrule">user</span><span class="token punctuation">:</span> postgres
     <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span>
     <span class="token key atrule">secureJsonData</span><span class="token punctuation">:</span>
@@ -218,20 +212,20 @@ dokku letsencrypt:enable grafana</code></pre>
     <span class="token key atrule">jsonData</span><span class="token punctuation">:</span>
       <span class="token key atrule">database</span><span class="token punctuation">:</span> &lt;database name<span class="token punctuation">></span>
       <span class="token key atrule">sslmode</span><span class="token punctuation">:</span> <span class="token string">"disable"</span> <span class="token comment"># disable/require/verify-ca/verify-full</span>
-      <span class="token key atrule">maxOpenConns</span><span class="token punctuation">:</span> <span class="token prism-number">0</span> <span class="token comment"># Grafana v5.4+</span>
-      <span class="token key atrule">maxIdleConns</span><span class="token punctuation">:</span> <span class="token prism-number">2</span> <span class="token comment"># Grafana v5.4+</span>
-      <span class="token key atrule">connMaxLifetime</span><span class="token punctuation">:</span> <span class="token prism-number">14400</span> <span class="token comment"># Grafana v5.4+</span>
-      <span class="token key atrule">postgresVersion</span><span class="token punctuation">:</span> <span class="token prism-number">1400</span> <span class="token comment"># 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10</span></code></pre>
+      <span class="token key atrule">maxOpenConns</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token comment"># Grafana v5.4+</span>
+      <span class="token key atrule">maxIdleConns</span><span class="token punctuation">:</span> <span class="token number">2</span> <span class="token comment"># Grafana v5.4+</span>
+      <span class="token key atrule">connMaxLifetime</span><span class="token punctuation">:</span> <span class="token number">14400</span> <span class="token comment"># Grafana v5.4+</span>
+      <span class="token key atrule">postgresVersion</span><span class="token punctuation">:</span> <span class="token number">1400</span> <span class="token comment"># 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10</span></code></pre>
 <p>See <a href="https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources">Grafana Data Sources Documentation</a></p>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -243,12 +237,15 @@ dokku letsencrypt:enable grafana</code></pre>
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

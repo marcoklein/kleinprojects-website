@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Thoughts on Data Privacy for my free time project Impromat | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Thoughts on Data Privacy for my free time project Impromat</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">November 2022</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Thoughts on Data Privacy for my free time project Impromat</h1>
+    
+      <p><time datetime="2022-11-06">November 2022</time></p>
+    
+  </header>
   <blockquote>
 <p>Just some thoughts on data privacy and GDPR</p>
 </blockquote>
@@ -57,14 +51,14 @@
 <p><a href="https://impromat.app">Impromat</a> is not a commercial application and does neither track nor collect any user specific data per default (would be far to complicated for me to set up :P ). However, there is also a login functionality so that users can synchronize workshops across devices. Through a Google login users can get access to that synchronization feature and workshop data gets transferred to the Impromat backend server and shared with devices of that user. This is where data privacy really gets interesting because according to GDPR there are some regulations that the application must fulfill in this case. For example: users must be able to retrieve all there stored data and they must be able to request deletion of their data. I am very happy that Impromat is currently in such a simple state that I have a 100% knowledge about what kind of data is stored where.</p>
 <p>After all, thinking about all those data sets that this small application processes is already very valuable to me. I still think that GDPR is a step into the right direction to protect user specific data, however, it's far to complicated for hobby or free time projects that you only spend a couple of hours per week or even month on.</p>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -76,12 +70,15 @@
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Refactor on the go | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Refactor on the go</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">July 2020</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Refactor on the go</h1>
+    
+      <p><time datetime="2020-07-29">July 2020</time></p>
+    
+  </header>
   <h1 id="break-up-database-references" tabindex="-1">Break up database references</h1>
 <h2 id="problem" tabindex="-1">Problem</h2>
 <ul>
@@ -66,16 +60,16 @@
 
 <span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> customers<span class="token punctuation">(</span>
    customer_id <span class="token keyword">serial</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
-   customer_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+   customer_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
    <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>customer_id<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> contacts<span class="token punctuation">(</span>
    contact_id <span class="token keyword">serial</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
    customer_id <span class="token keyword">INT</span><span class="token punctuation">,</span>
-   contact_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
-   phone <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-   email <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token prism-number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   contact_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+   phone <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   email <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
    <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>contact_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
    <span class="token keyword">CONSTRAINT</span> fk_customer
       <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>customer_id<span class="token punctuation">)</span> 
@@ -86,11 +80,11 @@
 <pre class="language-sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> customers <span class="token punctuation">(</span>customer_name<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token string">'marco'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">'peter'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">'kim'</span><span class="token punctuation">)</span></code></pre>
 <p>Insert Contacts</p>
 <pre class="language-sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> contacts <span class="token punctuation">(</span>customer_id<span class="token punctuation">,</span> contact_name<span class="token punctuation">,</span> phone<span class="token punctuation">,</span> email<span class="token punctuation">)</span> <span class="token keyword">values</span>
-	<span class="token punctuation">(</span><span class="token prism-number">1</span><span class="token punctuation">,</span> <span class="token string">'marco'</span><span class="token punctuation">,</span> <span class="token string">'1234'</span><span class="token punctuation">,</span> <span class="token string">'marco@mail.com'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token punctuation">(</span><span class="token prism-number">2</span><span class="token punctuation">,</span> <span class="token string">'peter'</span><span class="token punctuation">,</span> <span class="token string">'56789'</span><span class="token punctuation">,</span> <span class="token string">'peter@mail.com'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token punctuation">(</span><span class="token prism-number">3</span><span class="token punctuation">,</span> <span class="token string">'kim'</span><span class="token punctuation">,</span> <span class="token string">'78956'</span><span class="token punctuation">,</span> <span class="token string">'kim@mail.com'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+	<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'marco'</span><span class="token punctuation">,</span> <span class="token string">'1234'</span><span class="token punctuation">,</span> <span class="token string">'marco@mail.com'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'peter'</span><span class="token punctuation">,</span> <span class="token string">'56789'</span><span class="token punctuation">,</span> <span class="token string">'peter@mail.com'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'kim'</span><span class="token punctuation">,</span> <span class="token string">'78956'</span><span class="token punctuation">,</span> <span class="token string">'kim@mail.com'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Create new business key column to replace foreign key</p>
-<pre class="language-sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> contacts <span class="token keyword">add</span> <span class="token keyword">column</span> customer_name_key <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token prism-number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> contacts <span class="token keyword">add</span> <span class="token keyword">column</span> customer_name_key <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Copy business keys into new column</p>
 <pre class="language-sql"><code class="language-sql"><span class="token keyword">update</span> contacts <span class="token keyword">set</span> customer_name_key<span class="token operator">=</span>customers<span class="token punctuation">.</span>customer_name
   <span class="token keyword">from</span> customers <span class="token keyword">where</span> customers<span class="token punctuation">.</span>customer_id <span class="token operator">=</span> contacts<span class="token punctuation">.</span>customer_id<span class="token punctuation">;</span></code></pre>
@@ -102,14 +96,14 @@
 <span class="token keyword">alter</span> <span class="token keyword">table</span> contacts
 	<span class="token keyword">drop</span> <span class="token keyword">column</span> customer_id<span class="token punctuation">;</span></code></pre>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -121,12 +115,15 @@
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

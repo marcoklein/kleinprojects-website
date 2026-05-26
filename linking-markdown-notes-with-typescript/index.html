@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Linking Markdown Notes with TypeScript | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Linking Markdown Notes with TypeScript</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">December 2021</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Linking Markdown Notes with TypeScript</h1>
+    
+      <p><time datetime="2021-12-19">December 2021</time></p>
+    
+  </header>
   <p>Linked note taking brings the advantage of connecting knowledge in an intuitive, connected matter as opposed to traditional, section-based note taking approaches. This approach gained traction through new networked note taking applications like <a href="https://roamresearch.com/">RoamResearch</a>, <a href="https://obsidian.md/">Obsidian</a>, and <a href="https://logseq.com/">Logseq</a>. They pursue the concept of <em>linked</em> notes - that means that instead of dividing notes into sections, they are all in a flat directory and define structure by relations to other notes.</p>
 <p>In this post we are using Markdown to stick to an easily editable text format without vendor lock-in. We could even drop these plain files into a Git folder for effortless backups and versioning. For linking markdown notes we are going to use the <a href="https://en.wikipedia.org/wiki/Help:Link">widely adopted Wikilink format</a> (e.g. <code>[[wikilink]]</code>). These connect arbitrary documents without the need of specifying the exact location.</p>
 <p>I did not find too many resources and guides on how you could implement algorithms by yourself to interlink Markdown notes with the power of <code>[[wikilinks]]</code>. That is why this post dives into an implementation to</p>
@@ -257,7 +251,7 @@ Therefore, we add a new function for extracting document titles:</p>
   <span class="token keyword">const</span> documentTitleMap<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
   files<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> path <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
     <span class="token comment">// extract document title</span>
-    <span class="token keyword">const</span> title <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">([^\/]+)\.md$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token operator">?.</span><span class="token punctuation">[</span><span class="token prism-number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> title <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">([^\/]+)\.md$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token operator">?.</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token comment">// verify a consistent mapping</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>title<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Could not extract title from path: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>documentTitleMap<span class="token punctuation">[</span>title<span class="token punctuation">]</span> <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span>
@@ -405,14 +399,14 @@ Path <span class="token keyword">for</span> <span class="token function">link</s
 <p>Cheers, Marco</p>
 <p><em>Find code for this article on <a href="https://github.com/marcoklein/linked-markdown-notes">GitHub</a></em></p>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -424,12 +418,15 @@ Path <span class="token keyword">for</span> <span class="token function">link</s
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Improving the Navigation of Impromat.app with a Bottom Navigation Bar | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Improving the Navigation of Impromat.app with a Bottom Navigation Bar</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">September 2023</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Improving the Navigation of Impromat.app with a Bottom Navigation Bar</h1>
+    
+      <p><time datetime="2023-09-10">September 2023</time></p>
+    
+  </header>
   <!-- Motivation & Background -->
 <p>To collect information about user behavior, I observed individuals using <a href="https://impromat.app">Impromat.app</a>. Quickly, I noticed, that one issue was the navigation. For instance, users were not clicking on the drawer icon located in the top-right corner in order to view all functions of the app (such as the ability to search for improv exercises and games, build a personal workshop, or manage individual exercises and games). Even worse, some mobile devices have a native feature that navigates back when swiping from left to right. This made it extremely difficult to navigate the app, as users were unable to open the drawer.</p>
 <!-- Problem Summary -->
@@ -83,14 +77,14 @@
 <p>The implementation of the new navigation approach is currently under development, but I already like it a lot for its easy app discoverability, conciseness, and ease of use (just one click instead of a swipe gesture). However, I am still determining the optimal high-level differentiation, which will depend on users' goals when they open <a href="https://impromat.app">Impromat</a>.</p>
 <p>In the future, I will integrate a more adaptive design following the guidelines of Material Design <a href="https://m3.material.io/foundations/layout/applying-layout">source</a>. Currently, I must assess whether implementing these changes will enhance the user experience before proceeding.</p>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -102,12 +96,15 @@
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

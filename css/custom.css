@@ -1,0 +1,52 @@
+.float-right {
+  float: right;
+}
+
+.responsive-image {
+  width: 100%;
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .responsive-image {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .responsive-image {
+    width: 70%;
+    max-width: 800px;
+  }
+}
+
+/* Active nav link styling */
+nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+/* Dynamic image hover for project cards */
+.project-card {
+  position: relative;
+}
+
+.project-card .is-absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.project-card:hover .is-absolute {
+  opacity: 1;
+}
+
+.project-card:hover .is-hidden-on-hover {
+  opacity: 0;
+}
+
+/* Ensure list item images don't overflow */
+article header .project-card {
+  max-height: 300px;
+  overflow: hidden;
+}

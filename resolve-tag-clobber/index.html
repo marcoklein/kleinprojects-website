@@ -4,68 +4,62 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Resolve tag clobber | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Resolve tag clobber</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">February 2021</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Resolve tag clobber</h1>
+    
+      <p><time datetime="2021-02-08">February 2021</time></p>
+    
+  </header>
   <p>If you got conflicting tags force pull the latest tags from your remote.</p>
 <pre class="language-bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">git</span> pull <span class="token parameter variable">--tags</span> origin develop
 From github.com:name/repo
  * branch            develop    -<span class="token operator">></span> FETCH_HEAD
- <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        <span class="token prism-number">0.1</span>.177    -<span class="token operator">></span> <span class="token prism-number">0.1</span>.177  <span class="token punctuation">(</span>would clobber existing tag<span class="token punctuation">)</span>
- <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        <span class="token prism-number">0.1</span>.179    -<span class="token operator">></span> <span class="token prism-number">0.1</span>.179  <span class="token punctuation">(</span>would clobber existing tag</code></pre>
+ <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        <span class="token number">0.1</span>.177    -<span class="token operator">></span> <span class="token number">0.1</span>.177  <span class="token punctuation">(</span>would clobber existing tag<span class="token punctuation">)</span>
+ <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        <span class="token number">0.1</span>.179    -<span class="token operator">></span> <span class="token number">0.1</span>.179  <span class="token punctuation">(</span>would clobber existing tag</code></pre>
 <p>Resolve with</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">git</span> fetch <span class="token parameter variable">--tags</span> <span class="token parameter variable">-f</span></code></pre>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -77,12 +71,15 @@ From github.com:name/repo
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>

@@ -4,51 +4,45 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/css/pico.min.css">
+    <link rel="stylesheet" href="/css/prism-theme.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <title>Incremental User Interface Development | Kleinprojects</title>
-    
+
   </head>
   <body>
 
 
-  <section class="hero is-primary">
-  <div class="hero-header">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item " href="/">
-        Kleinprojects
+
+  <nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>Kleinprojects</strong>
       </a>
-    </div>
-    <a class="navbar-item " href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item is-active" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" >Projects</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
 </nav>
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">Incremental User Interface Development</h1>
-    <h2 class="subtitle is-4"></h2>
-    
-      <div class="format-right">August 2022</div>
-    
-  </div>
-</section>
 
 
-<main class="container  content">
-  <section class="section">
-    
 
-<div class="content">
+<main class="container">
+  
+<article>
+  <header>
+    <h1>Incremental User Interface Development</h1>
+    
+      <p><time datetime="2022-08-21">August 2022</time></p>
+    
+  </header>
   <p>Developing a cool user interface can be really hard. It starts with the &quot;what does the user <em>actually</em> wants to do?&quot;-challenge and involves questions like &quot;where does does the user wants to access the application?&quot;. The answer is often that neither you nor your user really knows what they want.</p>
 <p>Recently, I had to deal quite often with this &quot;user interface challenge&quot; and how to develop and effective approach to develop a cool app that solves exactly the problem a user is facing. Therefore, I tried to take a step back and observe my approach to frontend development.</p>
 <p>Initially, I observed, that I would spend tons of time looking and reading through new UI frameworks that would fit my need. And then there is a difference between the (1) <em>UI</em> framework and the (2) <em>frontend framework</em>. (1) is a library for the actual styling, like Bootstrap, Evergreen, Onsen UI, ... and (2) is a library that helps with the implementation of logic and state, like Angular, Vue, or React.</p>
@@ -65,14 +59,14 @@
 <p>It means starting with the most basic components that HTML has to offer. If you need an input, use <code>&lt;input&gt;</code>. If you need a card use a <code>&lt;div&gt;</code> with some <code>border</code> property set.</p>
 <p>With this approach I am able to push the UI framework decision to the future as long as possible and can rather ship working prototypes that I can quickly evaluate with end users to build a better product and eventually choose the UI framework that fits.</p>
 
-</div>
+</article>
 
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
+<footer class="container">
+  <hr>
+  <p>
+    <small>
       <a href="/legal/">Legal Notice</a>
       &middot;
       <a href="/feed.xml">RSS Feed</a>
@@ -84,12 +78,15 @@
       <a href="https://github.com/marcoklein" target="_blank">
         GitHub
       </a>
-    </p>
-    <p>
+    </small>
+  </p>
+  <p>
+    <small>
       &copy; Marco Klein 2026
-    </p>
-  </div>
+    </small>
+  </p>
 </footer></body></html>
+
 
 
 <script data-goatcounter="https://apparentlyi.goatcounter.com/count" async="async" src="//gc.zgo.at/count.js"></script>
