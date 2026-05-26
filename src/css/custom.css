@@ -30,12 +30,16 @@ nav a[aria-current="page"] {
   position: relative;
 }
 
+.project-card .is-absolute,
+.project-card .is-hidden-on-hover {
+  transition: opacity 0.2s;
+}
+
 .project-card .is-absolute {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
-  transition: opacity 0.2s;
 }
 
 .project-card:hover .is-absolute {
