@@ -5,7 +5,7 @@
     </header>
   {% endif %}
   <h3>
-    <a href="{{ project.data.title | slugify }}"><strong>{{ project.data.title }}</strong></a>
+    <a href="{{ project.fileSlug }}/"><strong>{{ project.data.title }}</strong></a>
   </h3>
   <p><small>
     <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
@@ -22,10 +22,15 @@
       <a href="{{ project.data.sourceUrl }}" target="_blank">{{ project.data.sourceUrlText or 'GitHub' }}</a>
     {% endif %}
     {% if project.data.projectUrl %}
+      {% if project.data.sourceUrl %} &middot; {% endif %}
       <a href="{{ project.data.projectUrl }}">{{ project.data.projectUrlText }}</a>
     {% endif %}
-    {% for url in project.data.urls | reverse %}
-      <a href="{{ url.url }}" target="_blank">{{ url.text }}</a>
-    {% endfor %}
+    {% if project.data.urls.length %}
+      {% if project.data.sourceUrl or project.data.projectUrl %} &middot; {% endif %}
+      {% for url in project.data.urls | reverse %}
+        {% if not loop.first %} &middot; {% endif %}
+        <a href="{{ url.url }}" target="_blank">{{ url.text }}</a>
+      {% endfor %}
+    {% endif %}
   </footer>
 </article>

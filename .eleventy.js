@@ -44,8 +44,6 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(syntaxhighlight);
 
-  eleventyConfig.addFilter('coverImage', filterCoverImage);
-
   /**
    * Generates a dynamic cover image
    */
@@ -130,8 +128,4 @@ function shortcodeDynamicImageOnHover(
   }
 }
 
-function filterCoverImage(page) {
-  // take filePathStem or pageOptions directly if it is a string (and a path)
-  var pageOptions = typeof pageOptions === 'string' ? page : page.filePathStem;
-  return path.join(path.dirname(pageOptions), page.data.coverImageName);
-}
+
