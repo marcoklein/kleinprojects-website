@@ -5,14 +5,9 @@ title: Blog
 ---
 
 {%- for post in collections.posts -%}
-  <h2 class="mb-3">
-    <a href="/{{ post.data.title | slugify }}/" class='has-text-weight-bold'>
-      {{ post.data.title }}</a>
-    <br/>
-    <span class='is-italic'>{{ post.data.tags.join(', ') }}</span>
-    &middot; {{ post.data.date | formatDate }}
-    <p class='has-text-weight-light'>
-      {{ post.content | excerpt }}
-    </p>
-  </h2>
+  <article>
+    <h3><a href="/{{ post.data.title | slugify }}/"><strong>{{ post.data.title }}</strong></a></h3>
+    <p><small>{{ post.data.tags.join(', ') }} &middot; {{ post.data.date | formatDate }}</small></p>
+    <p>{{ post.content | excerpt }}</p>
+  </article>
 {%- endfor -%}

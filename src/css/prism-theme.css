@@ -49,8 +49,8 @@ pre[class*='language-'] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  border: 1px solid var(--bulma-border);
-  background-color: var(--bulma-code-background);
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
 }
 
 /* Inline code */
@@ -58,8 +58,8 @@ pre[class*='language-'] {
   padding: 0.2em;
   padding-top: 1px;
   padding-bottom: 1px;
-  background: var(--bulma-code-background);
-  border: 1px solid var(--bulma-border);
+  background: #f5f5f5;
+  border: 1px solid #ddd;
 }
 
 .token.comment,
@@ -85,7 +85,7 @@ pre[class*='language-'] {
 
 .token.url,
 .token.symbol,
-.token.prism-number,
+.token.number,
 .token.boolean,
 .token.variable,
 .token.constant,
@@ -98,7 +98,7 @@ pre[class*='language-'] {
 .token.attr-value,
 .language-autohotkey .token.selector,
 .language-json .token.boolean,
-.language-json .token.prism-number,
+.language-json .token.number,
 code[class*='language-css'] {
   color: #0000ff;
 }
@@ -108,7 +108,7 @@ code[class*='language-css'] {
 }
 
 .token.deleted,
-.language-autohotkey .token.prism-tag {
+.language-autohotkey .token.tag {
   color: #9a050f;
 }
 
@@ -131,7 +131,7 @@ code[class*='language-css'] {
   color: #2b91af;
 }
 
-.token.prism-tag,
+.token.tag,
 .token.selector {
   color: #800000;
 }
@@ -143,7 +143,7 @@ code[class*='language-css'] {
   color: #ff0000;
 }
 
-.token.directive.prism-tag .prism-tag {
+.token.directive.tag .tag {
   background: #ffff00;
   color: #393a34;
 }
@@ -228,7 +228,7 @@ code[class*='language-css'] {
 
   .token.url,
   .token.symbol,
-  .token.prism-number,
+  .token.number,
   .token.boolean,
   .token.variable,
   .token.constant,
@@ -241,7 +241,7 @@ code[class*='language-css'] {
   .token.attr-value,
   .language-autohotkey .token.selector,
   .language-json .token.boolean,
-  .language-json .token.prism-number,
+  .language-json .token.number,
   code[class*='language-css'] {
     color: #569cd6;
   }
@@ -251,7 +251,7 @@ code[class*='language-css'] {
   }
 
   .token.deleted,
-  .language-autohotkey .token.prism-tag {
+  .language-autohotkey .token.tag {
     color: #f48771;
   }
 
@@ -265,7 +265,7 @@ code[class*='language-css'] {
     color: #4ec9b0;
   }
 
-  .token.prism-tag,
+  .token.tag,
   .token.selector {
     color: #569cd6;
   }
@@ -277,7 +277,7 @@ code[class*='language-css'] {
     color: #9cdcfe;
   }
 
-  .token.directive.prism-tag .prism-tag {
+  .token.directive.tag .tag {
     background: #646695;
     color: #d4d4d4;
   }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.0
+
+- Replace Bulma CSS framework with Pico CSS for semantic, classless styling
+- Remove Sass build pipeline in favor of static CSS passthrough
+- Switch project display from card grid to list layout with cover images
+- Remove Font Awesome dependency; use plain text for icons
+- Simplify homepage to blog-focused layout with nav-based navigation
+
 ## 2.7.0
 
 - Upgrade eleventy to version 3

@@ -5,30 +5,9 @@ title: Kleinprojects
 subtitle: coding projects and blog
 ---
 
-<div class="columns is-centered">
-  <div class="column is-relative">
-    <h4 class="title is-4">Latest Project</h4>
-    {% set project = collections.projects | first %}
-    {% include 'projects/card.njk' %}
-    <a class="button is-primary mt-4" href="/projects/">
-      Explore Projects
-    </a>
-  </div>
-  <div class="column is-relative">
-    <h4 class="title is-4">Latest Posts</h4>
-    <div class="post-list">
-      {%- for post in collections.posts -%}
-        <h2 class="mb-3">
-          <a href="{{ post.data.title | slugify }}" class='has-text-weight-bold'>
-            {{ post.data.title }}</a>
-          <br/>
-          <span class='is-italic'>{{ post.data.tags.join(', ') }}</span>
-          &middot; {{ post.data.date | formatDate }}
-        </h2>
-      {%- endfor -%}
-    </div>
-    <a class="button is-primary mt-4" href="/blog/">
-      Explore Posts
-    </a>
-  </div>
-</div>
+{%- for post in collections.posts -%}
+  <article>
+    <h3><a href="{{ post.data.title | slugify }}"><strong>{{ post.data.title }}</strong></a></h3>
+    <p><small>{{ post.data.tags.join(', ') }} &middot; {{ post.data.date | formatDate }}</small></p>
+  </article>
+{%- endfor -%}

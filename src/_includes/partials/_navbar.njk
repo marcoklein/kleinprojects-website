@@ -1,16 +1,13 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="/images/logo.png"></a>
-      <a class="navbar-item {% if navParent=='home' %}is-active{% endif %}" href="/">
-        {{ site.title }}
+<nav class="container">
+  <ul>
+    <li>
+      <a href="/" aria-label="Home">
+        <strong>{{ site.title }}</strong>
       </a>
-    </div>
-    <a class="navbar-item {% if navParent=='projects' %}is-active{% endif %}" href="/projects/">
-      Projects
-    </a>
-    <a class="navbar-item {% if navParent=='blog' %}is-active{% endif %}" href="/blog/">
-      Blog
-    </a>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li><a href="/projects/" {% if navParent=='projects' %}aria-current="page"{% endif %}>Projects</a></li>
+    <li><a href="/blog/" {% if navParent=='blog' %}aria-current="page"{% endif %}>Blog</a></li>
+  </ul>
 </nav>

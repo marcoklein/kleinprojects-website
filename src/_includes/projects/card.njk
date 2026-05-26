@@ -1,65 +1,29 @@
-<div class="card has-text-left">
-  <div class="card-image">
-    <figure class="image is16by9">
-      {% dynamicImageOnHover project, project.data.coverImage, project.data.coverImageDynamic %}
-    </figure>
-  </div>
-  <div class="card-content">
-    <span class="content is-small is-pulled-right mb-1 ml-1">
-      <div>
-        <span class="icon">
-          <i class="fas fa-calendar"></i>
-        </span>
-        <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
-      </div>
+<article>
+  <header>
+    {% dynamicImageOnHover project, project.data.coverImage, project.data.coverImageDynamic %}
+  </header>
+  <h2>{{ project.data.title }}</h2>
+  <p>{{ project.data.description }}</p>
+  <footer>
+    <small>
+      <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
       {% if project.data.platforms %}
-        {% if 'desktop' in project.data.platforms %}
-          <div>
-            <span class="icon">
-              <i class="fas fa-desktop"></i>
-            </span>
-            Desktop
-          </div>
-        {% endif %}
-        {% if 'mobile' in project.data.platforms %}
-          <div>
-            <span class="icon">
-              <i class="fas fa-mobile-alt"></i>
-            </span>
-            Mobile
-          </div>
-        {% endif %}
+        &middot;
+        {% if 'desktop' in project.data.platforms %}Desktop{% endif %}
+        {% if 'desktop' in project.data.platforms and 'mobile' in project.data.platforms %}, {% endif %}
+        {% if 'mobile' in project.data.platforms %}Mobile{% endif %}
       {% endif %}
-    </span>
-    <h2 class="title is-4">{{ project.data.title }}</h2>
-    <p class="subtitle is-6">{{ project.data.description }}
-    </p>
-  </div>
-  <div class="card-footer">
-    {% if project.data.sourceUrl %}
-      <div class="card-footer-item">
-        {% if project.data.showUrlIcons %}
-          <span class="icon">
-            <i class="fab fa-github"></i>
-          </span>
-        {% endif %}
-        <a href="{{ project.data.sourceUrl }}" target="_blank" class="">{{ project.data.sourceUrlText }}</a>
-      </div>
-    {% endif %}
-    {% if project.data.projectUrl %}
-      <div class="card-footer-item">
-        <a href="{{ project.data.projectUrl }}" class="">{{ project.data.projectUrlText }}</a>
-      </div>
-    {% endif %}
-    {% for url in project.data.urls | reverse %}
-      <div class="card-footer-item">
-        {% if url.icon and project.data.showUrlIcons %}
-          <span class="icon">
-            <i class="{{ url.icon }}"></i>
-          </span>
-        {% endif %}
-        <a href="{{ url.url }}" target="_blank" class="">{{ url.text }}</a>
-      </div>
-    {% endfor %}
-  </div>
-</div>
+    </small>
+    <nav>
+      {% if project.data.sourceUrl %}
+        <a href="{{ project.data.sourceUrl }}" target="_blank">{{ project.data.sourceUrlText or 'GitHub' }}</a>
+      {% endif %}
+      {% if project.data.projectUrl %}
+        <a href="{{ project.data.projectUrl }}">{{ project.data.projectUrlText }}</a>
+      {% endif %}
+      {% for url in project.data.urls | reverse %}
+        <a href="{{ url.url }}" target="_blank">{{ url.text }}</a>
+      {% endfor %}
+    </nav>
+  </footer>
+</article>

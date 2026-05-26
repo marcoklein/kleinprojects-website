@@ -1,7 +1,5 @@
-<div class="columns is-centered is-multiline">
+<div class="grid">
   {% for project in collections.projects %}
-      <div class="column is-two-thirds-tablet is-half-widescreen">
-        {% include 'projects/card.njk' %}
-      </div>
+      {% include 'projects/card.njk' %}
   {% endfor %}
 </div>

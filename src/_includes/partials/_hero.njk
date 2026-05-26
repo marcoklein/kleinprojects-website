@@ -1,12 +1,12 @@
-<section class="hero is-primary">
-  <div class="hero-header">
-    {% include "partials/_navbar.njk" %}
-  </div>
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-2">{{ title }}</h1>
-    <h2 class="subtitle is-4">{{ subtitle }}</h2>
+<header>
+  {% include "partials/_navbar.njk" %}
+  <div class="container">
+    <hgroup>
+    <h1>{{ title }}</h1>
+    <p>{{ subtitle }}</p>
     {% if date %}
-      <div class="format-right">{{ date | formatDate}}</div>
+      <p><small>{{ date | formatDate }}</small></p>
     {% endif %}
+  </hgroup>
   </div>
-</section>
+</header>

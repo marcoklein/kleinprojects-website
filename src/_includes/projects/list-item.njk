@@ -1,0 +1,31 @@
+<article>
+  {% if project.data.coverImage %}
+    <header>
+      {% dynamicImageOnHover project, project.data.coverImage, project.data.coverImageDynamic %}
+    </header>
+  {% endif %}
+  <h3>
+    <a href="{{ project.data.title | slugify }}"><strong>{{ project.data.title }}</strong></a>
+  </h3>
+  <p><small>
+    <time datetime="{{ project.date | datetime }}">{{ project.date | formatDate }}</time>
+    {% if project.data.platforms %}
+      &middot;
+      {% if 'desktop' in project.data.platforms %}Desktop{% endif %}
+      {% if 'desktop' in project.data.platforms and 'mobile' in project.data.platforms %}, {% endif %}
+      {% if 'mobile' in project.data.platforms %}Mobile{% endif %}
+    {% endif %}
+  </small></p>
+  <p>{{ project.data.description }}</p>
+  <footer>
+    {% if project.data.sourceUrl %}
+      <a href="{{ project.data.sourceUrl }}" target="_blank">{{ project.data.sourceUrlText or 'GitHub' }}</a>
+    {% endif %}
+    {% if project.data.projectUrl %}
+      <a href="{{ project.data.projectUrl }}">{{ project.data.projectUrlText }}</a>
+    {% endif %}
+    {% for url in project.data.urls | reverse %}
+      <a href="{{ url.url }}" target="_blank">{{ url.text }}</a>
+    {% endfor %}
+  </footer>
+</article>

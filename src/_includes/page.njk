@@ -14,13 +14,13 @@ centerContent: true
   {% include 'partials/_hero.njk' %}
 {% else %}
   {% include 'partials/_navbar.njk' %}
-  {% include 'partials/_section.njk' %}
+  {% if addSection %}
+    {% include 'partials/_section.njk' %}
+  {% endif %}
 {% endif %}
 
-<main class="container {% if centerContent %}has-text-centered{% endif %} {% if r/\.md$/.test(page.inputPath) %}content{% endif %}">
-  <section class="section">
-    {{ content | safe }}
-  </section>
+<main class="container">
+  {{ content | safe }}
 </main>
 
 {% include 'partials/_footer.njk' %}
