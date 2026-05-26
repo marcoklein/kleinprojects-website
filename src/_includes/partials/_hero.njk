@@ -2,11 +2,11 @@
   {% include "partials/_navbar.njk" %}
   <div class="container">
     <hgroup>
-    <h1>{{ title }}</h1>
-    <p>{{ subtitle }}</p>
-    {% if date %}
-      <p><small>{{ date | formatDate }}</small></p>
-    {% endif %}
-  </hgroup>
+      <h1>{{ title }}</h1>
+      <p>{{ subtitle }}</p>
+      {% if date %}
+        <p><small>{{ date | formatDate }}</small></p>
+      {% endif %}
+    </hgroup>
   </div>
 </header>

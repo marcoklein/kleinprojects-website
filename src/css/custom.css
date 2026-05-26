@@ -26,10 +26,6 @@ nav a[aria-current="page"] {
 }
 
 /* Dynamic image hover for project cards */
-.is-absolute {
-  position: absolute;
-}
-
 .project-card {
   position: relative;
 }
@@ -44,6 +40,10 @@ nav a[aria-current="page"] {
 
 .project-card:hover .is-absolute {
   opacity: 1;
+}
+
+.project-card:hover .is-hidden-on-hover {
+  opacity: 0;
 }
 
 /* Ensure list item images don't overflow */

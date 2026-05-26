@@ -1,11 +1,9 @@
 ---
 navParent: home
 useHero: true
-addSection: true
 title: null
 subtitle: null
 date: null
-centerContent: true
 ---
 
 {% include 'partials/_header.njk' %}
@@ -14,9 +12,6 @@ centerContent: true
   {% include 'partials/_hero.njk' %}
 {% else %}
   {% include 'partials/_navbar.njk' %}
-  {% if addSection %}
-    {% include 'partials/_section.njk' %}
-  {% endif %}
 {% endif %}
 
 <main class="container">
