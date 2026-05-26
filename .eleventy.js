@@ -5,7 +5,7 @@ const moment = require('moment');
 const syntaxhighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
-const pluginRss = require('@11ty/eleventy-plugin-rss');
+const pluginRss = require('@11ty/eleventy-plugin-rss').default;
 const striptags = require('striptags');
 // const upgradeHelper = require('@11ty/eleventy-upgrade-help');
 
