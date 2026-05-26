@@ -4,4 +4,6 @@ navParent: projects
 title: Coding Projects
 ---
 
-{% include 'projects/cards-grid.njk' %}
+{% for project in collections.projects %}
+  {% include 'projects/list-item.njk' %}
+{% endfor %}

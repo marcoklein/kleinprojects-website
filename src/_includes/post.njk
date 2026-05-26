@@ -1,14 +1,19 @@
 ---
 navParent: blog
 permalink: /{{title | slugify}}/index.html
-layout: page
-centerContent: false
+layout: page.njk
+useHero: false
 
 title: null
 subtitle: null
 ---
-{# Base layout for posts in `posts` folder. #}
 
-<div class="content">
+<article>
+  <header>
+    <h1>{{ title }}</h1>
+    {% if date %}
+      <p><time datetime="{{ date | datetime }}">{{ date | formatDate }}</time></p>
+    {% endif %}
+  </header>
   {{ content | safe }}
-</div>
+</article>

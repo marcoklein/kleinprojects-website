@@ -1,4 +1,3 @@
-const sass = require('sass');
 const fs = require('node:fs');
 const path = require('node:path');
 const moment = require('moment');
@@ -7,10 +6,6 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const pluginRss = require('@11ty/eleventy-plugin-rss').default;
 const striptags = require('striptags');
-// const upgradeHelper = require('@11ty/eleventy-upgrade-help');
-
-// install prism plugins
-require('prismjs/plugins/custom-class/prism-custom-class');
 
 const REGEX_IMAGE_EXTENSION = '(jpg|png|gif)';
 
@@ -24,28 +19,9 @@ module.exports = function (eleventyConfig) {
   }
   console.log('Cleared _site folder');
 
-  const isServing = process.argv.includes('--serve');
-  if (isServing) {
-    // watch only files if we are serving
-    const watcher = fs.watch('src/styles', (event, filepath) => {
-      console.log('Styles file changed', filepath);
-      compileSass();
-    });
-
-    process.on('SIGINT', () => {
-      console.log('Stopping file watcher...');
-      watcher.close();
-    });
-
-    process.on('SIGTERM', () => {
-      console.log('Stopping file watcher...');
-      watcher.close();
-    });
-  }
-  compileSass();
-
+  eleventyConfig.addPassthroughCopy('src/css');
   eleventyConfig.addPassthroughCopy({
-    './node_modules/@fortawesome/fontawesome-free': 'css/fontawesome',
+    './node_modules/@picocss/pico/css/pico.min.css': 'css/pico.min.css',
   });
   eleventyConfig.addPassthroughCopy('src/CNAME');
   eleventyConfig.addPassthroughCopy('src/images');
@@ -66,17 +42,7 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByGlob('src/projects/**/*.md').reverse();
   });
 
-  eleventyConfig.addPlugin(syntaxhighlight, {
-    init: function ({ Prism }) {
-      Prism.plugins.customClass.map({
-        // prefix tag and number to avoid conflicts with Bulma
-        tag: 'prism-tag',
-        number: 'prism-number',
-      });
-    },
-  });
-
-  eleventyConfig.addFilter('coverImage', filterCoverImage);
+  eleventyConfig.addPlugin(syntaxhighlight);
 
   /**
    * Generates a dynamic cover image
@@ -132,13 +98,6 @@ module.exports = function (eleventyConfig) {
   };
 };
 
-async function compileSass() {
-  console.log('Compiling sass.');
-  const cssContent = sass.compile('src/styles/main.scss');
-  fs.mkdirSync('_site/css', { recursive: true });
-  fs.writeFileSync('_site/css/main.css', cssContent.css);
-}
-
 function shortcodeDynamicImageOnHover(
   page,
   staticCoverImage,
@@ -159,16 +118,14 @@ function shortcodeDynamicImageOnHover(
   if (fs.existsSync(dynamicCoverImageInputPath)) {
     // dynamic cover image exists
     return (
-      `<img class="is-absolute" src="${dynamicCoverImagePath}">` +
-      `<img class="is-hidden-on-hover" src="${staticCoverImagePath}">`
+      `<div class="project-card">` +
+      `<img class="is-absolute" src="${dynamicCoverImagePath}" alt="">` +
+      `<img class="is-hidden-on-hover" src="${staticCoverImagePath}" alt="">` +
+      `</div>`
     );
   } else {
-    return `<img src="${staticCoverImagePath}">`;
+    return `<img src="${staticCoverImagePath}" alt="">`;
   }
 }
 
-function filterCoverImage(page) {
-  // take filePathStem or pageOptions directly if it is a string (and a path)
-  var pageOptions = typeof pageOptions === 'string' ? page : page.filePathStem;
-  return path.join(path.dirname(pageOptions), page.data.coverImageName);
-}
+
